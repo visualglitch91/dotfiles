@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+
+import subprocess
+import re
+import sys
+
+# Ensure both window title and width are provided
+if len(sys.argv) < 3:
+    print("Usage: find_window.py <window_title> <width_percentage>")
+    sys.exit(1)
+
+search_title = sys.argv[1]
+width_percentage = sys.argv[2]
+
+# Run `niri msg windows` and capture output
+output = subprocess.run(["niri", "msg", "windows"], capture_output=True, text=True).stdout
+
+# Split into lines and process
+window_id = None
+for i, line in enumerate(output.splitlines()):
+    id_match = re.match(r"Window ID (\d+):", line)
+    if id_match:
+        window_id = id_match.group(1)  # Store the last seen window ID
+
+    if "Title:" in line and search_title in line:
+        print(f"Found window with ID: {window_id}")
+        # Set window width with the provided percentage
+        set_width_command = ["niri", "msg", "action", "set-window-width", width_percentage, f"--id={window_id}"]
+        subprocess.run(set_width_command)
+        print(f"Window width set to {width_percentage} for window ID {window_id}")
+        break  # Stop at the first match
+
+# If no match was found, exit with a non-zero status
+if window_id is None:
+    sys.exit(1)

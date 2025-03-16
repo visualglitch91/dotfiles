@@ -1,0 +1,43 @@
+#!/bin/bash
+
+if command -v yay >/dev/null; then
+    AUR_HELPER="yay"
+elif command -v paru >/dev/null; then
+    AUR_HELPER="paru"
+else
+    sudo pacman -S --needed base-devel &&
+        git clone https://aur.archlinux.org/paru.git &&
+        cd paru && makepkg -si &&
+        cd .. && rm -rf paru
+    AUR_HELPER="paru"
+fi
+
+ROOT=$(dirname "$(realpath "$0")")
+
+if [ "$ROOT" != "$HOME/.visualglitch91" ]; then
+    rm -rf "$HOME/.visualglitch91"
+    ln -s $ROOT "$HOME/.visualglitch91"
+fi
+
+symlink() {
+    local source="$1"
+    local destination="$2"
+
+    # Get the absolute path of the source
+    target="$HOME/.visualglitch91/$source"
+
+    # If the destination is relative, prepend $HOME
+    if [[ "$destination" == /* ]]; then
+        link_name="$destination"
+    else
+        link_name="$HOME/$destination"
+    fi
+
+    echo "Creating symlink: $link_name -> $target"
+
+    # Remove directory
+    rm -rf "$link_name"
+
+    # Create the symlink
+    ln -s "$target" "$link_name"
+}

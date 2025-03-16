@@ -1,0 +1,3 @@
+#!/bin/bash
+echo $1 | wl-copy --trim-newline
+wtype -M ctrl -M shift v -m ctrl -m shift

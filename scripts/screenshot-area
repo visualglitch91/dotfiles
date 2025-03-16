@@ -1,0 +1,2 @@
+#!/bin/bash
+grim -g "$(slurp -d -c FF79C6 -b 00000066 -F "Fira Mono" -w 3)" - | wl-copy -t image/png

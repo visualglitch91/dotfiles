@@ -1,0 +1,21 @@
+anchor=top-right
+font=Open Sans 13
+background-color=#282A36F0
+text-color=#FFFFFFFF
+width=500
+height=600
+max-history=10
+margin=0,20,20
+padding=12
+border-size=2
+border-color=#FF79C6FF
+border-radius=12
+default-timeout=20000
+group-by=none
+icons=0
+
+[grouped]
+format=<b>%s</b>\n%b
+
+# makoctl reload // Load last config
+# makoctl restore // Load last notify

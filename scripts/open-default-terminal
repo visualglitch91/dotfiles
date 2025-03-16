@@ -1,0 +1,3 @@
+#!/bin/bash
+source "$HOME/.visualglitch91/env"
+$DEFAULT_TERMINAL

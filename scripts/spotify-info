@@ -1,0 +1,13 @@
+#!/bin/bash
+source "$HOME/.visualglitch91/env"
+
+RESPONSE=$(
+    curl -s -X GET "$HASS_HOST/api/states/$HASS_SPOTIFY_ENTITY" \
+        -H "Authorization: Bearer $HASS_TOKEN" \
+        -H "Content-Type: application/json"
+)
+
+SONG=$(echo "$RESPONSE" | jq -r '.attributes | "\(.media_title) - \(.media_artist)"')
+STATUS=$(echo "$RESPONSE" | jq -r '.state')
+
+echo {\"text\": \"${SONG//&/&amp;}\", \"alt\": \"$STATUS\"}

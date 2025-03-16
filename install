@@ -1,0 +1,63 @@
+#!/bin/bash
+
+ROOT=$(dirname "$(realpath "$0")")
+source "$ROOT/install.pre"
+source "$ROOT/env"
+
+# Setup symlinks
+symlink "./paru" ".config/paru"
+symlink "./kitty" ".config/kitty"
+symlink "./mako" ".config/mako"
+symlink "./niri" ".config/niri"
+symlink "./ulauncher" ".config/ulauncher"
+symlink "./waybar" ".config/waybar"
+symlink "./zsh/.zshrc" ".zshrc"
+symlink "./gtk/icons" ".icons"
+symlink "./gtk/themes" ".themes"
+symlink "./gtk/themes/$GTK_THEME/gtk-4.0" ".config/gtk-4.0"
+
+sudo pacman -Sy --needed \
+    git curl aria2 wget polkit-gnome \
+    kitty swaybg mako waybar xwayland-satellite niri \
+    wtype wl-clipboard slurp grim gnome-tweaks \
+    gnome-control-center flatpak zsh nodejs npm
+
+$AUR_HELPER -Sy --needed \
+    ulauncher-git \
+    visual-studio-code-bin \
+    appimagelauncher
+
+flatpak install flathub \
+    com.tomjwatson.Emote com.github.tchx84.Flatseal \
+    io.github.ungoogled_software.ungoogled_chromium \
+    io.gitlab.librewolf-community \
+    page.codeberg.libre_menu_editor.LibreMenuEditor
+
+# Setup npm to use local directory
+mkdir -p ~/.npm-global
+npm config set prefix "~/.npm-global/"
+
+# Install global npm packages
+npm install -g yarn less
+
+# No aarch64 support
+flatpak install -y flathub com.slack.Slack || echo "Slack installation failed, but continuing..."
+
+# Set up GTK theme
+gsettings set org.gnome.desktop.interface accent-color "$ACCENT_COLOR"
+gsettings set org.gnome.desktop.interface color-scheme "$COLOR_SCHEME"
+gsettings set org.gnome.desktop.interface icon-theme "$ICON_THEME"
+gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME"
+gsettings set org.gnome.desktop.interface font-name "$INTERFACE_FONT"
+gsettings set org.gnome.desktop.interface monospace-font-name "$MONOSPACE_FONT"
+
+# Flatpak overrides for themes and icons
+sudo flatpak override --filesystem=$HOME/.themes
+sudo flatpak override --filesystem=$HOME/.icons
+sudo flatpak override --filesystem=xdg-config/gtk-4.0
+flatpak override --user --filesystem=xdg-config/gtk-4.0
+
+# Install oh-my-zsh if not already installed
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi

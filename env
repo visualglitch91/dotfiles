@@ -1,0 +1,16 @@
+#!/bin/bash
+
+export DEFAULT_BROWSER=io.github.ungoogled_software.ungoogled_chromium.desktop
+export DEFAULT_TERMINAL=kitty
+export ACCENT_COLOR="pink"
+export COLOR_SCHEME="prefer-dark"
+export ICON_THEME="Yaru-magenta-dark"
+export GTK_THEME="Catppuccin-Macchiato"
+export INTERFACE_FONT="Fira Sans"
+export MONOSPACE_FONT="Fira Mono"
+
+ROOT=$HOME/.visualglitch91
+
+if [ -f "$ROOT/env.local" ]; then
+    source "$ROOT/env.local"
+fi
