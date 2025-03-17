@@ -25,7 +25,8 @@ sudo pacman -Sy --needed \
 $AUR_HELPER -Sy --needed \
     ulauncher-git \
     visual-studio-code-bin \
-    appimagelauncher
+    appimagelauncher \
+    easystroke
 
 flatpak install flathub \
     com.tomjwatson.Emote com.github.tchx84.Flatseal \

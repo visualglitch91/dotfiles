@@ -142,8 +142,8 @@ binds {
 prefer-no-csd
 
 spawn-at-startup "mako"
-spawn-at-startup "ulauncher --daemon"
 spawn-at-startup "xwayland-satellite"
+spawn-at-startup "easystroke" "hide"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "~/.visualglitch91/scripts/waybar-start"
 spawn-at-startup "~/.visualglitch91/scripts/swaybg-start"
