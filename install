@@ -5,6 +5,7 @@ source "$ROOT/install.pre"
 source "$ROOT/env"
 
 # Setup symlinks
+symlink "./easystroke" ".easystroke"
 symlink "./paru" ".config/paru"
 symlink "./kitty" ".config/kitty"
 symlink "./mako" ".config/mako"
@@ -20,7 +21,7 @@ sudo pacman -Sy --needed \
     git curl aria2 wget polkit-gnome \
     kitty swaybg mako waybar xwayland-satellite niri \
     wtype wl-clipboard slurp grim gnome-tweaks \
-    gnome-control-center flatpak zsh nodejs npm
+    gnome-control-center flatpak zsh nodejs npm jq
 
 $AUR_HELPER -Sy --needed \
     ulauncher-git \
@@ -49,8 +50,6 @@ gsettings set org.gnome.desktop.interface accent-color "$ACCENT_COLOR"
 gsettings set org.gnome.desktop.interface color-scheme "$COLOR_SCHEME"
 gsettings set org.gnome.desktop.interface icon-theme "$ICON_THEME"
 gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME"
-gsettings set org.gnome.desktop.interface font-name "$INTERFACE_FONT"
-gsettings set org.gnome.desktop.interface monospace-font-name "$MONOSPACE_FONT"
 
 # Flatpak overrides for themes and icons
 sudo flatpak override --filesystem=$HOME/.themes
