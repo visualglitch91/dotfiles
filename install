@@ -8,6 +8,7 @@ source "$ROOT/env"
 # Setup symlinks
 symlink "./easystroke" ".easystroke"
 symlink "./paru" ".config/paru"
+symlink "./nvim" ".config/nvim"
 symlink "./kitty" ".config/kitty"
 symlink "./mako" ".config/mako"
 symlink "./niri" ".config/niri"
@@ -20,11 +21,10 @@ symlink "./gtk/themes/$GTK_THEME/gtk-4.0" ".config/gtk-4.0"
 
 # Install pacman packages
 sudo pacman -Sy --needed \
-    git curl aria2 wget polkit-gnome \
+    aria2 wget polkit-gnome zip \
     kitty swaybg mako waybar xwayland-satellite niri \
     wtype wl-clipboard slurp grim gnome-tweaks \
-    gnome-control-center flatpak zsh nodejs npm jq \
-    bluetui spotifyd 
+    flatpak zsh nodejs npm jq bluetui spotifyd
 
 # Install aur packages
 $AUR_HELPER -Sy --needed \

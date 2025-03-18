@@ -4,6 +4,7 @@ environment {
     GTK_THEME "Catppuccin-Macchiato"
     ICON_THEME "Yaru-magenta-dark"
     ACCENT_COLOR "pink"
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
 }
 
 cursor {
@@ -61,7 +62,7 @@ output "Virtual-1" {
 }
 
 output "AU Optronics 0x5A3D Unknown" {
-    scale 1.1
+    scale 1
 }
 
 animations {}
