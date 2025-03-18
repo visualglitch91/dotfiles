@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ROOT=$(dirname "$(realpath "$0")")
+GTK_THEME=$(cat $ROOT/niri/config.kdl | grep -oP 'GTK_THEME\s*"\K[^"]+')
 source "$ROOT/install.pre"
 source "$ROOT/env"
 
@@ -17,18 +18,22 @@ symlink "./gtk/icons" ".icons"
 symlink "./gtk/themes" ".themes"
 symlink "./gtk/themes/$GTK_THEME/gtk-4.0" ".config/gtk-4.0"
 
+# Install pacman packages
 sudo pacman -Sy --needed \
     git curl aria2 wget polkit-gnome \
     kitty swaybg mako waybar xwayland-satellite niri \
     wtype wl-clipboard slurp grim gnome-tweaks \
-    gnome-control-center flatpak zsh nodejs npm jq
+    gnome-control-center flatpak zsh nodejs npm jq \
+    bluetui spotifyd 
 
+# Install aur packages
 $AUR_HELPER -Sy --needed \
     ulauncher-git \
     visual-studio-code-bin \
     appimagelauncher \
     easystroke
 
+# Install flatpak apps
 flatpak install flathub \
     com.tomjwatson.Emote com.github.tchx84.Flatseal \
     io.github.ungoogled_software.ungoogled_chromium \
@@ -41,9 +46,6 @@ npm config set prefix "~/.npm-global/"
 
 # Install global npm packages
 npm install -g yarn less
-
-# No aarch64 support
-flatpak install -y flathub com.slack.Slack || echo "Slack installation failed, but continuing..."
 
 # Flatpak overrides for themes and icons
 sudo flatpak override --filesystem=$HOME/.themes

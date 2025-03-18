@@ -19,8 +19,12 @@ unsetopt PROMPT_SP
 alias open=xdg-open
 
 # APT shortcuts
-alias apt-add="sudo apt install"
-alias apt-del="sudo apt remove"
+alias aptadd="sudo apt install"
+alias aptdel="sudo apt remove"
+
+# DNF shortcuts
+alias dnfadd="sudo dnf install"                                                          
+alias dnfdel="sudo dnf remove"
 
 # Pacman shortcuts
 alias pacadd='sudo pacman -Sy'
@@ -59,6 +63,7 @@ alias git-push='git push -u origin $(git-curr-branch)'
 
 export PATH="$HOME/.npm-global/bin/:$PATH"
 export PATH="$HOME/.visualglitch91/scripts/:$PATH"
+export PATH="$HOME/.local/bin/:$PATH"
 export PATH="$HOME/Scripts/:$PATH"
 export PATH="$HOME/Applications/:$PATH"
 

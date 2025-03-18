@@ -14,9 +14,16 @@ ARTIST=$(echo "$RESPONSE" | jq -r '.attributes.media_artist // ""')
 if [[ -n "$TITLE" && -n "$ARTIST" ]]; then
     SONG="$TITLE - $ARTIST"
 else
-    SONG=""
+    exit 0
 fi
 
 STATUS=$(echo "$RESPONSE" | jq -r '.state')
 
-echo {\"text\": \"${SONG//&/&amp;}\", \"alt\": \"$STATUS\"}
+# Corrected if statement for comparison
+if [[ "$STATUS" == "playing" ]]; then
+    echo " $SONG"
+    exit
+fi
+
+echo " $SONG"
+exit

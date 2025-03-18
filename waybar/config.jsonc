@@ -50,12 +50,6 @@
   "custom/media": {
     "exec": "~/.visualglitch91/scripts/spotify-info",
     "interval": 5,
-    "return-type": "json",
-    "format": "{icon} {text}",
-    "format-icons": {
-      "playing": "",
-      "paused": ""
-    },
     "hide-empty-text": true,
     "on-click": "~/.visualglitch91/scripts/spotify-toggle"
   }

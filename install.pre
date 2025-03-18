@@ -1,5 +1,13 @@
 #!/bin/bash
 
+ROOT=$(dirname "$(realpath "$0")")
+
+if [ "$ROOT" != "$HOME/.visualglitch91" ]; then
+    rm -rf "$HOME/.visualglitch91"
+    ln -s $ROOT "$HOME/.visualglitch91"
+fi
+
+
 if command -v yay >/dev/null; then
     AUR_HELPER="yay"
 elif command -v paru >/dev/null; then
@@ -10,13 +18,6 @@ else
         cd paru && makepkg -si &&
         cd .. && rm -rf paru
     AUR_HELPER="paru"
-fi
-
-ROOT=$(dirname "$(realpath "$0")")
-
-if [ "$ROOT" != "$HOME/.visualglitch91" ]; then
-    rm -rf "$HOME/.visualglitch91"
-    ln -s $ROOT "$HOME/.visualglitch91"
 fi
 
 symlink() {

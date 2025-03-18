@@ -1,9 +1,9 @@
 environment {
     DISPLAY ":0"
+    COLOR_SCHEME "prefer-dark"
     GTK_THEME "Catppuccin-Macchiato"
     ICON_THEME "Yaru-magenta-dark"
     ACCENT_COLOR "pink"
-    COLOR_SCHEME "dark"
 }
 
 cursor {

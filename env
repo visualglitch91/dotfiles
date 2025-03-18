@@ -2,9 +2,6 @@
 
 export DEFAULT_BROWSER=io.github.ungoogled_software.ungoogled_chromium.desktop
 export DEFAULT_TERMINAL=kitty
-export COLOR_SCHEME="prefer-dark"
-
-
 
 ROOT=$HOME/.visualglitch91
 
