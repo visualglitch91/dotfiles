@@ -1,3 +1,18 @@
+environment {
+    DISPLAY ":0"
+    GTK_THEME "Catppuccin-Macchiato"
+    ICON_THEME "Yaru-magenta-dark"
+    ACCENT_COLOR "pink"
+    COLOR_SCHEME "dark"
+}
+
+cursor {
+    xcursor-theme "Yaru"
+    xcursor-size 24
+    hide-when-typing
+    hide-after-inactive-ms 1000
+}
+
 input {
     keyboard {
         xkb {
@@ -60,6 +75,7 @@ binds {
     Mod+period { spawn  "com.tomjwatson.Emote"; }
     Mod+T { spawn "~/.visualglitch91/scripts/open-default-terminal"; }
     Mod+B { spawn "~/.visualglitch91/scripts/open-default-browser"; }
+    Mod+W { spawn "~/.visualglitch91/scripts/waybar-start"; }
     Mod+Alt+Backspace { spawn "~/.visualglitch91/scripts/screenshot-area"; }
     Mod+Shift+Backspace { spawn "~/.visualglitch91/scripts/screenshot"; }
 
@@ -136,7 +152,6 @@ binds {
 
     // Power and Session
     Mod+Shift+E { quit; }
-    Mod+Shift+P { power-off-monitors; }
 }
 
 prefer-no-csd
@@ -145,16 +160,13 @@ spawn-at-startup "mako"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "easystroke" "hide"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-spawn-at-startup "~/.visualglitch91/scripts/waybar-start"
+spawn-at-startup "~/.visualglitch91/scripts/gtk-settings"
 spawn-at-startup "~/.visualglitch91/scripts/swaybg-start"
+spawn-at-startup "~/.visualglitch91/scripts/waybar-start"
 spawn-at-startup "~/.visualglitch91/startup"
 
 hotkey-overlay {
     skip-at-startup
-}
-
-environment {
-    DISPLAY ":0"
 }
 
 window-rule {

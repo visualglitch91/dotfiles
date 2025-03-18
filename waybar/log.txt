@@ -1,0 +1,122 @@
+[2025-03-17 21:50:31.514] [debug] Try expanding: $XDG_CONFIG_HOME/waybar/config
+[2025-03-17 21:50:31.514] [debug] Try expanding: $XDG_CONFIG_HOME/waybar/config.jsonc
+[2025-03-17 21:50:31.514] [debug] Found config file: /home/erica/.config/waybar/config.jsonc
+[2025-03-17 21:50:31.514] [info] Using configuration file /home/erica/.config/waybar/config.jsonc
+[2025-03-17 21:50:32.120] [info] Discovered appearance 'dark'
+[2025-03-17 21:50:32.120] [debug] Try expanding: $XDG_CONFIG_HOME/waybar/style-dark.css
+[2025-03-17 21:50:32.120] [debug] Try expanding: $XDG_CONFIG_HOME/waybar/style.css
+[2025-03-17 21:50:32.120] [debug] Found config file: /home/erica/.config/waybar/style.css
+[2025-03-17 21:50:32.120] [info] Using CSS file /home/erica/.config/waybar/style.css
+[2025-03-17 21:50:32.127] [debug] Output detection done: eDP-1 ()
+[2025-03-17 21:50:32.129] [info] Niri IPC starting
+[2025-03-17 21:50:32.130] [debug] Niri IPC: received {"WorkspacesChanged":{"workspaces":[{"id":1,"idx":1,"name":null,"output":"eDP-1","is_active":true,"is_focused":true,"active_window_id":null}]}}
+[2025-03-17 21:50:32.131] [debug] Niri IPC: received {"WindowsChanged":{"windows":[]}}
+[2025-03-17 21:50:32.131] [debug] network: new default route via 192.168.0.1 on if3 metric 600
+[2025-03-17 21:50:32.131] [debug] network: wlo1, new addr 192.168.0.227/24
+[2025-03-17 21:50:32.131] [debug] network: wlo1, new addr 192.168.0.227/24
+[2025-03-17 21:50:32.131] [debug] network: wlo1, new addr 2804:14c:85:3a73::6278/128
+[2025-03-17 21:50:32.131] [warning] No batteries.
+[2025-03-17 21:50:32.132] [debug] Niri IPC: received {"KeyboardLayoutsChanged":{"keyboard_layouts":{"names":["English (US, alt. intl.)","Portuguese (Brazil)"],"current_idx":0}}}
+[2025-03-17 21:50:32.156] [debug] GTK widget tree:
+window#waybar.background.top.eDP-1..mode-default:dir(ltr)
+  decoration:dir(ltr)
+  box.horizontal:dir(ltr)
+    box.horizontal.modules-left:dir(ltr)
+      widget:dir(ltr)
+        box#workspaces.horizontal.module:dir(ltr)
+      widget:dir(ltr)
+        label#custom-media.module:dir(ltr)
+    box.horizontal.modules-center:dir(ltr)
+      widget:dir(ltr)
+        label#clock.module:dir(ltr)
+    box.horizontal.modules-right:dir(ltr)
+      widget:dir(ltr)
+        label#language.module:dir(ltr)
+      widget:dir(ltr)
+        label#network.module:dir(ltr)
+      widget:dir(ltr)
+        label#battery.module:dir(ltr)
+      widget:dir(ltr)
+        label#pulseaudio.module:dir(ltr)
+
+[2025-03-17 21:50:32.167] [debug] niri language update with full name English (US, alt. intl.)
+[2025-03-17 21:50:32.167] [debug] niri language update with short name us
+[2025-03-17 21:50:32.167] [debug] niri language update with short description en
+[2025-03-17 21:50:32.167] [debug] niri language update with variant alt-intl
+[2025-03-17 21:50:32.167] [debug] niri language formatted layout name <span text_transform="uppercase"> us</span>
+[2025-03-17 21:50:32.168] [debug] niri language update with full name English (US, alt. intl.)
+[2025-03-17 21:50:32.168] [debug] niri language update with short name us
+[2025-03-17 21:50:32.168] [debug] niri language update with short description en
+[2025-03-17 21:50:32.168] [debug] niri language update with variant alt-intl
+[2025-03-17 21:50:32.168] [debug] niri language formatted layout name <span text_transform="uppercase"> us</span>
+[2025-03-17 21:50:32.173] [info] Bar configured (width: 1904, height: 24) for output: eDP-1
+[2025-03-17 21:50:32.439] [debug] Cmd exited with code 0
+[2025-03-17 21:50:32.439] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:50:32.683] [trace] Sink name auto_null Running:[false] Idle:[false]
+[2025-03-17 21:50:32.716] [trace] Sink name alsa_output.pci-0000_00_1f.3.analog-stereo Running:[false] Idle:[false]
+[2025-03-17 21:50:32.719] [trace] Sink name alsa_output.pci-0000_00_1f.3.analog-stereo Running:[false] Idle:[false]
+[2025-03-17 21:50:34.623] [debug] Niri IPC: received {"WorkspacesChanged":{"workspaces":[{"id":1,"idx":1,"name":null,"output":"eDP-1","is_active":true,"is_focused":true,"active_window_id":1},{"id":2,"idx":2,"name":null,"output":"eDP-1","is_active":false,"is_focused":false,"active_window_id":null}]}}
+[2025-03-17 21:50:34.624] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"kitty","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:50:34.656] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"zsh","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:50:34.754] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"erica@erica-avell:~","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:50:37.770] [debug] Cmd exited with code 0
+[2025-03-17 21:50:37.770] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:50:42.451] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"sudo systemctl disable lemurs","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:50:43.152] [debug] Cmd exited with code 0
+[2025-03-17 21:50:43.152] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:50:44.772] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"~","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:50:48.945] [debug] Cmd exited with code 0
+[2025-03-17 21:50:48.945] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:50:49.861] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"pacdel lemurs","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:50:51.716] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"~","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:50:56.227] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"sudo systemctl enable gdm","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:50:56.480] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"~","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:50:59.785] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:50:59.785] [debug] Cmd exited with code 0
+[2025-03-17 21:51:05.129] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:51:05.129] [debug] Cmd exited with code 0
+[2025-03-17 21:51:10.545] [debug] Cmd exited with code 0
+[2025-03-17 21:51:10.545] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:51:15.868] [debug] Cmd exited with code 0
+[2025-03-17 21:51:15.868] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:51:21.598] [debug] Cmd exited with code 0
+[2025-03-17 21:51:21.598] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:51:24.605] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"pm2 delete all","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:24.900] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"~","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:26.111] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"pm2 save","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:26.222] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"~","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:28.149] [debug] Cmd exited with code 0
+[2025-03-17 21:51:28.149] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:51:28.200] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"erica@erica-avell:~","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:28.204] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"~","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:30.179] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"pm2 save --force","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:30.296] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"~","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:33.020] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"code .visualglitch91","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:33.466] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":1,"title":"~","app_id":"kitty","pid":1244,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:34.086] [debug] Cmd exited with code 0
+[2025-03-17 21:51:34.086] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:51:36.233] [debug] Niri IPC: received {"WorkspaceActiveWindowChanged":{"workspace_id":1,"active_window_id":2}}
+[2025-03-17 21:51:36.234] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":2,"title":"Visual Studio Code","app_id":"code","pid":1868,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:36.791] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":2,"title":"waybar-start - .visualglitch91 - Visual Studio Code","app_id":"code","pid":1868,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:37.878] [debug] Niri IPC: received {"WorkspaceActiveWindowChanged":{"workspace_id":1,"active_window_id":3}}
+[2025-03-17 21:51:37.879] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":3,"title":"Unlock Login Keyring","app_id":"gcr-prompter","pid":2036,"workspace_id":1,"is_focused":true,"is_floating":true}}}
+[2025-03-17 21:51:40.663] [debug] Niri IPC: received {"WorkspaceActiveWindowChanged":{"workspace_id":1,"active_window_id":2}}
+[2025-03-17 21:51:40.664] [debug] Niri IPC: received {"WindowFocusChanged":{"id":2}}
+[2025-03-17 21:51:40.665] [debug] Niri IPC: received {"WindowClosed":{"id":3}}
+[2025-03-17 21:51:41.049] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:51:41.049] [debug] Cmd exited with code 0
+[2025-03-17 21:51:46.465] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:51:46.465] [debug] Cmd exited with code 0
+[2025-03-17 21:51:50.172] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":2,"title":"● waybar-start - .visualglitch91 - Visual Studio Code","app_id":"code","pid":1868,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:51.317] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":2,"title":"waybar-start - .visualglitch91 - Visual Studio Code","app_id":"code","pid":1868,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:51.797] [debug] Cmd exited with code 0
+[2025-03-17 21:51:51.797] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:51:55.080] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":2,"title":"config.kdl - .visualglitch91 - Visual Studio Code","app_id":"code","pid":1868,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:51:57.559] [debug] Cmd exited with code 0
+[2025-03-17 21:51:57.559] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:51:59.821] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":2,"title":"● config.kdl - .visualglitch91 - Visual Studio Code","app_id":"code","pid":1868,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:52:02.938] [debug] Cmd exited with code 0
+[2025-03-17 21:52:02.938] [debug] Received SIGCHLD in signalThread
+[2025-03-17 21:52:07.970] [debug] Niri IPC: received {"WindowOpenedOrChanged":{"window":{"id":2,"title":"config.kdl - .visualglitch91 - Visual Studio Code","app_id":"code","pid":1868,"workspace_id":1,"is_focused":true,"is_floating":false}}}
+[2025-03-17 21:52:08.521] [debug] Cmd exited with code 0
+[2025-03-17 21:52:08.521] [debug] Received SIGCHLD in signalThread

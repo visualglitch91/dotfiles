@@ -45,12 +45,6 @@ npm install -g yarn less
 # No aarch64 support
 flatpak install -y flathub com.slack.Slack || echo "Slack installation failed, but continuing..."
 
-# Set up GTK theme
-gsettings set org.gnome.desktop.interface accent-color "$ACCENT_COLOR"
-gsettings set org.gnome.desktop.interface color-scheme "$COLOR_SCHEME"
-gsettings set org.gnome.desktop.interface icon-theme "$ICON_THEME"
-gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME"
-
 # Flatpak overrides for themes and icons
 sudo flatpak override --filesystem=$HOME/.themes
 sudo flatpak override --filesystem=$HOME/.icons

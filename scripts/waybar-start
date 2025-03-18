@@ -1,4 +1,5 @@
 #!/bin/bash
 /home/erica/.npm-global/bin/lessc $HOME/.visualglitch91/waybar/style.less $HOME/.visualglitch91/waybar/style.css
 killall waybar
-waybar &
+waybar
+

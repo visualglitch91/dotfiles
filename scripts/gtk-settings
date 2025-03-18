@@ -1,0 +1,6 @@
+#!/bin/bash
+gsettings set org.gnome.desktop.interface accent-color "$ACCENT_COLOR"
+gsettings set org.gnome.desktop.interface color-scheme "$COLOR_SCHEME"
+gsettings set org.gnome.desktop.interface icon-theme "$ICON_THEME"
+gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME"
+env > ~/env.txt
