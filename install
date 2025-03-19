@@ -45,7 +45,7 @@ mkdir -p ~/.npm-global
 npm config set prefix "~/.npm-global/"
 
 # Install global npm packages
-npm install -g yarn less
+npm install -g yarn less mustache
 
 # Flatpak overrides for themes and icons
 sudo flatpak override --filesystem=$HOME/.themes

@@ -56,12 +56,11 @@ layout {
     struts {}
 }
 
-output "Virtual-1" {
-    scale 1.8
-    position x=1280 y=0
-}
+// Macbook virtual machine
+output "Virtual-1" { scale 1.8; }
 
-output "AU Optronics 0x5A3D Unknown" {
+output "eDP-1" {
+    {{turn_off_laptop_display}}
     scale 1
 }
 

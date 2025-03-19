@@ -1,0 +1,31 @@
+#!/bin/bash
+
+NIRI_DIR=$HOME/.visualglitch91/niri
+NPM_DIR=/home/erica/.npm-global/bin
+
+# Function to get the number of connected displays
+get_display_count() {
+    niri msg outputs | grep -c "^Output"
+}
+
+# Function to toggle laptop display
+toggle_laptop_display() {
+    local state=$1
+    echo "{\"turn_off_laptop_display\":\"$state\"}" | $NPM_DIR/mustache - $NIRI_DIR/config.mustache >$NIRI_DIR/config.kdl
+}
+
+# Initial count
+prev_count=-1
+
+while true; do
+    count=$(get_display_count)
+
+    if [[ "$count" -gt 1 ]]; then
+        toggle_laptop_display "off"
+    elif [[ "$count" -eq 1 ]]; then
+        toggle_laptop_display ""
+    fi
+
+    prev_count=$count
+    sleep 5
+done
