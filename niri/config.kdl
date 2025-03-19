@@ -90,6 +90,8 @@ binds {
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    Mod+F11 { spawn "brightnessctl" "set" "15%-"; }
+    Mod+F12 { spawn "brightnessctl" "set" "+15%"; }
 
     // Window controls
     Mod+Shift+W { close-window; }
@@ -207,6 +209,14 @@ window-rule {
 window-rule {
     match app-id="balenaEtcher"
     open-floating false
+}
+
+window-rule {
+    match title="Picture in picture" app-id=""
+    open-floating true
+    opacity 1.0
+    default-column-width { fixed 480; }
+    default-window-height { fixed 270; }
 }
 
 window-rule {

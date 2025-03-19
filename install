@@ -21,7 +21,7 @@ symlink "./gtk/themes/$GTK_THEME/gtk-4.0" ".config/gtk-4.0"
 
 # Install pacman packages
 sudo pacman -Sy --needed \
-    aria2 wget polkit-gnome zip \
+    aria2 wget polkit-gnome zip brightnessctl \
     kitty swaybg mako waybar xwayland-satellite niri \
     wtype wl-clipboard slurp grim gnome-tweaks \
     flatpak zsh nodejs npm jq bluetui spotifyd
