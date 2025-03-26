@@ -1,0 +1,25 @@
+if command -v yay >/dev/null; then
+    AUR_HELPER="yay"
+elif command -v paru >/dev/null; then
+    AUR_HELPER="paru"
+else
+    sudo pacman -S --needed base-devel &&
+        git clone https://aur.archlinux.org/paru.git &&
+        cd paru && makepkg -si &&
+        cd .. && rm -rf paru
+    AUR_HELPER="paru"
+fi
+
+# Install pacman packages
+sudo pacman -Sy --needed \
+    aria2 wget polkit-gnome zip brightnessctl \
+    kitty swaybg mako waybar xwayland-satellite niri \
+    wtype wl-clipboard slurp grim gnome-tweaks \
+    flatpak zsh nodejs npm jq bluetui spotifyd
+
+# Install aur packages
+$AUR_HELPER -Sy --needed \
+    ulauncher-git \
+    visual-studio-code-bin \
+    appimagelauncher \
+    easystroke

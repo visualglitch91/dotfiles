@@ -7,7 +7,6 @@ source "$ROOT/env"
 
 # Setup symlinks
 symlink "./easystroke" ".easystroke"
-symlink "./waybinder" ".config/waybinder"
 symlink "./paru" ".config/paru"
 symlink "./nvim" ".config/nvim"
 symlink "./kitty" ".config/kitty"
@@ -19,21 +18,6 @@ symlink "./zsh/.zshrc" ".zshrc"
 symlink "./gtk/icons" ".icons"
 symlink "./gtk/themes" ".themes"
 symlink "./gtk/themes/$GTK_THEME/gtk-4.0" ".config/gtk-4.0"
-
-# Install pacman packages
-sudo pacman -Sy --needed \
-    aria2 wget polkit-gnome zip brightnessctl \
-    kitty swaybg mako waybar xwayland-satellite niri \
-    wtype wl-clipboard slurp grim gnome-tweaks \
-    flatpak zsh nodejs npm jq bluetui spotifyd \
-    zenity
-
-# Install aur packages
-$AUR_HELPER -Sy --needed \
-    ulauncher-git \
-    visual-studio-code-bin \
-    appimagelauncher \
-    easystroke
 
 # Install flatpak apps
 flatpak install flathub \
@@ -47,7 +31,7 @@ mkdir -p ~/.npm-global
 npm config set prefix "~/.npm-global/"
 
 # Install global npm packages
-npm install -g yarn less mustache
+npm install -g less mustache
 
 # Flatpak overrides for themes and icons
 sudo flatpak override --filesystem=$HOME/.themes

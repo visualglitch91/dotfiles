@@ -21,7 +21,7 @@ let displayCount = -1;
 async function generateNiriConfig() {
   try {
     const data = JSON.stringify({
-      laptop_display_power: displayCount.length > 1 ? "off" : "",
+      laptop_display_power: displayCount > 1 ? "off" : "",
     });
 
     execSync(
