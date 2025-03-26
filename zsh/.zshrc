@@ -64,6 +64,7 @@ alias git-push='git push -u origin $(git-curr-branch)'
 export PATH="$HOME/.npm-global/bin/:$PATH"
 export PATH="$HOME/.visualglitch91/scripts/:$PATH"
 export PATH="$HOME/.local/bin/:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Scripts/:$PATH"
 export PATH="$HOME/Applications/:$PATH"
 
