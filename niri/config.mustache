@@ -10,8 +10,6 @@ environment {
 cursor {
     xcursor-theme "Yaru"
     xcursor-size 24
-    hide-when-typing
-    hide-after-inactive-ms 1000
 }
 
 input {
@@ -60,7 +58,7 @@ layout {
 output "Virtual-1" { scale 1.8; }
 
 output "eDP-1" {
-    {{turn_off_laptop_display}}
+    {{laptop_display_power}}
     scale 1
 }
 
@@ -78,6 +76,7 @@ binds {
     Mod+W { spawn "~/.visualglitch91/scripts/waybar-start"; }
     Mod+Alt+Backspace { spawn "~/.visualglitch91/scripts/screenshot-area"; }
     Mod+Shift+Backspace { spawn "~/.visualglitch91/scripts/screenshot"; }
+    Mod+X { spawn "waybinder" "-Fwwz"; }
 
     // Workaround for Chromium/Electron apps that don't accept cedilla
     Mod+C { spawn  "~/.visualglitch91/scripts/type" "ç"; }
@@ -137,10 +136,6 @@ binds {
     Mod+Alt+P { set-window-height "+5%"; }
     Mod+Alt+0 { set-window-height "100%"; }
     Mod+Alt+9 { set-window-height "100%"; }
-
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
@@ -216,6 +211,15 @@ window-rule {
     opacity 1.0
     default-column-width { fixed 480; }
     default-window-height { fixed 270; }
+}
+
+
+window-rule {
+    match title="waybinder" app-id="zenity"
+    open-floating true
+    opacity 1.0
+    default-column-width { fixed 480; }
+    default-window-height { fixed 720; }
 }
 
 window-rule {

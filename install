@@ -7,6 +7,7 @@ source "$ROOT/env"
 
 # Setup symlinks
 symlink "./easystroke" ".easystroke"
+symlink "./waybinder" ".config/waybinder"
 symlink "./paru" ".config/paru"
 symlink "./nvim" ".config/nvim"
 symlink "./kitty" ".config/kitty"
@@ -24,7 +25,8 @@ sudo pacman -Sy --needed \
     aria2 wget polkit-gnome zip brightnessctl \
     kitty swaybg mako waybar xwayland-satellite niri \
     wtype wl-clipboard slurp grim gnome-tweaks \
-    flatpak zsh nodejs npm jq bluetui spotifyd
+    flatpak zsh nodejs npm jq bluetui spotifyd \
+    zenity
 
 # Install aur packages
 $AUR_HELPER -Sy --needed \

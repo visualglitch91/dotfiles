@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+
+const path = require("path");
+const { execSync } = require("child_process");
+
+const NIRI_DIR = path.join(process.env.HOME, ".visualglitch91/niri");
+const NPM_DIR = path.join(process.env.HOME, "/.npm-global/bin");
+
+function getDisplayCount() {
+  try {
+    const output = execSync("niri msg outputs").toString();
+    return (output.match(/^Output/gm) || []).length;
+  } catch (error) {
+    console.error("Error getting display count:", error);
+    return 0;
+  }
+}
+
+let displayCount = -1;
+
+async function generateNiriConfig() {
+  try {
+    const data = JSON.stringify({
+      laptop_display_power: displayCount.length > 1 ? "off" : "",
+    });
+
+    execSync(
+      `echo '${data}' | ${NPM_DIR}/mustache - ${NIRI_DIR}/config.mustache >${NIRI_DIR}/config.kdl`
+    );
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+(async () => {
+  displayCount = await getDisplayCount();
+
+  setInterval(() => {
+    const nextDisplayCount = getDisplayCount();
+
+    if (displayCount !== nextDisplayCount) {
+      displayCount = nextDisplayCount;
+      generateNiriConfig();
+    }
+  }, 5000);
+
+  generateNiriConfig();
+})();
