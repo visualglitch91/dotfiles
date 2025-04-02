@@ -12,7 +12,7 @@ sudo dnf install -y \
     aria2 wget mate-polkit zip brightnessctl \
     kitty swaybg mako waybar xorg-x11-server-Xwayland \
     wtype wl-clipboard slurp grim gnome-tweaks \
-    flatpak zsh nodejs npm jq cargo
+    flatpak zsh nodejs npm jq cargo swayidle
 
 # Install Bluetui (no direct package, so use cargo)
 if ! command -v bluetui &>/dev/null; then
