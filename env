@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export DEFAULT_BROWSER=io.github.ungoogled_software.ungoogled_chromium.desktop
+export DEFAULT_BROWSER=com.vivaldi.Vivaldi.desktop
 export DEFAULT_TERMINAL=kitty
 
 ROOT=$HOME/.visualglitch91

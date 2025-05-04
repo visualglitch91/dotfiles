@@ -22,7 +22,7 @@ symlink "./gtk/themes/$GTK_THEME/gtk-4.0" ".config/gtk-4.0"
 # Install flatpak apps
 flatpak install flathub \
     com.tomjwatson.Emote com.github.tchx84.Flatseal \
-    io.github.ungoogled_software.ungoogled_chromium \
+    com.vivaldi.Vivaldi \
     io.gitlab.librewolf-community \
     page.codeberg.libre_menu_editor.LibreMenuEditor
 
