@@ -1,2 +1,3 @@
 #!/bin/bash
-gtk-launch $(xdg-settings get default-web-browser)
+source "$HOME/.visualglitch91/env"
+/usr/bin/vivaldi-snapshot --new-window $HOMEPAGE
