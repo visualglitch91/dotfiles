@@ -11,3 +11,6 @@
 [submodule "config/ulauncher/extensions/ulauncher-bookmarks"]
 	path = config/ulauncher/extensions/ulauncher-bookmarks
 	url = https://github.com/lighttigerXIV/ulauncher-bookmarks.git
+[submodule "config/ulauncher/extensions/ulauncher-text-snippets"]
+	path = config/ulauncher/extensions/ulauncher-text-snippets
+	url = git@github.com:visualglitch91/ulauncher-text-snippets.git

@@ -1,0 +1,13 @@
+{
+    "preferences": {
+        "notification_behavior": "disabled",
+        "number_of_results": "8",
+        "snippets_copy_mode": "wl",
+        "snippets_path": "~/.config/ulauncher-snippets"
+    },
+    "triggers": {
+        "snippets_keyword": {
+            "keyword": "snip"
+        }
+    }
+}

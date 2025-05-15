@@ -1,0 +1,10 @@
+{
+    "preferences": {
+        "command": "/home/erica/.visualglitch91/scripts/type"
+    },
+    "triggers": {
+        "keyword": {
+            "keyword": "snip"
+        }
+    }
+}

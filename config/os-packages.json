@@ -1,5 +1,5 @@
 {
-  "copr": ["yalter/niri", "troycurtisjr/ulauncher", "eclipseo/espanso"],
+  "copr": ["yalter/niri", "troycurtisjr/ulauncher"],
   "dnf": [
     "aria2",
     "mate-polkit",
@@ -19,9 +19,7 @@
     "code",
     "neovim",
     "niri",
-    "ulauncher",
-    "espanso",
-    "espanso-wayland"
+    "ulauncher"
   ],
   "cargo": ["bluetui"],
   "flatpak": [
