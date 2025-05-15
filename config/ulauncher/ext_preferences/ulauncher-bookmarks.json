@@ -1,0 +1,10 @@
+{
+    "preferences": {
+        "icon": "blue"
+    },
+    "triggers": {
+        "keyword": {
+            "keyword": "b"
+        }
+    }
+}

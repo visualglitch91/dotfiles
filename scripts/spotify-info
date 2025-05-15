@@ -1,0 +1,40 @@
+#!/bin/bash
+source "$HOME/.visualglitch91/env"
+
+MAX_CHARS=20
+
+RESPONSE=$(
+    curl -s -X GET "$HASS_HOST/api/states/$HASS_SPOTIFY_ENTITY" \
+        -H "Authorization: Bearer $HASS_TOKEN" \
+        -H "Content-Type: application/json"
+)
+
+TITLE=$(echo "$RESPONSE" | jq -r '.attributes.media_title // ""')
+ARTIST=$(echo "$RESPONSE" | jq -r '.attributes.media_artist // ""')
+
+# Truncate title and artist to 10 chars if necessary
+if [[ ${#TITLE} -gt MAX_CHARS ]]; then
+    TITLE="${TITLE:0:$MAX_CHARS}…"
+fi
+
+if [[ ${#ARTIST} -gt MAX_CHARS ]]; then
+    ARTIST="${ARTIST:0:$MAX_CHARS}…"
+fi
+
+# Check if both title and artist are present
+if [[ -n "$TITLE" && -n "$ARTIST" ]]; then
+    SONG="$TITLE - $ARTIST"
+else
+    exit 0
+fi
+
+STATUS=$(echo "$RESPONSE" | jq -r '.state')
+
+# Corrected if statement for comparison
+if [[ "$STATUS" == "playing" ]]; then
+    echo " $SONG"
+    exit
+fi
+
+echo " $SONG"
+exit

@@ -1,0 +1,260 @@
+@import "/home/erica/.visualglitch91/.design-tokens.less";
+
+// Base colors
+@baseFg: @colors_text;
+@baseBg: @apps_vivaldi_background;
+@baseAccent: @apps_vivaldi_accent;
+@baseHighlight: @apps_vivaldi_highlight;
+@baseSuccess: #06a700;
+@baseWarning: #ffcc00;
+@baseError: #c64539;
+@baseInverse: #2c2e3a;
+
+html,
+#browser > * {
+  // Vivaldi internal color variables
+  --colorFg: @{baseFg};
+  --colorFgAlpha: fade(@baseFg, 10%);
+  --colorFgIntense: #ffffff;
+  --colorFgFaded: lighten(@baseFg, 5%);
+  --colorFgFadedMore: lighten(@baseFg, 10%);
+  --colorFgFadedMost: lighten(@baseFg, 20%);
+
+  --colorBg: @{baseBg};
+  --colorBgAlpha: fade(@baseBg, 90%);
+  --colorBgAlphaHeavy: fade(@baseBg, 65%);
+  --colorBgAlphaHeavier: fade(@baseBg, 25%);
+  --colorBgAlphaBlur: fade(@baseBg, 87%);
+  --colorBgDark: darken(@baseBg, 5%);
+  --colorBgDarker: darken(@baseBg, 10%);
+  --colorBgLight: lighten(@baseBg, 5%);
+  --colorBgLighter: lighten(@baseBg, 10%);
+  --colorBgLightIntense: lighten(@baseBg, 7%);
+  --colorBgIntense: darken(@baseBg, 15%);
+  --colorBgIntenser: darken(@baseBg, 20%);
+  --colorBgIntserAlpha: fade(darken(@baseBg, 25%), 92%);
+  --colorBgInverse: @{baseInverse};
+  --colorBgInverser: lighten(@baseInverse, 5%);
+  --colorBgFaded: lighten(@baseBg, 6%);
+
+  --backgroundBlur: blur(10px);
+
+  --colorHighlightBg: @{baseHighlight};
+  --colorHighlightBgFaded: lighten(@baseHighlight, 20%);
+  --colorHighlightBgAlpha: fade(@baseHighlight, 10%);
+  --colorHighlightBgDark: darken(@baseHighlight, 10%);
+  --colorHighlightFg: #ffffff;
+  --colorHighlightFgAlpha: fade(#ffffff, 50%);
+  --colorHighlightFgAlphaHeavy: fade(#ffffff, 25%);
+
+  --colorAccentBg: @{baseAccent};
+  --colorAccentBgAlpha: fade(@baseAccent, 45%);
+  --colorAccentBgAlphaHeavy: fade(@baseAccent, 25%);
+  --colorAccentBgDark: darken(@baseAccent, 10%);
+  --colorAccentBgDarker: darken(@baseAccent, 20%);
+  --colorAccentBgFaded: lighten(@baseAccent, 5%);
+  --colorAccentBgFadedMore: lighten(@baseAccent, 15%);
+  --colorAccentBgFadedMost: lighten(@baseAccent, 25%);
+  --colorAccentBorder: @{baseAccent};
+  --colorAccentBorderDark: darken(@baseAccent, 10%);
+  --colorAccentFg: #ffffff;
+  --colorAccentFgFaded: lighten(#ffffff, 20%);
+  --colorAccentFgAlpha: fade(#ffffff, 15%);
+  --colorAccentFgAlphaHeavy: fade(#ffffff, 5%);
+
+  --colorBorder: #515260;
+  --colorBorderDisabled: #454754;
+  --colorBorderSubtle: #494a57;
+  --colorBorderIntense: #626472;
+
+  --colorSuccessBg: @{baseSuccess};
+  --colorSuccessBgAlpha: fade(@baseSuccess, 10%);
+  --colorSuccessFg: #ffffff;
+
+  --colorWarningBg: @{baseWarning};
+  --colorWarningBgAlpha: fade(@baseWarning, 10%);
+  --colorWarningFg: #000000;
+
+  --colorErrorBg: @{baseError};
+  --colorErrorBgAlpha: fade(@baseError, 10%);
+  --colorErrorFg: #ffffff;
+
+  --colorWindowBg: @{baseAccent};
+  --colorWindowFg: #ffffff;
+
+  // Layout and custom style settings
+
+  --radius: 0px;
+  --radiusRoundedLess: calc(var(--radius) - 1px);
+  --radiusHalf: calc(var(--radius) / 2);
+  --radiusCap: calc(var(--radiusHalf) + 1px);
+
+  --tabRadius: 0px;
+  --tabbarHeight: 30px;
+  --tabVerticalMargin: 0px;
+  --tabHeight: calc(var(--tabbarHeight) - var(--tabVerticalMargin));
+
+  --tabbarBackground: @baseBg;
+  --tabActiveBackground: rgb(50, 50, 67, 0.1);
+
+  font-family: @fontFamily;
+}
+
+#header {
+  display: none !important;
+  min-height: unset !important;
+  border-bottom: 2px solid var(--tabActiveBackground);
+}
+
+body:has(.tab-strip > span:nth-child(2)) #header {
+  display: block !important;
+}
+
+body {
+  --statusBarTop: 8px;
+}
+
+body:has(.tab-strip > span:nth-child(2)) {
+  --statusBarTop: calc(var(--tabbarHeight) + 8px);
+}
+
+#tabs-tabbar-container.top {
+  height: var(--tabbarHeight) !important;
+}
+
+#titlebar {
+  height: 100% !important;
+}
+
+#titlebar .vivaldi {
+  position: relative !important;
+  padding: 0 !important;
+  margin: 0px !important;
+  height: 100% !important;
+  display: none !important;
+}
+
+#titlebar .tabbar-wrapper {
+  margin-right: 28px !important;
+}
+
+#tabs-tabbar-container {
+  background: var(--tabbarBackground) !important;
+}
+
+#tabs-container {
+  padding-left: 6px !important;
+}
+
+#tabs-container .tab.active:before,
+#tabs-container .tab.active:after {
+  display: none !important;
+}
+
+#tabs-container .tab,
+#tabs-container .tab > .tab-header,
+#tabs-container .tab > .tab-header > .title {
+  height: var(--tabHeight) !important;
+}
+
+#tabs-container .tab > .tab-header > .title {
+  line-height: calc(var(--tabHeight) - 1px) !important;
+}
+
+#tabs-container .tab > .tab-header > .close {
+  margin-right: 0px !important;
+}
+
+#tabs-container .tab > .tab-header {
+  flex: 1 !important;
+}
+
+#tabs-container .tab {
+  margin: auto 0 !important;
+  padding: 0 4px !important;
+  border-radius: var(--tabRadius) !important;
+  background: transparent !important;
+}
+
+#tabs-container .tab.active {
+  background: var(--tabActiveBackground) !important;
+}
+
+.tab-position {
+  height: var(--tabbarHeight) !important;
+}
+
+.tab-position .button-toolbar {
+  height: 100% !important;
+}
+
+body:has(.extension-popup) .button-popup {
+  display: none !important;
+}
+
+// footer#footer {
+//   position: absolute !important;
+//   top: var(--statusBarTop) !important;
+//   bottom: unset !important;
+//   right: 6px !important;
+//   left: unset !important;
+//   padding: 4px 12px;
+//   border-radius: 6px;
+//   overflow: hidden;
+//   border-top: none !important;
+//   background: var(--tabbarBackground) !important;
+//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+// }
+
+// .extension-popup.bottom {
+//   top: calc(var(--statusBarTop) + 40px) !important;
+//   margin-left: 2px !important;
+// }
+
+// .button-popup {
+//   bottom: unset !important;
+//   top: calc(var(--statusBarTop) + 40px) !important;
+// }
+
+// .button-popup:before,
+// .button-popup:after,
+// .extension-popup:before,
+// .extension-popup:after {
+//   display: none !important;
+// }
+
+// footer#footer .button-toolbar button {
+//   padding: 0 6px;
+//   border-radius: 6px;
+//   position: relative;
+//   overlay: hidden;
+// }
+
+// footer#footer .button-toolbar button:hover {
+//   background: rgba(255, 255, 255, 0.1);
+// }
+
+.find-in-page-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  padding: 0 12px;
+  border-bottom-left-radius: 5px;
+}
+
+#panels-container.overlay.minimized {
+  position: absolute;
+}
+
+#panels-container {
+  background-color: fade(@baseBg, 65%);
+  backdrop-filter: blur(10px);
+}
+
+.color-behind-tabs-off .SearchField:focus-within,
+.color-behind-tabs-off .MailSearchField-Inner:focus-within,
+.color-behind-tabs-off .UrlBar-AddressField:focus-within {
+  outline: 2px solid var(--colorAccentBg);
+  outline-offset: -2px;
+}

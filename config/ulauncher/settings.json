@@ -1,0 +1,17 @@
+{
+  "arrow_key_aliases": "hjkl",
+  "base_width": 750,
+  "clear_previous_query": true,
+  "close_on_focus_out": true,
+  "daemonless": false,
+  "disable_desktop_filters": false,
+  "enable_application_mode": true,
+  "grab_mouse_pointer": true,
+  "jump_keys": "1234567890abcdefghijklmnopqrstuvwxyz",
+  "max_recent_apps": 0,
+  "raise_if_started": false,
+  "render_on_screen": "mouse-pointer-monitor",
+  "show_tray_icon": true,
+  "theme_name": "wal",
+  "tray_icon_name": "ulauncher-indicator-symbolic"
+}

@@ -1,0 +1,8 @@
+#!/bin/bash
+source "$HOME/.visualglitch91/env"
+
+# Toggle play/pause
+curl -s -X POST "$HASS_HOST/api/services/media_player/media_play_pause" \
+    -H "Authorization: Bearer $HASS_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d "{ \"entity_id\": \"$HASS_SPOTIFY_ENTITY\" }"

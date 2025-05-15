@@ -1,0 +1,12 @@
+#!/bin/bash
+
+sudo dnf install \
+    jq curl wget git \
+    dnf-plugins-core \
+    nodejs npm jq cargo \
+    flatpak zsh -y
+
+sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+
+mkdir -p ~/.npm-global
+npm config set prefix "~/.npm-global/"

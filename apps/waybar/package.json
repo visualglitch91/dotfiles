@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "prestart": "~/.npm-global/bin/lessc ../../config/waybar/style.less ../../config/waybar/style.css",
+    "start": "waybar"
+  }
+}

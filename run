@@ -1,0 +1,22 @@
+#!/bin/bash
+
+ROOT=$(dirname "$(realpath -P "$0")")
+
+rm -rf "$HOME/.visualglitch91"
+ln -s $ROOT "$HOME/.visualglitch91"
+
+ROOT="$HOME/.visualglitch91"
+
+export PATH="$HOME/.npm-global/bin:$PATH"
+export PATH="$ROOT/bin:$PATH"
+
+pre-install
+install-os-packages
+post-install
+
+git submodule init
+git submodule update
+
+yarn
+
+$ROOT/scripts/customizations

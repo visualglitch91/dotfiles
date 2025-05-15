@@ -1,0 +1,10 @@
+{
+    "preferences": {
+        "triggers": {
+            "switch_kw": {
+                "keyword": "w"
+            }
+        }
+    },
+    "triggers": {}
+}

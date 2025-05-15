@@ -1,0 +1,10 @@
+{
+    "preferences": {
+        "device_list": "EDIFIER TWS Pro 2 64:68:76:C3:87:B2, EDIFIER X5 R 60:F4:3A:F0:E4:F7 "
+    },
+    "triggers": {
+        "kw": {
+            "keyword": "bt"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+#!/bin/bash
+ROOT="$HOME/.visualglitch91"
+PATH="$HOME/.npm-global/bin:$PATH"
+
+$ROOT/bin/generate-design-tokens
+$ROOT/bin/mustache-design-tokens $ROOT/config/kitty kitty.conf
+$HOME/.npm-global/bin/lessc $ROOT/config/vivaldi-css/style.less $ROOT/config/vivaldi-css/style.css
+
+pm2 delete $ROOT/apps/ecosystem.config.js
+pm2 start $ROOT/apps/ecosystem.config.js

@@ -1,0 +1,59 @@
+@import "./vars.less";
+@import "./reset.less";
+@import "./helpers.less";
+
+#workspaces {
+  &:extend(.__module-single);
+  margin-right: @module-spacing;
+  padding: 0;
+
+  & button {
+    border-radius: @border-radius;
+    padding: 0 4px;
+
+    &:hover,
+    &.focused {
+      box-shadow: inherit;
+      background-color: fade(darken(@bg-color, 5%), 90%);
+    }
+  }
+}
+
+#custom-media {
+  &:extend(.__module-single);
+}
+
+#clock {
+  &:extend(.__module-single);
+}
+
+#language {
+  &:extend(.__module-first);
+}
+
+#network,
+#battery {
+  &:extend(.__module);
+}
+
+#pulseaudio {
+  &:extend(.__module-last);
+}
+
+/*-----Indicators----*/
+#idle_inhibitor.activated {
+  color: #50fa7b;
+}
+
+#battery.charging {
+  color: #50fa7b;
+}
+
+#battery.warning:not(.charging) {
+  color: #f1fa8c;
+}
+
+#battery.critical:not(.charging),
+#temperature.critical {
+  color: #ff5555;
+}

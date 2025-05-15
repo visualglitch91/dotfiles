@@ -1,0 +1,56 @@
+{
+  "layer": "top",
+  "spacing": 0,
+  "height": 0,
+  "margin-top": 12,
+  "margin-right": 8,
+  "margin-bottom": 0,
+  "margin-left": 8,
+  "modules-left": ["niri/workspaces", "custom/media"],
+  "modules-center": ["clock"],
+  "modules-right": ["niri/language", "network", "battery", "pulseaudio"],
+  "niri/language": {
+    "format": "<span text_transform=\"uppercase\"> {short}</span>",
+    "on-click": "niri msg action switch-layout next"
+  },
+  "niri/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "tooltip": false
+  },
+  "clock": {
+    "format": "{:%H:%M - %a, %d %b %Y}",
+    "tooltip": false
+  },
+  "network": {
+    "format-wifi": " {essid}",
+    "format-ethernet": "",
+    "format-disconnected": "",
+    "interval": 5,
+    "tooltip": false
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-icons": ["", "", ""]
+  },
+  "pulseaudio": {
+    "scroll-step": 5,
+    "max-volume": 150,
+    "format": " {volume}%",
+    "format-muted": "",
+    "nospacing": 1,
+    "on-click": "pwvucontrol",
+    "tooltip": false
+  },
+  "custom/media": {
+    "exec": "~/.visualglitch91/scripts/spotify-info",
+    "interval": 5,
+    "hide-empty-text": true,
+    "on-click": "~/.visualglitch91/scripts/spotify-toggle"
+  }
+}

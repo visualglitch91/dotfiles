@@ -1,0 +1,25 @@
+@import "./vars.less";
+
+.__module {
+  background-color: @bg-color;
+  padding: 0.3em calc(@module-padding / 2) 0.4em;
+}
+
+.__module-first {
+  &:extend(.__module);
+  border-top-left-radius: @border-radius;
+  border-bottom-left-radius: @border-radius;
+  padding-left: @module-padding;
+}
+
+.__module-last {
+  &:extend(.__module);
+  border-top-right-radius: @border-radius;
+  border-bottom-right-radius: @border-radius;
+  padding-right: @module-padding;
+}
+
+.__module-single {
+  &:extend(.__module-first);
+  &:extend(.__module-last);
+}

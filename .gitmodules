@@ -1,0 +1,13 @@
+
+[submodule "config/ulauncher/extensions/Ulauncher-Bluetooth-quick-connect"]
+	path = config/ulauncher/extensions/Ulauncher-Bluetooth-quick-connect
+	url = https://github.com/Eckhoff42/Ulauncher-Bluetooth-quick-connect.git
+[submodule "config/ulauncher/extensions/ulauncher-system"]
+	path = config/ulauncher/extensions/ulauncher-system
+	url = https://github.com/iboyperson/ulauncher-system
+[submodule "config/ulauncher/extensions/ulauncher-niri-window-switcher"]
+	path = config/ulauncher/extensions/ulauncher-niri-window-switcher
+	url = git@github.com:visualglitch91/ulauncher-niri-window-switcher.git
+[submodule "config/ulauncher/extensions/ulauncher-bookmarks"]
+	path = config/ulauncher/extensions/ulauncher-bookmarks
+	url = https://github.com/lighttigerXIV/ulauncher-bookmarks.git

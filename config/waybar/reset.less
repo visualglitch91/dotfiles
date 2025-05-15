@@ -1,0 +1,32 @@
+@import "./vars.less";
+
+* {
+  border: none;
+  font-family: @font-family, "Font Awesome 6 Pro", sans-serif;
+  font-size: @font-size;
+  color: @text-color;
+  border-radius: 0;
+}
+
+window.eDP-1 * {
+  font-size: @laptop-font-size;
+}
+
+window#waybar {
+  background: rgba(40, 42, 54, 0);
+}
+
+label.module,
+box.module,
+box.module button {
+  padding: 0;
+  border-radius: 0;
+}
+
+.modules-left {
+  margin-left: @waybar-margin;
+}
+
+.modules-right {
+  margin-right: @waybar-margin;
+}

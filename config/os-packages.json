@@ -1,0 +1,34 @@
+{
+  "copr": ["yalter/niri", "troycurtisjr/ulauncher", "eclipseo/espanso"],
+  "dnf": [
+    "aria2",
+    "mate-polkit",
+    "zip",
+    "brightnessctl",
+    "kitty",
+    "swaybg",
+    "mako",
+    "waybar",
+    "xorg-x11-server-Xwayland",
+    "wtype",
+    "wl-clipboard",
+    "gnome-tweaks",
+    "swayidle",
+    "dbus-devel",
+    "pkgconf-pkg-config",
+    "code",
+    "neovim",
+    "niri",
+    "ulauncher",
+    "espanso",
+    "espanso-wayland"
+  ],
+  "cargo": ["bluetui"],
+  "flatpak": [
+    "com.tomjwatson.Emote",
+    "com.github.tchx84.Flatseal",
+    "io.gitlab.librewolf-community",
+    "page.codeberg.libre_menu_editor.LibreMenuEditor"
+  ],
+  "npm": ["less", "mustache", "pm2", "yarn"]
+}

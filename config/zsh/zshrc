@@ -1,0 +1,70 @@
+export ZSH="$HOME/.oh-my-zsh"
+
+ZSH_THEME="risto"
+
+plugins=(
+	asdf
+	git
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# Only source the Cargo environment file if it exists
+if [ -f "$HOME/.cargo/env" ]; then
+	source "$HOME/.cargo/env"
+fi
+
+unsetopt PROMPT_SP
+
+alias open=xdg-open
+
+# DNF shortcuts
+alias dnfadd="sudo dnf install"
+alias dnfdel="sudo dnf remove"
+
+# Flatpak shortcuts
+alias flatadd='flatpak install flathub'
+alias flatdel='flatpak remove'
+
+alias compose="docker compose"
+alias nrun="npm run"
+alias vim=nvim
+alias vi=nvim
+alias nano=nvim
+
+alias gl='git pull'
+alias gp='git push'
+alias gpo='git push -u origin'
+alias gs='git status'
+alias gb='git branch'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gd='git diff'
+alias ga='git add'
+alias gall='git add .'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gcan='git commit --amend --no-edit'
+alias git-confia="git add . && git commit --amend --no-edit && git push --force"
+alias git-curr-branch='git rev-parse --abbrev-ref HEAD'
+alias git-push='git push -u origin $(git-curr-branch)'
+
+export ELECTRON_OZONE_PLATFORM_HINT=wayland
+
+export PATH="$HOME/.npm-global/bin/:$PATH"
+export PATH="$HOME/.visualglitch91/scripts/:$PATH"
+export PATH="$HOME/.local/bin/:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+PATH="/home/erica/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/home/erica/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/home/erica/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/home/erica/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/erica/perl5"; export PERL_MM_OPT;

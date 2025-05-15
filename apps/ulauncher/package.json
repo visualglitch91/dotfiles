@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "prestart": "../../bin/mustache-design-tokens ../../config/ulauncher/user-themes/wal theme.css && ../../bin/mustache-design-tokens ../../config/ulauncher/user-themes/wal manifest.json",
+    "start": "/usr/bin/ulauncher --daemon"
+  }
+}

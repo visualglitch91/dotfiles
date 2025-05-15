@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo $1 | wl-copy --trim-newline
+
+app_id=$(niri msg focused-window | grep "App ID" | awk -F': ' '{print $2}')
+
+if [[ "$app_id" =~ vivaldi ]]; then
+    wtype -M ctrl v -m ctrl
+else
+    wtype -M ctrl -M shift v -m ctrl -m shift
+fi

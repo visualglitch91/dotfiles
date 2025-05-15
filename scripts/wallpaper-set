@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -e
+
+DEST_DIR="$HOME/.visualglitch91"
+ROOT="$DEST_DIR/config/wallpaper.jpg"
+
+input="$1"
+
+mkdir -p "$DEST_DIR"
+
+# If input is a URL
+if [[ "$input" =~ ^https?:// ]]; then
+    tmpfile=$(mktemp --suffix=.download)
+    curl -Lso "$tmpfile" "$input"
+    input="$tmpfile"
+fi
+
+# Convert to jpg if not already
+file_ext="${input##*.}"
+if [[ "${file_ext,,}" != "jpg" && "${file_ext,,}" != "jpeg" ]]; then
+    convert "$input" "$ROOT"
+else
+    cp "$input" "$ROOT"
+fi

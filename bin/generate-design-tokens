@@ -1,0 +1,38 @@
+#!/home/erica/.visualglitch91/node_modules/.bin/vite-node
+import fs from "fs";
+import { join } from "path";
+import designTokens from "../config/design-tokens";
+import { lessVarsToCSS } from "../utils/utils";
+
+function flatten(obj, prefix = "") {
+  const out = {};
+  for (const [key, value] of Object.entries(obj)) {
+    const newKey = prefix ? `${prefix}_${key}` : key;
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      Object.assign(out, flatten(value, newKey));
+    } else {
+      out[newKey] = value;
+    }
+  }
+  return out;
+}
+
+const flattened = flatten(designTokens);
+const lessLines = [];
+
+for (const [key, value] of Object.entries(flattened)) {
+  lessLines.push(`@${key}: ${value};`);
+}
+
+const less = lessLines.join("\n");
+
+fs.writeFileSync(join(__dirname, "../.design-tokens.less"), less);
+
+fs.writeFileSync(join(__dirname, "../.design-tokens.css"), lessVarsToCSS(less));
+
+fs.writeFileSync(
+  join(__dirname, "../.design-tokens.json"),
+  JSON.stringify(designTokens, null, 2)
+);
+
+console.log("Design tokens generated successfully.");

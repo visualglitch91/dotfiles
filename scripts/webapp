@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/bin/vivaldi-snapshot --disable-features=GlobalShortcutsPortal --app=$1

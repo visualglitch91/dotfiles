@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "start": "../../node_modules/.bin/vite-node index.ts"
+  },
+  "dependencies": {}
+}
