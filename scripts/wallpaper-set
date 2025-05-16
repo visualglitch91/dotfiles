@@ -12,7 +12,7 @@ mkdir -p "$DEST_DIR"
 # If input is a URL
 if [[ "$input" =~ ^https?:// ]]; then
     tmpfile=$(mktemp --suffix=.download)
-    curl -Lso "$tmpfile" "$input"
+    wget -qO "$tmpfile" "$input"
     input="$tmpfile"
 fi
 
@@ -23,3 +23,5 @@ if [[ "${file_ext,,}" != "jpg" && "${file_ext,,}" != "jpeg" ]]; then
 else
     cp "$input" "$ROOT"
 fi
+
+pm2 restart visualglitch-os--swaybg

@@ -3,8 +3,9 @@
 @font-family: @fontFamilyMono;
 @font-size: @apps_waybar_fontSize;
 @laptop-font-size: @apps_waybar_laptopFontSize;
-@bg-color: fade(@colors_background, 90%);
-@text-color: @colors_text;
+@bg-color: fade(darken(@colors_text, 5%), 85%);
+@text-color: @colors_background;
+@highlight-background-color: fade(@colors_accent, 20%);
 @waybar-margin: 0.6rem;
 @module-spacing: 0.6rem;
 @module-padding: 1.2rem;
