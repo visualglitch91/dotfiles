@@ -1,8 +1,15 @@
-export default function config({ externalDisplayConnected, designTokens }) {
+export default function config({
+  externalDisplayConnected,
+  designTokens,
+}: {
+  externalDisplayConnected: string;
+  designTokens: any;
+}) {
   return {
     external_display_connected: externalDisplayConnected,
     color_scheme: designTokens.apps.niri.colorScheme,
     gtk_theme: designTokens.apps.niri.gtkTheme,
+
     icon_theme: designTokens.apps.niri.iconTheme,
     keyboard_layout: "us(alt-intl),br",
     cursor_theme: designTokens.apps.niri.cursorTheme,
