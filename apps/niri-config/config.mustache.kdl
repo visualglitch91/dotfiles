@@ -111,6 +111,7 @@ window-rule {
 
 window-rule {
     match app-id="kitty" is-focused=false
+    match app-id="com.mitchellh.ghostty" is-focused=false
     shadow {
         inactive-color "#1D1D1FCC"
     }

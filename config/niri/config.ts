@@ -2,7 +2,7 @@ export default function config({
   externalDisplayConnected,
   designTokens,
 }: {
-  externalDisplayConnected: string;
+  externalDisplayConnected: boolean;
   designTokens: any;
 }) {
   return {
@@ -34,7 +34,7 @@ export default function config({
       ["Mod+E", 'spawn "nautilus"'],
       ["Mod+D", 'spawn "ulauncher-toggle"'],
       ["Mod+period", 'spawn "flatpak" "run" "com.tomjwatson.Emote"'],
-      ["Mod+T", 'spawn "kitty"'],
+      ["Mod+T", 'spawn "ghostty"'],
       ["Mod+B", 'spawn "~/.visualglitch91/scripts/open-default-browser"'],
       ["Mod+Alt+Backspace", "screenshot"],
       ["Mod+Shift+Backspace", "screenshot-screen"],
@@ -98,12 +98,13 @@ export default function config({
     window_rules: [
       `
         match app-id="kitty"
+        match app-id="com.mitchellh.ghostty"
         default-column-width { proportion 0.5; }
     `,
       `
         match app-id="code"
         match app-id="vivaldi-snapshot"
-        default-column-width { proportion 1.0; }
+        default-column-width { proportion 0.9; }
     `,
       `
         match app-id=r#"^vivaldi-gomuks\.[^_]+__-Default$"#
@@ -127,6 +128,10 @@ export default function config({
         opacity 1.0
         default-column-width { fixed 480; }
         default-window-height { fixed 270; }
+    `,
+      `
+      match app-id="code" is-focused=true
+      opacity 0.97
     `,
     ],
   };

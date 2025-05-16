@@ -19,7 +19,8 @@
     "code",
     "neovim",
     "niri",
-    "ulauncher"
+    "ulauncher",
+    "ghostty"
   ],
   "cargo": ["bluetui"],
   "flatpak": [

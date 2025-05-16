@@ -3,6 +3,7 @@
   ["./config/mako", ".config/mako"],
   ["./config/niri", ".config/niri"],
   ["./config/kitty", ".config/kitty"],
+  ["./config/ghostty", ".config/ghostty"],
   ["./config/nvim", ".config/nvim"],
   ["./config/waybar", ".config/waybar"],
   ["./config/ulauncher", ".config/ulauncher"],
