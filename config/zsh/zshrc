@@ -25,8 +25,8 @@ alias dnfadd="sudo dnf -y install"
 alias dnfdel="sudo dnf -y remove"
 
 # Flatpak shortcuts
-alias flatadd='flatpak install flathub'
-alias flatdel='flatpak remove'
+alias flatadd='flatpak install -y flathub'
+alias flatdel='flatpak remove -y'
 
 alias compose="docker compose"
 alias nrun="npm run"

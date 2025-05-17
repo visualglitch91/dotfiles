@@ -96,7 +96,7 @@ hotkey-overlay {
 }
 
 window-rule {
-    match is-focused=false
+    match is-active=false
     opacity 0.3
     
     shadow {
@@ -120,6 +120,7 @@ window-rule {
 window-rule {
     geometry-corner-radius {{window_corner_radius}}
     clip-to-geometry true
+    draw-border-with-background false
 }
 
 {{#window_rules}}
