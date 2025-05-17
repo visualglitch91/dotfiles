@@ -25,6 +25,16 @@ symlink() {
     ln -s "$target" "$link_name"
 }
 
+sudo dnf remove nano -y
+
+sudo rm /usr/bin/vim
+sudo rm /usr/bin/nano
+sudo rm /usr/bin/nvim
+
+sudo ln -s /usr/bin/hx /usr/bin/vim
+sudo ln -s /usr/bin/hx /usr/bin/nano
+sudo ln -s /usr/bin/hx /usr/bin/nvim
+
 sudo flatpak override --filesystem=$HOME/.themes
 sudo flatpak override --filesystem=$HOME/.icons
 sudo flatpak override --filesystem=xdg-config/gtk-4.0

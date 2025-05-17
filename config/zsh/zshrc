@@ -3,24 +3,26 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="risto"
 
 plugins=(
-	asdf
-	git
+    asdf
+    git
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # Only source the Cargo environment file if it exists
 if [ -f "$HOME/.cargo/env" ]; then
-	source "$HOME/.cargo/env"
+    source "$HOME/.cargo/env"
 fi
 
 unsetopt PROMPT_SP
 
 alias open=xdg-open
+alias zsh-reload="source ~/.zshrc"
 
 # DNF shortcuts
-alias dnfadd="sudo dnf install"
-alias dnfdel="sudo dnf remove"
+alias dnfup="sudo dnf update -y"
+alias dnfadd="sudo dnf -y install"
+alias dnfdel="sudo dnf -y remove"
 
 # Flatpak shortcuts
 alias flatadd='flatpak install flathub'
@@ -28,9 +30,6 @@ alias flatdel='flatpak remove'
 
 alias compose="docker compose"
 alias nrun="npm run"
-alias vim=nvim
-alias vi=nvim
-alias nano=nvim
 
 alias gl='git pull'
 alias gp='git push'
@@ -57,18 +56,12 @@ export PATH="$HOME/.local/bin/:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
-export VISUAL=vim
+export VISUAL=hx
 export EDITOR="$VISUAL"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-PATH="/home/erica/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/erica/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/erica/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/erica/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/erica/perl5"; export PERL_MM_OPT;
 
 function current_dir() {
     local current_dir=$PWD
@@ -77,7 +70,7 @@ function current_dir() {
     else
         current_dir=${current_dir##*/}
     fi
-    
+
     echo $current_dir
 }
 
@@ -91,7 +84,7 @@ function set_tab_to_working_dir() {
     local title=$(current_dir)
     # uncomment the following to show the exit code after a failed command
     # if [[ $result -gt 0 ]]; then
-    #     title="$title [$result]" 
+    #     title="$title [$result]"
     # fi
 
     change_tab_title $title
@@ -106,3 +99,4 @@ if [[ -n $ZELLIJ ]]; then
     add-zsh-hook precmd set_tab_to_working_dir
     add-zsh-hook preexec set_tab_to_command_line
 fi
+

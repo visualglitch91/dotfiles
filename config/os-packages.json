@@ -1,5 +1,5 @@
 {
-  "copr": ["yalter/niri", "troycurtisjr/ulauncher"],
+  "copr": ["yalter/niri", "troycurtisjr/ulauncher", "pgdev/ghostty"],
   "dnf": [
     "aria2",
     "mate-polkit",
@@ -17,10 +17,11 @@
     "dbus-devel",
     "pkgconf-pkg-config",
     "code",
-    "neovim",
     "niri",
     "ulauncher",
-    "ghostty"
+    "ghostty",
+    "nmtui",
+    "helix"
   ],
   "cargo": ["bluetui"],
   "flatpak": [
