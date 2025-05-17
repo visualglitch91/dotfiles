@@ -4,10 +4,11 @@ set -e
 
 DEST_DIR="$HOME/.visualglitch91"
 ROOT="$DEST_DIR/config/wallpaper.jpg"
+OVERVIEW="$DEST_DIR/config/wallpaper-overview.jpg"
 
 input="$1"
 
-mkdir -p "$DEST_DIR"
+mkdir -p "$DEST_DIR/config"
 
 # If input is a URL
 if [[ "$input" =~ ^https?:// ]]; then
@@ -24,4 +25,8 @@ else
     cp "$input" "$ROOT"
 fi
 
+# Generate blurred overview image
+convert "$ROOT" -blur 0x8 "$OVERVIEW"
+
 pm2 restart visualglitch-os--swaybg
+pm2 restart visualglitch-os--swww

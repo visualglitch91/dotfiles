@@ -1,5 +1,5 @@
 {
   "scripts": {
-    "start": "swaybg -i ../../config/wallpaper.jpg"
+    "start": "swaybg -i ../../config/wallpaper-overview.jpg"
   }
 }

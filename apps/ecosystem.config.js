@@ -4,6 +4,7 @@ const apps = [
   "niri-config",
   "ulauncher",
   "swaybg",
+  "swww",
   "waybar",
   "mako",
   "swayidle",

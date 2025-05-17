@@ -47,9 +47,15 @@ layout {
         active-gradient from="{{layout_focus_ring_color_start}}" to="{{layout_focus_ring_color_end}}" angle=45
     }
 
+ 
     border { off; }
 }
 
+// Force swaybg to set its background to the overview
+layer-rule {
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
 
 
 output "eDP-1" {

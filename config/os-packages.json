@@ -1,5 +1,10 @@
 {
-  "copr": ["yalter/niri", "troycurtisjr/ulauncher", "pgdev/ghostty"],
+  "copr": [
+    "yalter/niri",
+    "troycurtisjr/ulauncher",
+    "pgdev/ghostty",
+    "alebastr/sway-extras"
+  ],
   "dnf": [
     "aria2",
     "mate-polkit",
@@ -7,6 +12,7 @@
     "brightnessctl",
     "kitty",
     "swaybg",
+    "swww",
     "mako",
     "waybar",
     "xorg-x11-server-Xwayland",

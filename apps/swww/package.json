@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "prestart": "sh -c \"sleep 1 && swww img ~/.visualglitch91/config/wallpaper.jpg\" &",
+    "start": "killall swww-daemon ; swww-daemon"
+  }
+}
