@@ -18,9 +18,6 @@ function getDisplayCount() {
   }
 }
 
-
-
-
 async function generateNiriConfig() {
   fs.writeFileSync(
     "../../config/niri/config.kdl",

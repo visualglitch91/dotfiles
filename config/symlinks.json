@@ -9,6 +9,7 @@
   ["./config/ulauncher", ".config/ulauncher"],
   ["./config/ulauncher/extensions", ".local/share/ulauncher/extensions"],
   ["./config/ulauncher/bookmarks", ".config/ulauncher-bookmarks"],
+  ["./config/ulauncher/snippets", ".config/ulauncher-text-snippets"],
   ["./gtk/icons", ".icons"],
   ["./gtk/themes", ".themes"],
   ["./gtk/themes/$GTK_THEME/gtk-4.0", ".config/gtk-4.0"]

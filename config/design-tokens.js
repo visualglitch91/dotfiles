@@ -36,9 +36,9 @@ const designTokens = {
       cursorTheme: getEnvVar("CURSOR_THEME"),
       cursorSize: 24,
       layoutGaps: 16,
-      layoutFocusRingWidth: 2,
-      layoutFocusRingColorStart: colors.primary,
-      layoutFocusRingColorEnd: colors.secondary,
+      layoutFocusRingWidth: 3,
+      layoutFocusRingColorStart: colors.accent,
+      layoutFocusRingColorEnd: "#BD93F9",
       windowCornerRadius: 0,
     },
     ulauncher: {
@@ -55,6 +55,7 @@ const designTokens = {
       fontSize: 13,
       borderSize: 2,
       borderRadius: 0,
+      borderColor: colors.secondary,
     },
     waybar: {
       fontSize: 13,

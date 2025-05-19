@@ -77,6 +77,7 @@ export default function config({
       ["Mod+Alt+M", "move-window-to-workspace-down"],
       ["Mod+Ctrl+Alt+Page_Up", "move-window-to-workspace-up"],
       ["Mod+Ctrl+Alt+Page_Down", "move-window-to-workspace-down"],
+      ["Ctrl+Alt+Shift+P", "toggle-overview"],
       ["Mod+Q", "consume-or-expel-window-left"],
       ["Mod+Shift+Q", "consume-or-expel-window-right"],
       ["Mod+F", "maximize-column"],
@@ -107,6 +108,10 @@ export default function config({
         default-column-width { proportion 0.9; }
     `,
       `
+        match app-id="vivaldi-snapshot" title=r#"Developer Tools - Vivaldi -*"#
+        default-column-width { proportion 0.4; }
+    `,
+      `
         match app-id=r#"^vivaldi-gomuks\.[^_]+__-Default$"#
         default-column-width { proportion 0.40; }
     `,
@@ -131,7 +136,7 @@ export default function config({
     `,
       `
       match app-id="code" is-focused=true
-      opacity 0.97
+      opacity 0.975
     `,
     ],
   };

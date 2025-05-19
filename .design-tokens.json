@@ -37,8 +37,8 @@
       "cursorSize": 24,
       "layoutGaps": 16,
       "layoutFocusRingWidth": 2,
-      "layoutFocusRingColorStart": "#a4ffff",
-      "layoutFocusRingColorEnd": "#69ff94",
+      "layoutFocusRingColorStart": "#e06c75",
+      "layoutFocusRingColorEnd": "#BD93F9",
       "windowCornerRadius": 0
     },
     "ulauncher": {
@@ -54,7 +54,8 @@
     "mako": {
       "fontSize": 13,
       "borderSize": 2,
-      "borderRadius": 0
+      "borderRadius": 0,
+      "borderColor": "#69ff94"
     },
     "waybar": {
       "fontSize": 13,

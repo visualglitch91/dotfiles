@@ -11,6 +11,7 @@ environment {
 cursor {
     xcursor-theme "{{cursor_theme}}"
     xcursor-size {{cursor_size}}
+    hide-after-inactive-ms 1000
 }
 
 input {
@@ -57,6 +58,11 @@ layer-rule {
     place-within-backdrop true
 }
 
+gestures {
+    hot-corners {
+        off
+    }
+}
 
 output "eDP-1" {
     {{#external_display_connected}}off{{/external_display_connected}}
