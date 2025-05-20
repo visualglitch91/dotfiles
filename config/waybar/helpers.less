@@ -1,25 +1,44 @@
 @import "./vars.less";
 
 .__module {
-  background-color: @bg-color;
-  padding: 0.3em calc(@module-padding / 2) 0.4em;
+  background-color: @module-bg-color;
+  padding: @module-padding-y calc(@module-padding-x / 2);
+  margin-top: @waybar-margin-y;
+  margin-bottom: @waybar-margin-y;
+  border-style: solid;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
 }
 
 .__module-first {
   &:extend(.__module);
   border-top-left-radius: @border-radius;
   border-bottom-left-radius: @border-radius;
-  padding-left: @module-padding;
+  padding-left: @module-padding-x;
+  border-left-width: 1px;
 }
 
 .__module-last {
   &:extend(.__module);
   border-top-right-radius: @border-radius;
   border-bottom-right-radius: @border-radius;
-  padding-right: @module-padding;
+  padding-right: @module-padding-x;
+  border-right-width: 1px;
 }
 
 .__module-single {
   &:extend(.__module-first);
   &:extend(.__module-last);
+}
+
+.__accent {
+  border-color: @colors_accent;
+}
+
+.__primary {
+  border-color: @colors_primary;
+}
+
+.__secondary {
+  border-color: @colors_secondary;
 }

@@ -13,7 +13,8 @@ window.eDP-1 * {
 }
 
 window#waybar {
-  background: rgba(40, 42, 54, 0);
+  background-color: @bg-color;
+  border-radius: @border-radius;
 }
 
 label.module,
@@ -24,9 +25,9 @@ box.module button {
 }
 
 .modules-left {
-  margin-left: @waybar-margin;
+  margin-left: @waybar-margin-x;
 }
 
 .modules-right {
-  margin-right: @waybar-margin;
+  margin-right: @waybar-margin-x;
 }

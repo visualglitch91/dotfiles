@@ -36,7 +36,7 @@
       "cursorTheme": "Yaru",
       "cursorSize": 24,
       "layoutGaps": 16,
-      "layoutFocusRingWidth": 2,
+      "layoutFocusRingWidth": 3,
       "layoutFocusRingColorStart": "#e06c75",
       "layoutFocusRingColorEnd": "#BD93F9",
       "windowCornerRadius": 0

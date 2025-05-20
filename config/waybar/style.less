@@ -4,56 +4,67 @@
 
 #workspaces {
   &:extend(.__module-single);
+  &:extend(.__accent);
+
   margin-right: @module-spacing;
   padding: 0;
 
   & button {
     border-radius: @border-radius;
-    padding: 0 4px;
+    padding: 0;
 
     &:hover,
     &.focused {
       box-shadow: inherit;
-      background-color: @highlight-background-color;
+      background-color: @module-bg-highlight-color;
+    }
+
+    &:hover {
+      background-color: fade(@module-bg-highlight-color, 30%);
     }
   }
 }
 
 #custom-media {
   &:extend(.__module-single);
+  &:extend(.__secondary);
 }
 
 #clock {
   &:extend(.__module-single);
+  &:extend(.__primary);
 }
 
 #language {
   &:extend(.__module-first);
+  &:extend(.__accent);
 }
 
 #network,
 #battery {
   &:extend(.__module);
+  &:extend(.__accent);
 }
 
 #pulseaudio {
   &:extend(.__module-last);
+  &:extend(.__accent);
 }
 
 /*-----Indicators----*/
 #idle_inhibitor.activated {
-  color: #50fa7b;
+  color: @success-color;
 }
 
 #battery.charging {
-  color: #50fa7b;
+  color: @success-color;
 }
 
 #battery.warning:not(.charging) {
-  color: #f1fa8c;
+  color: @warning-color;
 }
 
 #battery.critical:not(.charging),
 #temperature.critical {
-  color: #ff5555;
+  color: @danger-color;
 }
