@@ -9,11 +9,26 @@ keybinds clear-defaults=true {
     }
  
     tab {
-        bind "Esc" { SwitchToMode "normal"; }
-        bind "left" { GoToPreviousTab; }
-        bind "right" { GoToNextTab; }
-        bind "x" { CloseTab; }
-        bind "n" { NewTab; }
+        bind "Esc" {SwitchToMode "normal"; }
+        bind "left" {
+            GoToPreviousTab
+            SwitchToMode "normal"
+        }
+        
+        bind "right" {
+            GoToNextTab
+            SwitchToMode "normal"
+        }
+        
+        bind "x" {
+            CloseTab
+            SwitchToMode "normal"
+        }
+        
+        bind "n" {
+            NewTab
+            SwitchToMode "normal"
+        }
     }
 }
 
