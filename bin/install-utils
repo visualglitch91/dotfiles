@@ -46,13 +46,15 @@ enable_copr_repos() {
 }
 
 install_bun_packages() {
-  local installed
-  installed=$(bun pm -g ls | awk -F@ '/@/ {print $1}' | sed 's/^[^ ]* //')
+  local installed=()
+  if installed_output=$(bun pm -g ls 2>/dev/null); then
+    mapfile -t installed < <(awk -F@ '/@/ {print $1}' <<<"$installed_output" | sed 's/^[^ ]* //')
+  fi
 
   for pkg in "$@"; do
-    if ! grep -qx "$pkg" <<<"$installed"; then
+    if ! printf '%s\n' "${installed[@]}" | grep -qx "$pkg"; then
       echo "Installing bun package: $pkg"
-      bun install -g "$pkg" >/dev/null 2>&1
+      bun install -g --no-save "$pkg" >/dev/null 2>&1
     fi
   done
 }

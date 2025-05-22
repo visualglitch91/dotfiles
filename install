@@ -3,7 +3,7 @@ set -Eeuo pipefail
 
 ROOT=$(dirname "$(realpath -P "$0")")
 
-REQUIRED_DNF_PKGS="jq curl zsh helix git dnf-plugins-core flatpak"
+REQUIRED_DNF_PKGS="jq curl zsh helix git dnf-plugins-core nodejs flatpak"
 REQUIRED_NIX_PKGS="bun"
 REQUIRED_BUN_PKGS="hjson pm2"
 
@@ -18,13 +18,16 @@ rm -f "$HOME/.visualglitch91"
 ln -s "$ROOT" "$HOME/.visualglitch91"
 
 # Add bun to the current PATH
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.bun/bin:$PATH"
 
 # Install lix (nix package manager)
 if ! command -v nix &>/dev/null; then
   echo "Installing nix package manager"
+  sudo setenforce 0
   sh -c "curl -sSf -L https://install.lix.systems/lix | sh -s -- install" >/dev/null 2>&1
   source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+  sudo setenforce 1
 fi
 
 install_dnf_packages $REQUIRED_DNF_PKGS
