@@ -1,3 +1,3 @@
 #!/bin/bash
-source "$HOME/.visualglitch91/env"
+source "$HOME/.visualglitch91/.generated/secrets.env"
 /usr/bin/vivaldi-snapshot --new-window $HOMEPAGE

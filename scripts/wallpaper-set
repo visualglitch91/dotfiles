@@ -3,8 +3,8 @@
 set -e
 
 DEST_DIR="$HOME/.visualglitch91"
-ROOT="$DEST_DIR/config/wallpaper.jpg"
-OVERVIEW="$DEST_DIR/config/wallpaper-overview.jpg"
+ROOT="$DEST_DIR/assets/wallpaper.jpg"
+OVERVIEW="$DEST_DIR/assets/wallpaper-overview.jpg"
 
 input="$1"
 
@@ -28,5 +28,5 @@ fi
 # Generate blurred overview image
 convert "$ROOT" -blur 0x8 "$OVERVIEW"
 
-pm2 restart visualglitch-os--swaybg
-pm2 restart visualglitch-os--swww
+pm2 restart swaybg
+pm2 restart swww

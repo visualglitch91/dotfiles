@@ -1,0 +1,244 @@
+environment {
+    COLOR_SCHEME "{{ system_theme.color_scheme }}"
+    GTK_THEME "{{ system_theme.gtk_theme }}"
+    ICON_THEME "{{ system_theme.icon_theme }}"
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+}
+
+cursor {
+    xcursor-theme "{{ apps.niri.cursor_theme }}"
+    xcursor-size {{ apps.niri.cursor_size }}
+    hide-after-inactive-ms 1000
+}
+
+input {
+    keyboard {
+        xkb {
+            layout "us(alt-intl),br"
+            options "caps:super"
+        }
+    }
+
+    touchpad {
+        tap
+        natural-scroll
+        scroll-factor 1.0
+    }
+
+    focus-follows-mouse max-scroll-amount="0%"
+}
+
+layout {
+    gaps {{ apps.niri.layout_gaps }}
+    center-focused-column "on-overflow"
+    always-center-single-column
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+        proportion 1.0
+    }
+
+    focus-ring {
+        width {{ apps.niri.layout_focus_ring_width }}
+        active-gradient from="{{ apps.niri.layout_focus_ring_color_start }}" to="{{ apps.niri.layout_focus_ring_color_end }}" angle=45
+    }
+
+    border { off; }
+}
+
+// Force swaybg to set its background to the overview
+layer-rule {
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
+
+gestures {
+    hot-corners {
+        off
+    }
+}
+
+output "eDP-1" {
+    {% if external_display_connected %}off{% endif %}
+    scale 1
+}
+
+output "Virtual-1" {
+    scale 1.8
+}
+
+output "LG Electronics LG ULTRAFINE 406AZXC9Y186" {
+    scale 1.5
+}
+
+animations {}
+
+binds {
+    // Applications such as remote-desktop clients and software KVM switches may
+    // request that niri stops processing the keyboard shortcuts defined here
+    // so they may, for example, forward the key presses as-is to a remote machine.
+    // It's a good idea to bind an escape hatch to toggle the inhibitor,
+    // so a buggy application can't hold your session hostage.
+    //
+    // The allow-inhibiting=false property can be applied to other binds as well,
+    // which ensures niri always processes them, even when an inhibitor is active.
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+    // Power and Session
+    Mod+Shift+E { quit; }
+
+    Mod+E { spawn "nautilus"; }
+    Mod+D { spawn "ulauncher-toggle"; }
+    Mod+period { spawn "flatpak" "run" "com.tomjwatson.Emote"; }
+    Mod+T { spawn "ghostty"; }
+    Mod+B { spawn "~/.visualglitch91/scripts/open-default-browser"; }
+    Mod+Alt+Backspace { screenshot; }
+    Mod+Shift+Backspace { screenshot-screen; }
+    Alt+Tab { spawn "~/.visualglitch91/scripts/window-switcher"; }
+    Mod+C { spawn "~/.visualglitch91/scripts/type" "ç"; }
+    Mod+Shift+C { spawn "~/.visualglitch91/scripts/type" "Ç"; }
+    Mod+L { switch-layout "next"; }
+    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+    XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+    Mod+F11 { spawn "brightnessctl" "set" "5%-"; }
+    Mod+F12 { spawn "brightnessctl" "set" "+5%"; }
+    Mod+Shift+W { close-window; }
+    Mod+Left { focus-column-left; }
+    Mod+Down { focus-window-down; }
+    Mod+Up { focus-window-up; }
+    Mod+Right { focus-column-right; }
+    Mod+Alt+Left { move-column-left; }
+    Mod+Alt+Down { move-window-down; }
+    Mod+Alt+Up { move-window-up; }
+    Mod+Alt+Right { move-column-right; }
+    Mod+K { focus-workspace-up; }
+    Mod+M { focus-workspace-down; }
+    Mod+Ctrl+Page_Up { focus-workspace-up; }
+    Mod+Ctrl+Page_Down { focus-workspace-down; }
+    Mod+Alt+K { move-window-to-workspace-up; }
+    Mod+Alt+M { move-window-to-workspace-down; }
+    Mod+Ctrl+Alt+Page_Up { move-window-to-workspace-up; }
+    Mod+Ctrl+Alt+Page_Down { move-window-to-workspace-down; }
+    Ctrl+Alt+Shift+P { toggle-overview; }
+    Mod+Q { consume-or-expel-window-left; }
+    Mod+Shift+Q { consume-or-expel-window-right; }
+    Mod+F { maximize-column; }
+    Mod+Alt+F { expand-column-to-available-width; }
+    Mod+Shift+F { fullscreen-window; }
+    Mod+V { center-column; }
+    Mod+R { switch-preset-column-width; }
+    Mod+Minus { set-column-width "-5%"; }
+    Mod+Equal { set-column-width "+5%"; }
+    Mod+O { set-window-width "-5%"; }
+    Mod+P { set-window-width "+5%"; }
+    Mod+9 { set-window-height "-5%"; }
+    Mod+0 { set-window-height "+5%"; }
+    Mod+Alt+O { set-window-height "-5%"; }
+    Mod+Alt+P { set-window-height "+5%"; }
+    Mod+Alt+0 { set-window-height "100%"; }
+    Mod+Alt+9 { set-window-height "100%"; }
+}
+
+prefer-no-csd
+
+spawn-at-startup "~/.visualglitch91/scripts/reload"
+spawn-at-startup "~/.visualglitch91/config/startup"
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+window-rule {
+    match is-active=false
+    opacity 0.3
+    
+    shadow {
+        on
+        inactive-color "#1D1D1FF0"
+        spread 0
+        softness 0
+        offset x=0 y=0
+        draw-behind-window true
+    } 
+}
+
+window-rule {
+    match app-id="kitty" is-focused=false
+    match app-id="com.mitchellh.ghostty" is-focused=false
+    shadow {
+        inactive-color "#1D1D1FCC"
+    }
+}
+
+window-rule {
+    geometry-corner-radius {{ apps.niri.window_corner_radius }}
+    clip-to-geometry true
+    draw-border-with-background false
+}
+
+window-rule {
+    match app-id="com.mitchellh.ghostty" is-focused=false
+    shadow {
+        inactive-color "#1D1D1FCC"
+    }
+}
+
+window-rule {
+    geometry-corner-radius 0
+    clip-to-geometry true
+    draw-border-with-background false
+}
+
+window-rule {
+    match app-id="kitty"
+    match app-id="com.mitchellh.ghostty"
+    default-column-width { proportion 0.5; }
+    
+}
+window-rule {
+    match app-id="code"
+    match app-id="vivaldi-snapshot"
+    default-column-width { proportion 0.9; }   
+}
+
+window-rule {
+    match app-id="vivaldi-snapshot" title=r#"Developer Tools - Vivaldi -*"#
+    default-column-width { proportion 0.4; }   
+}
+
+window-rule {    
+    match app-id=r#"^vivaldi-gomuks.[^_]+__-Default$"#
+    default-column-width { proportion 0.40; }
+}
+
+window-rule {    
+    match app-id=r#"^vivaldi-app.slack.com__client_.*-Default$"#
+    default-column-width { proportion 0.60; }
+}
+
+window-rule {
+    match app-id="page.codeberg.libre_menu_editor.LibreMenuEditor"
+    max-width 800
+}
+
+window-rule {    
+    match app-id="balenaEtcher"
+    open-floating false
+}
+
+window-rule {
+    match title="Picture in picture" app-id=""
+    open-floating true
+    opacity 1.0
+    default-column-width { fixed 480; }
+    default-window-height { fixed 270; }   
+}
+
+window-rule {    
+    match app-id="code" is-focused=true
+    opacity 0.975
+}

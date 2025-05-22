@@ -1,6 +1,0 @@
-{
-  "scripts": {
-    "prestart": "../../bin/mustache-design-tokens ../../config/mako config",
-    "start": "killall mako ; mako"
-  }
-}

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+export PATH="$HOME/.npm-global/bin:$PATH"
+
+ROOT=$(dirname "$(realpath -P "$0")")/..
+
+$ROOT/bin/generate-dynamic-files
+pm2 delete $ROOT/.generated/ecosystem.config.js
+pm2 start $ROOT/.generated/ecosystem.config.js

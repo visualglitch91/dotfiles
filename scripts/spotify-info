@@ -1,5 +1,5 @@
 #!/bin/bash
-source "$HOME/.visualglitch91/env"
+source "$HOME/.visualglitch91/.generated/secrets.env"
 
 MAX_CHARS=20
 

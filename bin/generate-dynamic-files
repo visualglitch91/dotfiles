@@ -1,0 +1,152 @@
+#!/usr/bin/node
+
+const fs = require("fs");
+const { join } = require("path");
+const hjson = require("hjson");
+const _ = require("lodash");
+const nunjucks = require("nunjucks");
+const less = require("less");
+const Color = require("color").default;
+
+const loadHJSON = (path) => {
+  return hjson.parse(fs.readFileSync(join(__dirname, path), "utf8"));
+};
+
+const n = new nunjucks.Environment();
+const config = loadHJSON("../config.hjson");
+const secrets = loadHJSON("../secrets.hjson");
+
+["darken", "lighten", "fade", "desaturate", "saturate"].forEach((it) => {
+  n.addFilter(it, (color, amount) => {
+    return Color(color)[it](amount).hex();
+  });
+});
+
+const appThemesBase = _.omit(config.application_theme, "colors");
+
+const themeBase = {
+  fonts: {
+    sans: config.system_theme.font_family,
+    mono: config.system_theme.font_family_mono,
+  },
+  colors: {
+    ...config.application_theme.colors,
+  },
+};
+
+const appThemes = JSON.parse(
+  n.renderString(JSON.stringify(appThemesBase), { ...themeBase })
+);
+
+const theme = {
+  ...themeBase,
+  apps: appThemes,
+};
+
+const data = {
+  ...theme,
+  secrets,
+};
+
+function flatten(obj, prefix = "") {
+  const out = {};
+
+  for (const [key, value] of Object.entries(obj)) {
+    const formattedKey = _.camelCase(key);
+    const newKey = prefix ? `${prefix}_${formattedKey}` : formattedKey;
+
+    if (value && typeof value === "object" && !Array.isArray(value)) {
+      Object.assign(out, flatten(value, newKey));
+    } else {
+      out[newKey] = value;
+    }
+  }
+
+  return out;
+}
+
+const flattened = flatten(theme);
+const lessLines = [];
+
+for (const [key, value] of Object.entries(flattened)) {
+  lessLines.push(`@${key}: ${value};`);
+}
+
+const lessContent = lessLines.join("\n");
+
+function lessVarsToCSS(less) {
+  const lines = [":root {"];
+  const originalLines = less.trim().split("\n");
+
+  for (const line of originalLines) {
+    const [key, value] = line.replace(";", "").split(": ");
+    const cssVar = key.replace(/^@/, "--visualglitch91_").replace(/_/g, "-");
+    lines.push(`  ${cssVar}: ${value};`);
+  }
+
+  lines.push("}");
+
+  return lines.join("\n");
+}
+
+fs.writeFileSync(
+  join(__dirname, "../.generated/design-tokens.less"),
+  lessContent
+);
+
+fs.writeFileSync(
+  join(__dirname, "../.generated/design-tokens.css"),
+  lessVarsToCSS(lessContent)
+);
+
+fs.writeFileSync(
+  join(__dirname, "../.generated/design-tokens.json"),
+  JSON.stringify(theme, null, 2)
+);
+
+config.templates.forEach((it) => {
+  try {
+    const base = join(__dirname, "../config");
+    const template = fs.readFileSync(join(base, it), "utf8");
+    const result = n.renderString(template, data);
+    fs.writeFileSync(join(base, it.replace(/\.tmpl$/, "")), result);
+  } catch (e) {
+    console.error(`Error processing ${it}: ${e.message}`);
+  }
+});
+
+config.less.forEach((it) => {
+  try {
+    const base = join(__dirname, "../config");
+    const filename = join(base, it);
+    less
+      .render(fs.readFileSync(filename, "utf8"), { filename })
+      .then((result) => {
+        fs.writeFileSync(filename.replace(/\.less$/, ".css"), result.css);
+      });
+  } catch (e) {
+    console.error(`Error processing ${it}: ${e.message}`);
+  }
+});
+
+const ecosystem = {
+  apps: Object.entries(config.pm2).map(([name, script]) => ({
+    name,
+    script: "/bin/sh",
+    args: ["-c", script.replace(/\n/g, " ")],
+    interpreter: "none",
+    autorestart: true,
+  })),
+};
+
+fs.writeFileSync(
+  join(__dirname, "../.generated/ecosystem.config.js"),
+  `module.exports = ${JSON.stringify(ecosystem, null, 2)};`
+);
+
+fs.writeFileSync(
+  join(__dirname, "../.generated/secrets.env"),
+  Object.entries(secrets)
+    .map(([key, value]) => `${key.toUpperCase()}="${value}"`)
+    .join("\n")
+);

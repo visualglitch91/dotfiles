@@ -1,0 +1,131 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+ROOT=$(dirname "$(realpath -P "$0")")
+
+rm -f "$HOME/.visualglitch91"
+ln -s "$ROOT" "$HOME/.visualglitch91"
+
+# Define the symlink function for later
+symlink() {
+    local source="config/$1"
+    local destination="$2"
+
+    # Get the absolute path of the source
+    target=$(realpath "$ROOT/$source")
+
+    # If the destination is relative, prepend $HOME
+    if [[ "$destination" == /* ]]; then
+        link_name="$destination"
+    else
+        link_name="$HOME/.config/$destination"
+    fi
+
+    echo "Creating symlink: $link_name -> $target"
+
+    # Remove directory
+    rm -rf "$link_name"
+
+    # Create the symlink
+    ln -s "$target" "$link_name"
+}
+
+# Install the reqired dnf packages
+sudo dnf install \
+    jq curl wget git \
+    dnf-plugins-core \
+    nodejs npm cargo \
+    flatpak zsh helix -y
+
+# Install oh-my-zsh (do not fail if already installed or on error)
+sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" || true
+
+mkdir -p ~/.npm-global
+npm config set prefix "~/.npm-global/"
+
+# Install the reqired npm packages
+npm install -g hjson pm2 yarn
+
+export PATH="$HOME/.npm-global/bin:$PATH"
+
+# Load the config file
+CONFIG=$(hjson -j "$ROOT/config.hjson")
+
+# Enable copr repositories
+echo $CONFIG | jq -r '.copr[]' | while read -r repo; do
+    sudo dnf -y copr enable "$repo"
+done
+
+# Install other dnf packages
+echo $CONFIG | jq -r '.dnf[]' | xargs sudo dnf install -y
+
+# Install cargo packages
+echo $CONFIG | jq -r '.cargo[]' | while read -r pkg; do
+    cargo binstall --version >/dev/null 2>&1 || {
+        command -v "$pkg" >/dev/null 2>&1 || cargo install "$pkg"
+    }
+done
+
+# Install flatpak packages
+echo $CONFIG | jq -r '.flatpak[]' | xargs -I{} flatpak install flathub -y --noninteractive {}
+
+# # Install other npm packages
+# echo $CONFIG | jq -r '.npm[]' | xargs npm install -g
+
+sh -c "cd $ROOT/bin && yarn"
+
+# Remove nano, vim, vi in favor of hx
+sudo dnf remove nano -y || true
+sudo rm -f /usr/bin/vim
+sudo rm -f /usr/bin/nano
+sudo rm -f /usr/bin/nvim
+sudo ln -s /usr/bin/hx /usr/bin/vim
+sudo ln -s /usr/bin/hx /usr/bin/nano
+sudo ln -s /usr/bin/hx /usr/bin/nvim
+
+# Make flatpak apps use the local themes
+sudo flatpak override --filesystem=$HOME/.themes
+sudo flatpak override --filesystem=$HOME/.icons
+sudo flatpak override --filesystem=xdg-config/gtk-4.0
+flatpak override --user --filesystem=xdg-config/gtk-4.0
+
+# Set theme vars
+COLOR_SCHEME=$(echo $CONFIG | jq -r '.system_theme.color_scheme')
+GTK_THEME=$(echo $CONFIG | jq -r '.system_theme.gtk_theme')
+ICON_THEME=$(echo $CONFIG | jq -r '.system_theme.icon_theme')
+CURSOR_THEME=$(echo $CONFIG | jq -r '.system_theme.cursor_theme')
+ACCENT_COLOR=$(echo $CONFIG | jq -r '.system_theme.accent_color')
+FONT_FAMILY=$(echo $CONFIG | jq -r '.system_theme.font_family')
+FONT_FAMILY_MONO=$(echo $CONFIG | jq -r '.system_theme.font_family_mono')
+
+# Set the GTK theme, icon theme, cursor theme, and font
+gsettings set org.gnome.desktop.interface color-scheme "$COLOR_SCHEME"
+gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME"
+gsettings set org.gnome.desktop.interface icon-theme "$ICON_THEME"
+gsettings set org.gnome.desktop.interface cursor-theme "$CURSOR_THEME"
+gsettings set org.gnome.desktop.interface accent-color "$ACCENT_COLOR"
+gsettings set org.gnome.desktop.interface font-name "$FONT_FAMILY 11"
+gsettings set org.gnome.desktop.interface document-font-name "$FONT_FAMILY 11"
+gsettings set org.gnome.desktop.interface monospace-font-name "$FONT_FAMILY_MONO 11"
+gsettings set org.gnome.desktop.wm.preferences titlebar-font "$FONT_FAMILY 11"
+
+# Hide the titlebar buttons
+gsettings set org.gnome.desktop.wm.preferences button-layout ':'
+
+echo "Creating symlinks..."
+
+# Create symlinks
+echo $CONFIG | jq -c '.symlinks[]' | while read -r pair; do
+    src=$(eval echo "$(echo "$pair" | jq -r '.[0]')")
+    dest=$(echo "$pair" | jq -r '.[1]')
+    symlink "$src" "$dest"
+done
+
+# Reload environment
+$ROOT/reload
+
+# Set the default web browser
+DEFAULT_BROWSER=$(echo $CONFIG | jq -r 'xdg."default_browser"')
+echo "*****************************************"
+echo "Run the following command to set the default web browser:"
+echo "xdg-settings set default-web-browser $DEFAULT_BROWSER"

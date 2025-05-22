@@ -1,5 +1,5 @@
 anchor=top-right
-font={{fontFamily}} {{apps.mako.fontSize}}
+font={{fonts.sans}} {{apps.mako.font_size}}
 background-color={{colors.background}}F0
 text-color={{colors.text}}
 width=500
@@ -8,15 +8,12 @@ max-history=10
 outer-margin=10,18,0,0
 margin=0,0,15,0
 padding=12
-border-size={{apps.mako.borderSize}}
-border-color={{apps.mako.borderColor}}
-border-radius={{apps.mako.borderRadius}}
+border-size={{apps.mako.border_size}}
+border-color={{apps.mako.border_color}}
+border-radius={{apps.mako.border_radius}}
 default-timeout=20000
 group-by=none
 icons=0
 
 [grouped]
 format=<b>%s</b>\n%b
-
-# makoctl reload // Load last config
-# makoctl restore // Load last notify

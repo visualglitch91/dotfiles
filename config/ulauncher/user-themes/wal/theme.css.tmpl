@@ -1,19 +1,19 @@
 /**
  * Dracula colors
  */
-@define-color background {{colors.background}};
-@define-color current_line_background {{colors.backgroundLighter}};
+@define-color background {{ colors.background }};
+@define-color current_line_background {{ colors.background | lighten(0.4) }};
 @define-color foreground #F8F8F2;
 @define-color foreground_lessimportant #585858;
-@define-color accent {{colors.text}};
-@define-color highlight {{colors.text}};
+@define-color accent {{ colors.text }};
+@define-color highlight {{ colors.text }};
 
 /**
  * App Window
  */
 @define-color bg_color @background;
 @define-color window_bg @background;
-@define-color window_border_color {{colors.accent}};
+@define-color window_border_color {{ colors.accent }};
 @define-color prefs_backgroud @foreground;
 
 /**
@@ -40,9 +40,9 @@
 .app {
   background-color: @window_bg;
   border-color: @window_border_color;
-  border-radius: {{apps.ulauncher.borderRadius}};
-  border-width: {{apps.ulauncher.borderWidth}}px;
-  font-family: "{{apps.ulauncher.fontFamily}}", sans-serif;
+  border-radius: {{ apps.ulauncher.border_radius }};
+  border-width: {{ apps.ulauncher.border_width }}px;
+  font-family: "{{ apps.ulauncher.font_family }}", sans-serif;
 }
 
 .input {

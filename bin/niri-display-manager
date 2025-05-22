@@ -1,0 +1,34 @@
+#!/usr/bin/node
+
+const { execSync } = require("child_process");
+
+let displayCount = -1;
+
+function getDisplayCount() {
+  try {
+    const res = execSync("niri msg --json outputs").toString();
+    return Object.values(JSON.parse(res)).length;
+  } catch (error) {
+    console.error("Error getting display count:", error);
+    return 0;
+  }
+}
+
+(async () => {
+  displayCount = await getDisplayCount();
+
+  setInterval(() => {
+    const nextDisplayCount = getDisplayCount();
+
+    if (displayCount !== nextDisplayCount) {
+      displayCount = nextDisplayCount;
+      const hasExternalDisplays = displayCount > 1;
+
+      execSync(
+        hasExternalDisplays
+          ? "niri msg output eDP-1 off"
+          : "niri msg output eDP-1 on"
+      );
+    }
+  }, 5000);
+})();

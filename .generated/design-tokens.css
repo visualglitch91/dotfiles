@@ -1,0 +1,29 @@
+:root {
+  --visualglitch91-fonts-sans: Fira Sans;
+  --visualglitch91-fonts-mono: Fira Mono;
+  --visualglitch91-colors-background: #282a36;
+  --visualglitch91-colors-text: #f8f8f2;
+  --visualglitch91-colors-primary: #a4ffff;
+  --visualglitch91-colors-secondary: #69ff94;
+  --visualglitch91-colors-accent: #e06c75;
+  --visualglitch91-apps-niri-cursorSize: 24;
+  --visualglitch91-apps-niri-layoutGaps: 16;
+  --visualglitch91-apps-niri-layoutFocusRingWidth: 3;
+  --visualglitch91-apps-niri-layoutFocusRingColorStart: #e06c75;
+  --visualglitch91-apps-niri-layoutFocusRingColorEnd: #BD93F9;
+  --visualglitch91-apps-niri-windowCornerRadius: 0;
+  --visualglitch91-apps-ulauncher-fontFamily: Fira Mono;
+  --visualglitch91-apps-ulauncher-borderRadius: 0;
+  --visualglitch91-apps-ulauncher-borderWidth: 2;
+  --visualglitch91-apps-vivaldi-background: #101116;
+  --visualglitch91-apps-vivaldi-accent: #e06c75;
+  --visualglitch91-apps-vivaldi-highlight: #639898;
+  --visualglitch91-apps-mako-fontSize: 13;
+  --visualglitch91-apps-mako-borderSize: 2;
+  --visualglitch91-apps-mako-borderRadius: 0;
+  --visualglitch91-apps-mako-borderColor: #69ff94;
+  --visualglitch91-apps-waybar-fontSize: 13;
+  --visualglitch91-apps-waybar-laptopFontSize: 14;
+  --visualglitch91-apps-ghostty-fontSize: 12;
+  --visualglitch91-apps-ghostty-backgroundOpacity: 0.9;
+}
