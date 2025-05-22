@@ -1,12 +1,12 @@
-#!/usr/bin/env -S /bin/sh -c '"$(dirname "$0")/node_modules/.bin/vite-node" "$0" "$@"'
+#!/usr/bin/env bun
 
-const fs = require("fs");
-const { join } = require("path");
-const hjson = require("hjson");
-const _ = require("lodash");
-const nunjucks = require("nunjucks");
-const less = require("less");
-const Color = require("color").default;
+import fs from "fs";
+import { join } from "path";
+import hjson from "hjson";
+import _ from "lodash";
+import nunjucks from "nunjucks";
+import less from "less";
+import Color from "color";
 
 const loadHJSON = (path) => {
   return hjson.parse(fs.readFileSync(join(__dirname, path), "utf8"));

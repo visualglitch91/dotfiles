@@ -7,7 +7,6 @@ copr: [
 ]
 
 dnf: [
-  perl-core
   aria2
   mate-polkit
   zip
@@ -28,10 +27,12 @@ dnf: [
   nerd-fonts
 ]
 
-cargo: [
+nix: [
   bluetui
   zellij
 ]
+
+bun: []
 
 flatpak: [
   com.tomjwatson.Emote
@@ -39,8 +40,6 @@ flatpak: [
   io.gitlab.librewolf-community
   page.codeberg.libre_menu_editor.LibreMenuEditor
 ]
-
-npm: []
 
 symlinks: [
   ["zsh/zshrc" "../.zshrc"]

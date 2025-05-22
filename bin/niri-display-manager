@@ -1,4 +1,4 @@
-#!/usr/bin/env -S /bin/sh -c '"$(dirname "$0")/node_modules/.bin/vite-node" "$0" "$@"'
+#!/usr/bin/env bun
 
 const { execSync } = require("child_process");
 

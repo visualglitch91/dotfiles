@@ -3,37 +3,39 @@ set -Eeuo pipefail
 
 ROOT=$(dirname "$(realpath -P "$0")")
 
+REQUIRED_DNF_PKGS="jq curl zsh helix git dnf-plugins-core flatpak"
+REQUIRED_NIX_PKGS="bun"
+REQUIRED_BUN_PKGS="hjson pm2"
+
 # Check if the script is run as root
 sudo echo "Starting installation..."
 
 # Load the install-utils script
 source "$ROOT/bin/install-utils"
 
+# Link the config directory
 rm -f "$HOME/.visualglitch91"
 ln -s "$ROOT" "$HOME/.visualglitch91"
 
-REQUIRED_DNF_PKGS="
-  jq curl zsh helix
-  git dnf-plugins-core nodejs
-  cargo flatpak
-"
+# Add bun to the current PATH
+export PATH="$HOME/.bun/bin:$PATH"
 
-REQUIRED_NPM_PKGS="
-  hjson pm2 yarn
-"
+# Install lix (nix package manager)
+if ! command -v nix &>/dev/null; then
+  echo "Installing nix package manager"
+  sh -c "curl -sSf -L https://install.lix.systems/lix | sh -s -- install" >/dev/null 2>&1
+  source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+fi
 
 install_dnf_packages $REQUIRED_DNF_PKGS
-install_npm_packages $REQUIRED_NPM_PKGS
+install_nix_packages $REQUIRED_NIX_PKGS
+install_bun_packages $REQUIRED_BUN_PKGS
 
 # Install oh-my-zsh (do not fail if already installed or on error)
-echo "Installing oh-my-zsh"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >/dev/null 2>&1 || true
-
-# Configure rootless global npm
-echo "Configuring rootless global npm"
-mkdir -p ~/.npm-global
-npm config set prefix "~/.npm-global/"
-export PATH="$HOME/.npm-global/bin:$PATH"
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  echo "Installing oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >/dev/null 2>&1 || true
+fi
 
 # Load the config file
 CONFIG=$(hjson -j "$ROOT/config.hjson")
@@ -41,13 +43,13 @@ conf() { jq -r ".$1" <<<"$CONFIG"; }
 
 enable_copr_repos $(conf copr[])
 install_dnf_packages $(conf dnf[])
-install_npm_packages $(conf npm[])
-install_cargo_packages $(conf cargo[])
+install_bun_packages $(conf bun[])
+install_nix_packages $(conf nix[])
 install_flatpak_packages $(conf flatpak[])
 
 # Install the bin/node_modules
 echo "Installing bin/node_modules"
-sh -c "cd $ROOT/bin && yarn" >/dev/null 2>&1
+sh -c "cd $ROOT/bin && bun install" >/dev/null 2>&1
 
 # Remove nano, vim, vi in favor of hx
 echo "Removing nano, vim, vi in favor of hx"

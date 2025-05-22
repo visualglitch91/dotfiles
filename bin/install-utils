@@ -45,22 +45,26 @@ enable_copr_repos() {
   done
 }
 
-install_npm_packages() {
+install_bun_packages() {
+  local installed
+  installed=$(bun pm -g ls | awk -F@ '/@/ {print $1}' | sed 's/^[^ ]* //')
+
   for pkg in "$@"; do
-    if ! npm list -g --depth=0 "$pkg" >/dev/null 2>&1; then
-      echo "Installing npm package: $pkg"
-      npm install -g "$pkg" >/dev/null 2>&1
+    if ! grep -qx "$pkg" <<<"$installed"; then
+      echo "Installing bun package: $pkg"
+      bun install -g "$pkg" >/dev/null 2>&1
     fi
   done
 }
 
-install_cargo_packages() {
-  cargo binstall --version >/dev/null 2>&1 && return
+install_nix_packages() {
+  local installed
+  installed=$(nix profile list --json | jq -r '.elements | keys[]')
 
   for pkg in "$@"; do
-    if ! command -v "$pkg" >/dev/null 2>&1; then
-      echo "Installing cargo package: $pkg"
-      cargo install --locked "$pkg" >/dev/null 2>&1
+    if ! grep -qx "$pkg" <<<"$installed"; then
+      echo "Installing nix package: $pkg"
+      nix profile install "nixpkgs#$pkg" >/dev/null 2>&1
     fi
   done
 }

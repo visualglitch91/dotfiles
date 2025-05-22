@@ -54,6 +54,7 @@ export PATH="$HOME/.npm-global/bin/:$PATH"
 export PATH="$HOME/.visualglitch91/scripts/:$PATH"
 export PATH="$HOME/.local/bin/:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.bun/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 
 export VISUAL=hx
