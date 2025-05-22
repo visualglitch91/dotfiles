@@ -42,6 +42,9 @@
     "ghostty": {
       "font_size": 12,
       "background_opacity": 0.9
+    },
+    "zellij": {
+      "theme": "catppuccin-mocha"
     }
   }
 }

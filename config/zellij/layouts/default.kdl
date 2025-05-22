@@ -1,0 +1,6 @@
+layout { 
+    pane size=1 borderless=true {
+        plugin location="https://github.com/cristiand391/zj-status-bar/releases/download/0.3.0/zj-status-bar.wasm"
+    }
+    pane
+}

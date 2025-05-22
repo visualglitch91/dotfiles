@@ -60,7 +60,7 @@ install_cargo_packages() {
   for pkg in "$@"; do
     if ! command -v "$pkg" >/dev/null 2>&1; then
       echo "Installing cargo package: $pkg"
-      cargo install "$pkg" >/dev/null 2>&1
+      cargo install --locked "$pkg" >/dev/null 2>&1
     fi
   done
 }

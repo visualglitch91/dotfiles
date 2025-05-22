@@ -3,9 +3,11 @@ copr: [
   troycurtisjr/ulauncher
   pgdev/ghostty
   alebastr/sway-extras
+  che/nerd-fonts
 ]
 
 dnf: [
+  perl-core
   aria2
   mate-polkit
   zip
@@ -23,10 +25,12 @@ dnf: [
   ulauncher
   ghostty
   NetworkManager-tui
+  nerd-fonts
 ]
 
 cargo: [
   bluetui
+  zellij
 ]
 
 flatpak: [
@@ -46,6 +50,7 @@ symlinks: [
   ["helix" "helix"]
   ["waybar" "waybar"]
   ["ulauncher" "ulauncher"]
+  ["zellij", "zellij"]
   ["ulauncher/extensions" "../.local/share/ulauncher/extensions"]
   ["ulauncher/bookmarks" "ulauncher-bookmarks"]
   ["ulauncher/snippets" "ulauncher-text-snippets"]
@@ -60,6 +65,7 @@ templates: [
   mako/config.tmpl
   git/config.tmpl
   niri/config.kdl.tmpl
+  zellij/config.kdl.tmpl
   ulauncher/user-themes/wal/manifest.json.tmpl
   ulauncher/user-themes/wal/theme.css.tmpl
 ]
@@ -139,5 +145,8 @@ application_theme: {
   ghostty: {
     font_size: 12,
     background_opacity: 0.9,
+  }
+  zellij: { 
+    theme: catppuccin-mocha
   }
 }

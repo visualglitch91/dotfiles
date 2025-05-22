@@ -1,0 +1,24 @@
+simplified_ui true
+show_startup_tips false
+
+theme "{{ apps.zellij.theme }}"
+
+keybinds clear-defaults=true {
+    normal {
+        bind "Ctrl b" { SwitchToMode "tab"; }
+    }
+ 
+    tab {
+        bind "Esc" { SwitchToMode "normal"; }
+        bind "left" { GoToPreviousTab; }
+        bind "right" { GoToNextTab; }
+        bind "x" { CloseTab; }
+        bind "n" { NewTab; }
+    }
+}
+
+ui {
+    pane_frames {
+        hide_session_name true
+    }
+}
