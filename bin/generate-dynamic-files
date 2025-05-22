@@ -45,6 +45,7 @@ const theme = {
 
 const data = {
   ...theme,
+  system_theme: config.system_theme,
   secrets,
 };
 
