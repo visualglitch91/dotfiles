@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+symlink() {
+  local source="config/$1"
+  local destination="$2"
+
+  # Get the absolute path of the source
+  target=$(realpath "$ROOT/$source")
+
+  # If the destination is relative, prepend $HOME
+  if [[ "$destination" == /* ]]; then
+    link_name="$destination"
+  else
+    link_name="$HOME/.config/$destination"
+  fi
+
+  echo "Creating symlink: $link_name → $target"
+
+  # Remove directory
+  rm -rf "$link_name"
+
+  # Create the symlink
+  ln -s "$target" "$link_name"
+}
+
+install_dnf_packages() {
+  for pkg in $@; do
+    if ! rpm -q "$pkg" >/dev/null 2>&1; then
+      echo "Installing dnf package: $pkg"
+      sudo dnf install -y "$pkg" >/dev/null 2>&1
+    fi
+  done
+}
+
+enable_copr_repos() {
+  local repos=("$@")
+  local enabled
+  enabled=$(sudo dnf copr list | grep -v "(disabled)" | sed 's|copr.fedorainfracloud.org/||' | cut -d/ -f1,2)
+
+  for repo in "${repos[@]}"; do
+    if ! grep -Fxq "$repo" <<<"$enabled"; then
+      echo "Enabling copr repository: $repo"
+      sudo dnf -y copr enable "$repo" >/dev/null 2>&1
+    fi
+  done
+}
+
+install_npm_packages() {
+  for pkg in "$@"; do
+    if ! npm list -g --depth=0 "$pkg" >/dev/null 2>&1; then
+      echo "Installing npm package: $pkg"
+      npm install -g "$pkg" >/dev/null 2>&1
+    fi
+  done
+}
+
+install_cargo_packages() {
+  cargo binstall --version >/dev/null 2>&1 && return
+
+  for pkg in "$@"; do
+    if ! command -v "$pkg" >/dev/null 2>&1; then
+      echo "Installing cargo package: $pkg"
+      cargo install "$pkg" >/dev/null 2>&1
+    fi
+  done
+}
+
+install_flatpak_packages() {
+  for pkg in "$@"; do
+    if ! flatpak info "$pkg" >/dev/null 2>&1; then
+      echo "Installing flatpak package: $pkg"
+      flatpak install flathub -y --noninteractive "$pkg" >/dev/null 2>&1
+    fi
+  done
+}

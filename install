@@ -3,79 +3,55 @@ set -Eeuo pipefail
 
 ROOT=$(dirname "$(realpath -P "$0")")
 
+# Check if the script is run as root
+sudo echo "Starting installation..."
+
+# Load the install-utils script
+source "$ROOT/bin/install-utils"
+
 rm -f "$HOME/.visualglitch91"
 ln -s "$ROOT" "$HOME/.visualglitch91"
 
-# Define the symlink function for later
-symlink() {
-    local source="config/$1"
-    local destination="$2"
+REQUIRED_DNF_PKGS="
+  jq curl zsh helix
+  git dnf-plugins-core nodejs
+  cargo flatpak
+"
 
-    # Get the absolute path of the source
-    target=$(realpath "$ROOT/$source")
+REQUIRED_NPM_PKGS="
+  hjson pm2 yarn
+"
 
-    # If the destination is relative, prepend $HOME
-    if [[ "$destination" == /* ]]; then
-        link_name="$destination"
-    else
-        link_name="$HOME/.config/$destination"
-    fi
-
-    echo "Creating symlink: $link_name -> $target"
-
-    # Remove directory
-    rm -rf "$link_name"
-
-    # Create the symlink
-    ln -s "$target" "$link_name"
-}
-
-# Install the reqired dnf packages
-sudo dnf install \
-    jq curl wget git \
-    dnf-plugins-core \
-    nodejs npm cargo \
-    flatpak zsh helix -y
+install_dnf_packages $REQUIRED_DNF_PKGS
+install_npm_packages $REQUIRED_NPM_PKGS
 
 # Install oh-my-zsh (do not fail if already installed or on error)
-sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" || true
+echo "Installing oh-my-zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >/dev/null 2>&1 || true
 
+# Configure rootless global npm
+echo "Configuring rootless global npm"
 mkdir -p ~/.npm-global
 npm config set prefix "~/.npm-global/"
-
-# Install the reqired npm packages
-npm install -g hjson pm2 yarn
-
 export PATH="$HOME/.npm-global/bin:$PATH"
 
 # Load the config file
 CONFIG=$(hjson -j "$ROOT/config.hjson")
+conf() { jq -r ".$1" <<<"$CONFIG"; }
 
-# Enable copr repositories
-echo $CONFIG | jq -r '.copr[]' | while read -r repo; do
-    sudo dnf -y copr enable "$repo"
-done
+enable_copr_repos $(conf copr[])
+install_dnf_packages $(conf dnf[])
+install_npm_packages $(conf npm[])
+install_cargo_packages $(conf cargo[])
+install_flatpak_packages $(conf flatpak[])
 
-# Install other dnf packages
-echo $CONFIG | jq -r '.dnf[]' | xargs sudo dnf install -y
-
-# Install cargo packages
-echo $CONFIG | jq -r '.cargo[]' | while read -r pkg; do
-    cargo binstall --version >/dev/null 2>&1 || {
-        command -v "$pkg" >/dev/null 2>&1 || cargo install "$pkg"
-    }
-done
-
-# Install flatpak packages
-echo $CONFIG | jq -r '.flatpak[]' | xargs -I{} flatpak install flathub -y --noninteractive {}
-
-# # Install other npm packages
-# echo $CONFIG | jq -r '.npm[]' | xargs npm install -g
-
-sh -c "cd $ROOT/bin && yarn"
+# Install the bin/node_modules
+echo "Installing bin/node_modules"
+sh -c "cd $ROOT/bin && yarn" >/dev/null 2>&1
 
 # Remove nano, vim, vi in favor of hx
-sudo dnf remove nano -y || true
+echo "Removing nano, vim, vi in favor of hx"
+sudo dnf remove nano -y >/dev/null 2>&1
 sudo rm -f /usr/bin/vim
 sudo rm -f /usr/bin/nano
 sudo rm -f /usr/bin/nvim
@@ -84,21 +60,23 @@ sudo ln -s /usr/bin/hx /usr/bin/nano
 sudo ln -s /usr/bin/hx /usr/bin/nvim
 
 # Make flatpak apps use the local themes
+echo "Making flatpak apps use the local themes"
 sudo flatpak override --filesystem=$HOME/.themes
 sudo flatpak override --filesystem=$HOME/.icons
 sudo flatpak override --filesystem=xdg-config/gtk-4.0
 flatpak override --user --filesystem=xdg-config/gtk-4.0
 
 # Set theme vars
-COLOR_SCHEME=$(echo $CONFIG | jq -r '.system_theme.color_scheme')
-GTK_THEME=$(echo $CONFIG | jq -r '.system_theme.gtk_theme')
-ICON_THEME=$(echo $CONFIG | jq -r '.system_theme.icon_theme')
-CURSOR_THEME=$(echo $CONFIG | jq -r '.system_theme.cursor_theme')
-ACCENT_COLOR=$(echo $CONFIG | jq -r '.system_theme.accent_color')
-FONT_FAMILY=$(echo $CONFIG | jq -r '.system_theme.font_family')
-FONT_FAMILY_MONO=$(echo $CONFIG | jq -r '.system_theme.font_family_mono')
+COLOR_SCHEME=$(conf system_theme.color_scheme)
+GTK_THEME=$(conf system_theme.gtk_theme)
+ICON_THEME=$(conf system_theme.icon_theme)
+CURSOR_THEME=$(conf system_theme.cursor_theme)
+ACCENT_COLOR=$(conf system_theme.accent_color)
+FONT_FAMILY=$(conf system_theme.font_family)
+FONT_FAMILY_MONO=$(conf system_theme.font_family_mono)
 
 # Set the GTK theme, icon theme, cursor theme, and font
+echo "Setting the GTK theme, icon theme, cursor theme, and font"
 gsettings set org.gnome.desktop.interface color-scheme "$COLOR_SCHEME"
 gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME"
 gsettings set org.gnome.desktop.interface icon-theme "$ICON_THEME"
@@ -112,20 +90,23 @@ gsettings set org.gnome.desktop.wm.preferences titlebar-font "$FONT_FAMILY 11"
 # Hide the titlebar buttons
 gsettings set org.gnome.desktop.wm.preferences button-layout ':'
 
-echo "Creating symlinks..."
-
 # Create symlinks
 echo $CONFIG | jq -c '.symlinks[]' | while read -r pair; do
-    src=$(eval echo "$(echo "$pair" | jq -r '.[0]')")
-    dest=$(echo "$pair" | jq -r '.[1]')
-    symlink "$src" "$dest"
+  src=$(eval echo "$(echo "$pair" | jq -r '.[0]')")
+  dest=$(echo "$pair" | jq -r '.[1]')
+  symlink "$src" "$dest"
 done
 
+# Init git submodules
+echo "Initializing git submodules"
+git submodule update --init --recursive >/dev/null 2>&1
+
 # Reload environment
-$ROOT/scripts/reload
+echo "Reloading environment"
+$ROOT/scripts/reload >/dev/null 2>&1
 
 # Set the default web browser
-DEFAULT_BROWSER=$(echo $CONFIG | jq -r 'xdg."default_browser"')
+DEFAULT_BROWSER=$(echo $CONFIG | jq -r '.xdg.default_browser')
 echo "*****************************************"
 echo "Run the following command to set the default web browser:"
 echo "xdg-settings set default-web-browser $DEFAULT_BROWSER"

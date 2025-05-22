@@ -22,7 +22,7 @@ dnf: [
   niri
   ulauncher
   ghostty
-  nmtui
+  NetworkManager-tui
 ]
 
 cargo: [
