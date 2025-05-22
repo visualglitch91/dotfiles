@@ -122,7 +122,7 @@ echo $CONFIG | jq -c '.symlinks[]' | while read -r pair; do
 done
 
 # Reload environment
-$ROOT/reload
+$ROOT/scripts/reload
 
 # Set the default web browser
 DEFAULT_BROWSER=$(echo $CONFIG | jq -r 'xdg."default_browser"')
