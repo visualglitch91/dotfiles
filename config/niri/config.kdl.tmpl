@@ -50,7 +50,7 @@ layout {
 
 // Force swaybg to set its background to the overview
 layer-rule {
-    match namespace="^wallpaper$"
+    match namespace="^overview$"
     place-within-backdrop true
 }
 
@@ -91,7 +91,7 @@ binds {
 
     Mod+E { spawn "nautilus"; }
     Mod+D { spawn "ulauncher-toggle"; }
-    Mod+period { spawn "flatpak" "run" "com.tomjwatson.Emote"; }
+    Mod+period { spawn "emote"; }
     Mod+T { spawn "ghostty"; }
     Mod+B { spawn "~/.visualglitch91/scripts/open-default-browser"; }
     Mod+Alt+Backspace { screenshot; }

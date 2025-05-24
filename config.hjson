@@ -1,45 +1,41 @@
 copr: [
   yalter/niri
-  troycurtisjr/ulauncher
   pgdev/ghostty
-  alebastr/sway-extras
-  che/nerd-fonts
+  troycurtisjr/ulauncher
 ]
-
 dnf: [
-  aria2
-  mate-polkit
   zip
-  brightnessctl
-  swaybg
-  swww
-  mako
-  waybar
-  wtype
-  wl-clipboard
-  gnome-tweaks
-  swayidle
   code
   niri
-  ulauncher
+  swayidle
   ghostty
+  ulauncher
+  # gtk-layer-shell required for ulauncher
+  gtk-layer-shell
+  mate-polkit
+  brightnessctl
   NetworkManager-tui
-  nerd-fonts
 ]
 
 nix: [
-  bluetui
+  eza
+  mako
+  wtype
   zellij
+  nixfmt
+  emote
+  aria2
+  waybar
+  bluetui
+  swayidle
+  distrobox
+  librewolf
+  wl-clipboard
 ]
 
 bun: []
 
-flatpak: [
-  com.tomjwatson.Emote
-  com.github.tchx84.Flatseal
-  io.gitlab.librewolf-community
-  page.codeberg.libre_menu_editor.LibreMenuEditor
-]
+flatpak: []
 
 symlinks: [
   ["zsh/zshrc" "../.zshrc"]
@@ -49,6 +45,7 @@ symlinks: [
   ["helix" "helix"]
   ["waybar" "waybar"]
   ["ulauncher" "ulauncher"]
+  ["nixpkgs", "nixpkgs"],
   ["zellij", "zellij"]
   ["ulauncher/extensions" "../.local/share/ulauncher/extensions"]
   ["ulauncher/bookmarks" "ulauncher-bookmarks"]
@@ -58,36 +55,32 @@ symlinks: [
   ["../assets/themes" "../.themes"]
   ["../assets/themes/$GTK_THEME/gtk-4.0" "gtk-4.0"]
 ]
-
 templates: [
-  ghostty/config.tmpl
   mako/config.tmpl
   git/config.tmpl
+  ghostty/config.tmpl
   niri/config.kdl.tmpl
   zellij/config.kdl.tmpl
-  ulauncher/user-themes/wal/manifest.json.tmpl
   ulauncher/user-themes/wal/theme.css.tmpl
+  ulauncher/user-themes/wal/manifest.json.tmpl
 ]
 
 less: [
-  vivaldi-css/style.less
   waybar/style.less
+  vivaldi-css/style.less
 ]
 
 pm2: {
-  niri-disaplay-manager: "~/.visualglitch91/bin/niri-display-manager"
-  waybar: "waybar"
   mako: "mako"
+  waybar: "waybar"
   ulauncher: "ulauncher --daemon"
-  swaybg: "swaybg -i ~/.visualglitch91/assets/wallpaper-overview.jpg"
+  niri-disaplay-manager: "{{bin}}/niri-display-manager"
+  swaybg-wallpaper: "{{bin}}/swaybg.x64 -n wallpaper  -i {{assets}}/wallpaper.jpg"
+  swaybg-overview: "{{bin}}/swaybg.x64 -n overview -i {{assets}}/wallpaper-overview.jpg"
   swayidle: '''
     swayidle -w
       timeout 300 'niri msg action power-off-monitors'
       timeout 1800 'systemctl suspend'
-  '''
-  swww: '''
-    sh -c "sleep 1 && swww img ~/.visualglitch91/assets/wallpaper.jpg" &
-      killall swww-daemon ; swww-daemon
   '''
 }
 
@@ -143,7 +136,7 @@ application_theme: {
   }
   ghostty: {
     font_size: 12,
-    background_opacity: 0.9,
+    background_opacity: 0.95,
   }
   zellij: { 
     theme: catppuccin-mocha

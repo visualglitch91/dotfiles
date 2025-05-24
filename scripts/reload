@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-export PATH="$HOME/.npm-global/bin:$PATH"
+export PATH="$HOME/.bun/bin:$PATH"
 
 ROOT=$(dirname "$(realpath -P "$0")")/..
 
