@@ -85,7 +85,7 @@ pm2: {
 }
 
 xdg: {
-  default_browser: vivaldi-stable.desktop
+  default_browser: vivaldi-snapshot.desktop
 }
 
 system_theme: {

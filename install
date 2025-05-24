@@ -25,7 +25,7 @@ export PATH="$HOME/.bun/bin:$PATH"
 if ! command -v nix &>/dev/null; then
   echo "Installing nix package manager"
   sudo setenforce 0
-  sh -c "curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate" >/dev/null 2>&1
+  curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate
   source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
   sudo setenforce 1
 fi
@@ -37,7 +37,7 @@ install_bun_packages $REQUIRED_BUN_PKGS
 # Install oh-my-zsh (do not fail if already installed or on error)
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   echo "Installing oh-my-zsh"
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >/dev/null 2>&1 || true
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 # Load the config file
@@ -112,6 +112,4 @@ $ROOT/scripts/reload >/dev/null 2>&1
 
 # Set the default web browser
 DEFAULT_BROWSER=$(echo $CONFIG | jq -r '.xdg.default_browser')
-echo "*****************************************"
-echo "Run the following command to set the default web browser:"
-echo "xdg-settings set default-web-browser $DEFAULT_BROWSER"
+xdg-settings set default-web-browser $DEFAULT_BROWSER
