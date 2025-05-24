@@ -29,7 +29,7 @@ alias flatadd='flatpak install -y flathub'
 alias flatdel='flatpak remove -y'
 
 alias compose="docker compose"
-alias nrun="npm run"
+alias l="eza -la"
 
 alias gl='git pull'
 alias gp='git push'

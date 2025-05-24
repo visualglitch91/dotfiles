@@ -14,21 +14,23 @@ function getDisplayCount() {
   }
 }
 
-(async () => {
-  displayCount = await getDisplayCount();
+function loop() {
+  const nextDisplayCount = getDisplayCount();
 
-  setInterval(() => {
-    const nextDisplayCount = getDisplayCount();
+  console.log(`Display count: ${nextDisplayCount} (previous: ${displayCount})`);
 
-    if (displayCount !== nextDisplayCount) {
-      displayCount = nextDisplayCount;
-      const hasExternalDisplays = displayCount > 1;
+  if (displayCount !== nextDisplayCount) {
+    displayCount = nextDisplayCount;
+    const hasExternalDisplays = displayCount > 1;
 
-      execSync(
-        hasExternalDisplays
-          ? "niri msg output eDP-1 off"
-          : "niri msg output eDP-1 on"
-      );
-    }
-  }, 5000);
-})();
+    execSync(
+      hasExternalDisplays
+        ? "niri msg output eDP-1 off"
+        : "niri msg output eDP-1 on"
+    );
+  }
+
+  setTimeout(loop, 5000);
+}
+
+loop();

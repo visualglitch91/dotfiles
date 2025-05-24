@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+ROOT=$(realpath $(dirname "$(realpath -P "$0")"))
+
 symlink() {
   local source="config/$1"
   local destination="$2"
@@ -77,5 +79,14 @@ install_flatpak_packages() {
       echo "Installing flatpak package: $pkg"
       flatpak install flathub -y --noninteractive "$pkg" >/dev/null 2>&1
     fi
+  done
+}
+
+install_local_packages() {
+  echo "$@" | jq -c 'to_entries[]' | while read -r entry; do
+    key=$(echo "$entry" | jq -r '.key')
+    val=$(echo "$entry" | jq -r '.value')
+    echo "Running in $key"
+    (cd "$ROOT/local/$key" && eval "$val")
   done
 }

@@ -3,8 +3,8 @@ set -Eeuo pipefail
 
 ROOT=$(dirname "$(realpath -P "$0")")
 
-REQUIRED_DNF_PKGS="jq curl zsh helix git dnf-plugins-core nodejs flatpak"
-REQUIRED_NIX_PKGS="bun"
+REQUIRED_DNF_PKGS="jq curl zsh helix git dnf-plugins-core flatpak"
+REQUIRED_NIX_PKGS="bun nodejs_22"
 REQUIRED_BUN_PKGS="hjson pm2"
 
 # Check if the script is run as root
@@ -21,11 +21,16 @@ ln -s "$ROOT" "$HOME/.visualglitch91"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.bun/bin:$PATH"
 
+CONFIG=$(hjson -j "$ROOT/config.hjson")
+conf() { jq -r ".$1" <<<"$CONFIG"; }
+install_local_packages $(conf local)
+exit 1
+
 # Install lix (nix package manager)
 if ! command -v nix &>/dev/null; then
   echo "Installing nix package manager"
   sudo setenforce 0
-  sh -c "curl -sSf -L https://install.lix.systems/lix | sh -s -- install" >/dev/null 2>&1
+  sh -c "curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate" >/dev/null 2>&1
   source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
   sudo setenforce 1
 fi
@@ -49,9 +54,9 @@ install_dnf_packages $(conf dnf[])
 install_bun_packages $(conf bun[])
 install_nix_packages $(conf nix[])
 install_flatpak_packages $(conf flatpak[])
+install_local_packages $(conf local[])
 
-# Install the bin/node_modules
-echo "Installing bin/node_modules"
+echo "Installing bin/node_modules" # Install the bin/node_modules
 sh -c "cd $ROOT/bin && bun install" >/dev/null 2>&1
 
 # Remove nano, vim, vi in favor of hx

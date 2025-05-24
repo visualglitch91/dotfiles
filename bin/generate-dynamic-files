@@ -13,10 +13,12 @@ const loadHJSON = (path) => {
 };
 
 const n = new nunjucks.Environment();
+const tmpl = n.renderString.bind(n);
 const config = loadHJSON("../config.hjson");
 const secrets = loadHJSON("../secrets.hjson");
+const colorFilters = ["darken", "lighten", "fade", "desaturate", "saturate"];
 
-["darken", "lighten", "fade", "desaturate", "saturate"].forEach((it) => {
+colorFilters.forEach((it) => {
   n.addFilter(it, (color, amount) => {
     return Color(color)[it](amount).hex();
   });
@@ -35,7 +37,7 @@ const themeBase = {
 };
 
 const appThemes = JSON.parse(
-  n.renderString(JSON.stringify(appThemesBase), { ...themeBase })
+  tmpl(JSON.stringify(appThemesBase), { ...themeBase })
 );
 
 const theme = {
@@ -109,7 +111,7 @@ config.templates.forEach((it) => {
   try {
     const base = join(__dirname, "../config");
     const template = fs.readFileSync(join(base, it), "utf8");
-    const result = n.renderString(template, data);
+    const result = tmpl(template, data);
     fs.writeFileSync(join(base, it.replace(/\.tmpl$/, "")), result);
   } catch (e) {
     console.error(`Error processing ${it}: ${e.message}`);
@@ -134,7 +136,13 @@ const ecosystem = {
   apps: Object.entries(config.pm2).map(([name, script]) => ({
     name,
     script: "/bin/sh",
-    args: ["-c", script.replace(/\n/g, " ")],
+    args: [
+      "-c",
+      tmpl(script.replace(/\n/g, " "), {
+        bin: "~/.visualglitch91/bin",
+        assets: "~/.visualglitch91/assets",
+      }),
+    ],
     interpreter: "none",
     autorestart: true,
   })),
