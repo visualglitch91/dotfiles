@@ -48,12 +48,17 @@ layout {
         active-gradient from="{{ apps.niri.layout_focus_ring_color_start }}" to="{{ apps.niri.layout_focus_ring_color_end }}" angle=45
     }
 
-    border { off; }
+    border {
+        width {{ apps.niri.layout_border_width }}
+        active-gradient from="{{ apps.niri.layout_focus_ring_color_start }}" to="{{ apps.niri.layout_focus_ring_color_end }}" angle=45
+        inactive-gradient from="{{ apps.niri.layout_border_color_start }}" to="{{ apps.niri.layout_border_color_end }}" angle=45
+    }
+
     blur {
         on
         passes 3
         radius 1
-        noise 0.5
+        noise 0.3
     }
 }
 
@@ -163,7 +168,7 @@ hotkey-overlay {
 
 window-rule {
     match is-active=false
-    opacity 0.3
+    opacity 0.2
     
     shadow {
         on
@@ -176,11 +181,9 @@ window-rule {
 }
 
 window-rule {
-    match app-id="kitty" is-focused=false
     match app-id="com.mitchellh.ghostty" is-focused=false
-    shadow {
-        inactive-color "#1D1D1FCC"
-    }
+    opacity 0.2
+    shadow { inactive-color "#1D1D1FDF"; }
 }
 
 window-rule {
@@ -189,18 +192,6 @@ window-rule {
     draw-border-with-background false
 }
 
-window-rule {
-    match app-id="com.mitchellh.ghostty" is-focused=false
-    shadow {
-        inactive-color "#1D1D1FCC"
-    }
-}
-
-window-rule {
-    geometry-corner-radius 0
-    clip-to-geometry true
-    draw-border-with-background false
-}
 
 window-rule {
     match app-id="kitty"
@@ -249,5 +240,5 @@ window-rule {
 
 window-rule {    
     match app-id="code" is-focused=true
-    opacity 0.975
+    opacity 0.96
 }
