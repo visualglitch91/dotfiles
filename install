@@ -56,7 +56,9 @@ install_flatpak_packages $(conf flatpak[])
 echo "Installing bin/node_modules" # Install the bin/node_modules
 ssh -c "cd $ROOT/bin && bun install" >/dev/null 2>&1
 
-install_local_packages $(conf local)
+if [[ "$@" == *"--install-local-packages"* ]]; then
+  install_local_packages $(conf local)
+fi
 
 # Remove nano, vim, vi in favor of hx
 echo "Removing nano, vim, vi in favor of hx"
