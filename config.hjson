@@ -1,3 +1,9 @@
+prerun: '''
+  mkdir -p ~/.local/share/ulauncher
+  sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+  echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
+'''
+
 copr: [
   pgdev/ghostty
   troycurtisjr/ulauncher
@@ -13,10 +19,12 @@ dnf: [
   mate-polkit
   brightnessctl
   NetworkManager-tui
+  nautilus
   ## niri dependencies
   # we are building niri from source to get blurred windows
   gcc
   clang
+  cargo
   dbus-devel
   pango-devel
   libgbm-devel
@@ -67,13 +75,14 @@ local: {
 symlinks: [
   ["zsh/zshrc" "../.zshrc"]
   ["mako" "mako"]
+  ["sway" "sway"]
   ["niri" "niri"]
   ["ghostty" "ghostty"]
   ["helix" "helix"]
   ["waybar" "waybar"]
   ["ulauncher" "ulauncher"]
   ["nixpkgs", "nixpkgs"],
-  ["zellij", "zellij"]
+  ["zellij" "zellij"]
   ["ulauncher/extensions" "../.local/share/ulauncher/extensions"]
   ["ulauncher/bookmarks" "ulauncher-bookmarks"]
   ["ulauncher/snippets" "ulauncher-text-snippets"]
@@ -102,7 +111,7 @@ pm2: {
   mako: "mako"
   waybar: "waybar"
   ulauncher: "ulauncher --daemon"
-  niri-disaplay-manager: "{{bin}}/niri-display-manager"
+  // niri-disaplay-manager: "{{bin}}/niri-display-manager"
   swaybg-wallpaper: "{{bin}}/swaybg.x64 -n wallpaper  -i {{assets}}/wallpaper.jpg"
   swaybg-overview: "{{bin}}/swaybg.x64 -n overview -i {{assets}}/wallpaper-overview.jpg"
   swayidle: '''
@@ -113,7 +122,7 @@ pm2: {
 }
 
 xdg: {
-  default_browser: vivaldi-stable.desktop
+  default_browser: vivaldi-snapshot.desktop
 }
 
 system_theme: {

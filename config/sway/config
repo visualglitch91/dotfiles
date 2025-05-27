@@ -1,0 +1,8 @@
+output * disable
+output HDMI-A-1 enable
+seat seat0 xcursor_theme transparent 12
+for_window [class=".*"] border none
+exec /usr/libexec/xdg-desktop-portal-gtk
+exec /usr/libexec/polkit-mate-authentication-agent-1
+exec niri
+

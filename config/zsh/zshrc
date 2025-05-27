@@ -30,7 +30,9 @@ alias flatdel='flatpak remove -y'
 
 alias compose="docker compose"
 alias l="eza -la"
+alias ls="eza -la"
 
+alias sup='sudo -E'
 alias gl='git pull'
 alias gp='git push'
 alias gpo='git push -u origin'

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -Eeuo pipefail
 
 ROOT=$(dirname "$(realpath -P "$0")")
 
@@ -13,6 +12,10 @@ sudo echo "Starting installation..."
 # Load the install-utils script
 source "$ROOT/bin/install-utils"
 
+# Init git submodules
+echo "Initializing git submodules"
+git submodule update --init --recursive >/dev/null 2>&1
+
 # Link the config directory
 rm -f "$HOME/.visualglitch91"
 ln -s "$ROOT" "$HOME/.visualglitch91"
@@ -20,11 +23,6 @@ ln -s "$ROOT" "$HOME/.visualglitch91"
 # Add bun to the current PATH
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.bun/bin:$PATH"
-
-CONFIG=$(hjson -j "$ROOT/config.hjson")
-conf() { jq -r ".$1" <<<"$CONFIG"; }
-install_local_packages $(conf local)
-exit 1
 
 # Install lix (nix package manager)
 if ! command -v nix &>/dev/null; then
@@ -54,10 +52,11 @@ install_dnf_packages $(conf dnf[])
 install_bun_packages $(conf bun[])
 install_nix_packages $(conf nix[])
 install_flatpak_packages $(conf flatpak[])
-install_local_packages $(conf local[])
 
 echo "Installing bin/node_modules" # Install the bin/node_modules
-sh -c "cd $ROOT/bin && bun install" >/dev/null 2>&1
+ssh -c "cd $ROOT/bin && bun install" >/dev/null 2>&1
+
+install_local_packages $(conf local)
 
 # Remove nano, vim, vi in favor of hx
 echo "Removing nano, vim, vi in favor of hx"
@@ -107,10 +106,6 @@ echo $CONFIG | jq -c '.symlinks[]' | while read -r pair; do
   symlink "$src" "$dest"
 done
 
-# Init git submodules
-echo "Initializing git submodules"
-git submodule update --init --recursive >/dev/null 2>&1
-
 # Reload environment
 echo "Reloading environment"
 $ROOT/scripts/reload >/dev/null 2>&1
@@ -118,5 +113,4 @@ $ROOT/scripts/reload >/dev/null 2>&1
 # Set the default web browser
 DEFAULT_BROWSER=$(echo $CONFIG | jq -r '.xdg.default_browser')
 echo "*****************************************"
-echo "Run the following command to set the default web browser:"
-echo "xdg-settings set default-web-browser $DEFAULT_BROWSER"
+xdg-settings set default-web-browser $DEFAULT_BROWSER

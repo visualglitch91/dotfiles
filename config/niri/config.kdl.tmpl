@@ -3,6 +3,7 @@ environment {
     GTK_THEME "{{ system_theme.gtk_theme }}"
     ICON_THEME "{{ system_theme.icon_theme }}"
     ELECTRON_OZONE_PLATFORM_HINT "wayland"
+    LOCPATH "/usr/lib/locale"
 }
 
 cursor {
@@ -12,6 +13,8 @@ cursor {
 }
 
 input {
+    mod-key-nested "Super"
+    
     keyboard {
         xkb {
             layout "us(alt-intl),br"
@@ -46,6 +49,12 @@ layout {
     }
 
     border { off; }
+    blur {
+        on
+        passes 3
+        radius 1
+        noise 0.5
+    }
 }
 
 // Force swaybg to set its background to the overview
@@ -69,7 +78,7 @@ output "Virtual-1" {
     scale 1.8
 }
 
-output "LG Electronics LG ULTRAFINE 406AZXC9Y186" {
+output "Smithay Winit Unknown" {
     scale 1.5
 }
 
