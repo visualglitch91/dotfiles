@@ -42,6 +42,7 @@ dnf: [
 
 nix: [
   eza
+  dex
   mako
   wtype
   zellij
@@ -58,7 +59,9 @@ nix: [
 
 bun: []
 
-flatpak: []
+flatpak: [
+  page.codeberg.libre_menu_editor.LibreMenuEditor
+]
 
 local: {
   niri: '''

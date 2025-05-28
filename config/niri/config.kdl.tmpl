@@ -1,3 +1,6 @@
+workspace "1"
+workspace "2"
+
 environment {
     COLOR_SCHEME "{{ system_theme.color_scheme }}"
     GTK_THEME "{{ system_theme.gtk_theme }}"
@@ -192,7 +195,6 @@ window-rule {
     draw-border-with-background false
 }
 
-
 window-rule {
     match app-id="kitty"
     match app-id="com.mitchellh.ghostty"
@@ -202,7 +204,7 @@ window-rule {
 window-rule {
     match app-id="code"
     match app-id="vivaldi-snapshot"
-    default-column-width { proportion 0.9; }   
+    default-column-width { proportion 0.9; }
 }
 
 window-rule {
