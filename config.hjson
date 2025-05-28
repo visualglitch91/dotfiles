@@ -42,6 +42,7 @@ dnf: [
 
 nix: [
   eza
+  dex
   mako
   wtype
   zellij
@@ -58,7 +59,9 @@ nix: [
 
 bun: []
 
-flatpak: []
+flatpak: [
+  page.codeberg.libre_menu_editor.LibreMenuEditor
+]
 
 local: {
   niri: '''
@@ -111,7 +114,7 @@ pm2: {
   mako: "mako"
   waybar: "waybar"
   ulauncher: "ulauncher --daemon"
-  // niri-disaplay-manager: "{{bin}}/niri-display-manager"
+  niri-disaplay-manager: "{{bin}}/niri-display-manager"
   swaybg-wallpaper: "{{bin}}/swaybg.x64 -n wallpaper  -i {{assets}}/wallpaper.jpg"
   swaybg-overview: "{{bin}}/swaybg.x64 -n overview -i {{assets}}/wallpaper-overview.jpg"
   swayidle: '''
@@ -119,6 +122,7 @@ pm2: {
       timeout 300 'niri msg action power-off-monitors'
       timeout 1800 'systemctl suspend'
   '''
+  polkit: "/usr/libexec/polkit-mate-authentication-agent-1"
 }
 
 xdg: {
