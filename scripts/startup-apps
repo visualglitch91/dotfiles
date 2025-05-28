@@ -1,11 +1,11 @@
 #!/bin/bash
 niri msg action focus-workspace 1
 $HOME/.visualglitch91/scripts/open-default-browser
-sleep 0.8
+sleep 1
 gtk-launch code ~/.visualglitch91
-sleep 1.5
+sleep 2
 niri msg action focus-workspace 2
 dex $HOME/.local/share/applications/Slack.desktop
 dex $HOME/.local/share/applications/Matrix.desktop
-sleep 0.7
+sleep 0.5
 niri msg action focus-workspace 1

@@ -1,0 +1,19 @@
+#!/bin/sh
+
+PATH=/usr/bin:$HOME/.nix-profile/bin:$HOME/.bun/bin
+
+killall niri || true && niri &
+
+sleep 1.5
+
+swaymsg floating enabled
+
+export NIRI_SOCKET=$(find /run/user/1000 -type s \
+  -name 'niri.wayland-*.*.sock' 2>/dev/null | head -n1)
+
+niri msg action spawn \
+  -- sh -c "PATH=$PATH ~/.visualglitch91/scripts/reload"
+
+sleep 0.5
+
+swaymsg floating disabled

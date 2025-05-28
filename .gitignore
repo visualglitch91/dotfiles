@@ -1,5 +1,5 @@
 node_modules
-.generated/secrets.env
-.generated/ecosystem.config.js
-startup
-secrets.hjson
+/.generated/secrets.env
+/.generated/ecosystem.config.js
+/startup
+/secrets.hjson
