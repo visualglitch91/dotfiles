@@ -107,3 +107,11 @@ fi
 
 # bun completions
 [ -s "/home/erica/.bun/_bun" ] && source "/home/erica/.bun/_bun"
+
+if [[ -n $SSH_TTY ]] || [[ $(tty) == /dev/tty* ]]; then
+  if [[ -z $ZELLIJ ]]; then
+    exec zellij attach --create
+  fi
+fi
+
+export TERM=xterm
