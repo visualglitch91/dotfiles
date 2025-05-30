@@ -18,6 +18,7 @@ unsetopt PROMPT_SP
 
 alias open=xdg-open
 alias zsh-reload="source ~/.zshrc"
+alias shx="sudo hx"
 
 # DNF shortcuts
 alias dnfup="sudo dnf update -y"
