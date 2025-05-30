@@ -28,7 +28,7 @@ export PATH="$HOME/.bun/bin:$PATH"
 if ! command -v nix &>/dev/null; then
   echo "Installing nix package manager"
   sudo setenforce 0
-  sh -c "curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate" >/dev/null 2>&1
+  sh -c "curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate"
   source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
   sudo setenforce 1
 fi
@@ -37,15 +37,18 @@ install_dnf_packages $REQUIRED_DNF_PKGS
 install_nix_packages $REQUIRED_NIX_PKGS
 install_bun_packages $REQUIRED_BUN_PKGS
 
-# Install oh-my-zsh (do not fail if already installed or on error)
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  echo "Installing oh-my-zsh"
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >/dev/null 2>&1 || true
-fi
-
 # Load the config file
 CONFIG=$(hjson -j "$ROOT/config.hjson")
 conf() { jq -r ".$1" <<<"$CONFIG"; }
+
+PRERUN_CMD=$(conf prerun)
+
+echo $(conf prerun) | jq -c 'to_entries[]' | while read -r entry; do
+  key=$(echo "$entry" | jq -r '.key')
+  val=$(echo "$entry" | jq -r '.value')
+  echo "Running $key"
+  eval "$val"
+done
 
 enable_copr_repos $(conf copr[])
 install_dnf_packages $(conf dnf[])
@@ -114,5 +117,10 @@ $ROOT/scripts/reload >/dev/null 2>&1
 
 # Set the default web browser
 DEFAULT_BROWSER=$(echo $CONFIG | jq -r '.xdg.default_browser')
-echo "*****************************************"
 xdg-settings set default-web-browser $DEFAULT_BROWSER
+
+# Install oh-my-zsh, this must be done last since it modifies the shell
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  echo "Installing oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
