@@ -119,6 +119,9 @@ $ROOT/scripts/reload >/dev/null 2>&1
 DEFAULT_BROWSER=$(echo $CONFIG | jq -r '.xdg.default_browser')
 xdg-settings set default-web-browser $DEFAULT_BROWSER
 
+# Fix DNS issues
+sudo bin/fix-dns-issues >/dev/null 2>&1
+
 # Install oh-my-zsh, this must be done last since it modifies the shell
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   echo "Installing oh-my-zsh"

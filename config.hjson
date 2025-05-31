@@ -86,7 +86,6 @@ symlinks: [
   ["helix" "helix"]
   ["waybar" "waybar"]
   ["ulauncher" "ulauncher"]
-  ["nixpkgs", "nixpkgs"],
   ["zellij" "zellij"]
   ["ulauncher/extensions" "../.local/share/ulauncher/extensions"]
   ["ulauncher/bookmarks" "ulauncher-bookmarks"]

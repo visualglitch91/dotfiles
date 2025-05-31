@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Disable systemd-resolved
+systemctl disable --now systemd-resolved
+
+# Configure NetworkManager to handle DNS directly
+mkdir -p /etc/NetworkManager/conf.d
+cat >/etc/NetworkManager/conf.d/dns.conf <<EOF
+[main]
+dns=default
+EOF
+
+# Restore /etc/resolv.conf symlink
+rm -f /etc/resolv.conf
+ln -s /var/run/NetworkManager/resolv.conf /etc/resolv.conf
+
+# Restart NetworkManager to apply changes
+systemctl restart NetworkManager
