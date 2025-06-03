@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# URL of the Vivaldi Snapshot x86_64 .rpm file
+LATEST_RPM_URL="https://downloads.vivaldi.com/snapshot/vivaldi-snapshot-7.5.3704.3-1.x86_64.rpm"
+
+# Output the URL being downloaded
+echo "Latest Vivaldi snapshot RPM URL: $LATEST_RPM_URL"
+
+# Create a temporary directory for the RPM file
+TEMP_DIR=$(mktemp -d)
+RPM_FILE="$TEMP_DIR/vivaldi-latest-snapshot.x86_64.rpm"
+
+# Check if the RPM is already installed
+if rpm -q vivaldi-snapshot &>/dev/null; then
+  echo "Vivaldi Snapshot is already installed, skipping download and installation."
+  exit 0
+fi
+
+# Download the latest Vivaldi snapshot RPM to the temporary directory
+echo "Downloading latest Vivaldi snapshot RPM from: $LATEST_RPM_URL"
+wget -q --show-progress "$LATEST_RPM_URL" -O "$RPM_FILE"
+
+# Check if the download was successful
+if [ $? -eq 0 ]; then
+  echo "Download completed successfully."
+else
+  echo "Download failed."
+  exit 1
+fi
+
+# Install the RPM if not already installed
+echo "Installing Vivaldi snapshot RPM..."
+sudo dnf install -y "$RPM_FILE"
+
+# Verify the installation
+if rpm -q vivaldi-snapshot &>/dev/null; then
+  echo "Vivaldi Snapshot has been successfully installed."
+else
+  echo "Vivaldi Snapshot installation failed."
+  exit 1
+fi
+
+# Clean up the temporary directory
+echo "Cleaning up temporary directory..."
+rm -rf "$TEMP_DIR"
