@@ -1,0 +1,9 @@
+#!/bin/sh
+
+CMD="/usr/bin/code --ozone-platform-hint=wayland"
+
+if [ -n "$NIRI_SOCKET" ]; then
+    niri msg action spawn -- $CMD
+else
+    exec $CMD
+fi
