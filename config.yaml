@@ -75,7 +75,6 @@ symlinks:
 
 templates:
   - mako/config.tmpl
-  - git/config.tmpl
   - ghostty/config.tmpl
   - niri/config.kdl.tmpl
   - zellij/config.kdl.tmpl
