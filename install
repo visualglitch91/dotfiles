@@ -5,7 +5,7 @@ BIN="$ROOT/bin"
 
 REQUIRED_DNF_PKGS="jq curl zsh helix git dnf-plugins-core flatpak"
 REQUIRED_NIX_PKGS="bun nodejs_22"
-REQUIRED_BUN_PKGS="hjson pm2"
+REQUIRED_BUN_PKGS="js-yaml pm2"
 
 # Check if the script is run as root
 sudo echo "Starting installation..."
@@ -40,7 +40,7 @@ install_nix_packages $REQUIRED_NIX_PKGS
 install_bun_packages $REQUIRED_BUN_PKGS
 
 # Load the config file
-CONFIG=$(hjson -j "$ROOT/config.hjson")
+CONFIG=$(js-yaml -j "$ROOT/config.yaml")
 conf() { jq -r ".$1" <<<"$CONFIG"; }
 
 PRERUN_CMDS=$(conf prerun)

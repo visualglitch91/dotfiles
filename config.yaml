@@ -1,48 +1,43 @@
-prerun: '''
+prerun: |
   mkdir -p ~/.vscode
   mkdir -p ~/.local/share/ulauncher
-'''
 
-copr: [
-  pgdev/ghostty
-  troycurtisjr/ulauncher
-]
+copr:
+  - pgdev/ghostty
+  - troycurtisjr/ulauncher
 
-dnf: [
-  zip
-  mako
-  code
-  aria2
-  wtype
-  waybar
-  ghostty
-  nautilus
-  swayidle
-  ulauncher
-  mate-polkit
-  wl-clipboard
-  brightnessctl
-  "gtk-layer-shell" // required for ulauncher
-  NetworkManager-tui
-]
+dnf:
+  - zip
+  - mako
+  - code
+  - aria2
+  - wtype
+  - waybar
+  - ghostty
+  - nautilus
+  - swayidle
+  - ulauncher
+  - mate-polkit
+  - wl-clipboard
+  - brightnessctl
+  - "gtk-layer-shell" # required for ulauncher
+  - NetworkManager-tui
 
-nix: [
-  eza
-  dex
-  emote
-  zellij
-  bluetui
-  librewolf
-]
+nix:
+  - eza
+  - dex
+  - emote
+  - zellij
+  - bluetui
+  - librewolf
 
 bun: []
 
-flatpak: [
-  page.codeberg.libre_menu_editor.LibreMenuEditor
-]
+flatpak:
+  - page.codeberg.libre_menu_editor.LibreMenuEditor
 
-local: {
-  niri: '''
+local:
+  niri: |
     sudo dnf install -y \
       gcc clang cargo dbus-devel \
       systemd-devel wayland-devel \
@@ -57,65 +52,57 @@ local: {
     sudo cp -f resources/niri-portals.conf /usr/share/xdg-desktop-portal/
     sudo cp -f resources/niri.service /etc/systemd/user/
     sudo cp -f resources/niri-shutdown.target /etc/systemd/user/
-  '''
   vivaldi-snapshot: "./install"
   vs-code: "./install"
-}
 
-symlinks: [
-  ["zsh/zshrc" "../.zshrc"]
-  ["mako" "mako"]
-  ["sway" "sway"]
-  ["niri" "niri"]
-  ["ghostty" "ghostty"]
-  ["helix" "helix"]
-  ["waybar" "waybar"]
-  ["ulauncher" "ulauncher"]
-  ["zellij" "zellij"]
-  ["ulauncher/extensions" "../.local/share/ulauncher/extensions"]
-  ["ulauncher/bookmarks" "ulauncher-bookmarks"]
-  ["ulauncher/snippets" "ulauncher-text-snippets"]
-  ["vscode/argv.json", "../.vscode/argv.json"]
-  ["../assets/icons" "../.icons"]
-  ["../assets/themes" "../.themes"]
-  ["../assets/themes/$GTK_THEME/gtk-4.0" "gtk-4.0"]
-]
+symlinks:
+  - ["zsh/zshrc", "../.zshrc"]
+  - ["mako", "mako"]
+  - ["sway", "sway"]
+  - ["niri", "niri"]
+  - ["ghostty", "ghostty"]
+  - ["helix", "helix"]
+  - ["waybar", "waybar"]
+  - ["ulauncher", "ulauncher"]
+  - ["zellij", "zellij"]
+  - ["ulauncher/extensions", "../.local/share/ulauncher/extensions"]
+  - ["ulauncher/bookmarks", "ulauncher-bookmarks"]
+  - ["ulauncher/snippets", "ulauncher-text-snippets"]
+  - ["vscode/argv.json", "../.vscode/argv.json"]
+  - ["../assets/icons", "../.icons"]
+  - ["../assets/themes", "../.themes"]
+  - ["../assets/themes/$GTK_THEME/gtk-4.0", "gtk-4.0"]
 
-templates: [
-  mako/config.tmpl
-  git/config.tmpl
-  ghostty/config.tmpl
-  niri/config.kdl.tmpl
-  zellij/config.kdl.tmpl
-  ulauncher/user-themes/wal/theme.css.tmpl
-  ulauncher/user-themes/wal/manifest.json.tmpl
-]
+templates:
+  - mako/config.tmpl
+  - git/config.tmpl
+  - ghostty/config.tmpl
+  - niri/config.kdl.tmpl
+  - zellij/config.kdl.tmpl
+  - ulauncher/user-themes/wal/theme.css.tmpl
+  - ulauncher/user-themes/wal/manifest.json.tmpl
 
-less: [
-  waybar/style.less
-  vivaldi-css/style.less
-]
+less:
+  - waybar/style.less
+  - vivaldi-css/style.less
 
-pm2: {
+pm2:
   mako: "mako"
   waybar: "waybar"
   ulauncher: "ulauncher --daemon"
   niri-disaplay-manager: "{{bin}}/niri-display-manager"
   swaybg-wallpaper: "{{bin}}/swaybg.x64 -n wallpaper  -i {{assets}}/wallpaper.jpg"
   swaybg-overview: "{{bin}}/swaybg.x64 -n overview -i {{assets}}/wallpaper-overview.jpg"
-  swayidle: '''
+  swayidle: |
     swayidle -w
       timeout 300 'niri msg action power-off-monitors'
       timeout 1800 'systemctl suspend'
-  '''
   polkit: "/usr/libexec/polkit-mate-authentication-agent-1"
-}
 
-xdg: {
+xdg:
   default_browser: vivaldi-snapshot.desktop
-}
 
-system_theme: {
+system_theme:
   color_scheme: prefer-dark
   accent_color: pink
   gtk_theme: Catppuccin-Macchiato
@@ -123,17 +110,15 @@ system_theme: {
   cursor_theme: Yaru
   font_family: Fira Sans
   font_family_mono: Fira Mono
-}
 
-application_theme: {
-  colors: {
+application_theme:
+  colors:
     background: "#282a36"
     text: "#f8f8f2"
     primary: "#a4ffff"
     secondary: "#69ff94"
     accent: "#e06c75"
-  }
-  niri: {
+  niri:
     cursor_size: 24
     layout_gaps: 16
     layout_focus_ring_width: 1
@@ -143,32 +128,24 @@ application_theme: {
     layout_border_color_start: "{{ colors.secondary }}88"
     layout_border_color_end: "#BD93F988"
     window_corner_radius: 12
-  }
-  ulauncher: {
+  ulauncher:
     font_family: "{{ fonts.mono }}"
     border_radius: 0
     border_width: 2
-  }
-  vivaldi: {
+  vivaldi:
     background: "{{ colors.background | darken(0.6) }}"
     accent: "{{ colors.accent }}"
     highlight: "{{ colors.primary | desaturate(0.8) | darken(0.4) }}"
-  }
-  mako: {
-    font_size: 13,
-    border_size: 2,
-    border_radius: 8,
-    border_color: "{{ colors.secondary }}",
-  }
-  waybar: {
-    font_size: 13,
-    laptop_font_size: 14,
-  }
-  ghostty: {
-    font_size: 12,
-    background_opacity: 0.95,
-  }
-  zellij: { 
+  mako:
+    font_size: 13
+    border_size: 2
+    border_radius: 8
+    border_color: "{{ colors.secondary }}"
+  waybar:
+    font_size: 13
+    laptop_font_size: 14
+  ghostty:
+    font_size: 12
+    background_opacity: 0.95
+  zellij:
     theme: catppuccin-mocha
-  }
-}

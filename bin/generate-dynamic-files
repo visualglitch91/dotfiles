@@ -2,20 +2,20 @@
 
 import fs from "fs";
 import { join } from "path";
-import hjson from "hjson";
+import yaml from "js-yaml";
 import _ from "lodash";
 import nunjucks from "nunjucks";
 import less from "less";
 import Color from "color";
 
-const loadHJSON = (path) => {
-  return hjson.parse(fs.readFileSync(join(__dirname, path), "utf8"));
+const loadYAML = (path) => {
+  return yaml.load(fs.readFileSync(join(__dirname, path), "utf8"));
 };
 
 const n = new nunjucks.Environment();
 const tmpl = n.renderString.bind(n);
-const config = loadHJSON("../config.hjson");
-const secrets = loadHJSON("../secrets.hjson");
+const config = loadYAML("../config.yaml");
+const secrets = loadYAML("../secrets.yaml");
 const colorFilters = ["darken", "lighten", "fade", "desaturate", "saturate"];
 
 colorFilters.forEach((it) => {
