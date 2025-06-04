@@ -131,6 +131,9 @@ sudo $BIN/dnf-defaultyes
 # Enable sudo password feedback
 sudo $BIN/sudo-pwfeedback
 
+# Set global environment variables
+sudo $BIN/global-env-vars
+
 # Install oh-my-zsh, this must be done last since it modifies the shell
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   echo "Installing oh-my-zsh"
