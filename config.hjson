@@ -1,10 +1,6 @@
-prerun: {
-  create-ulauncher-folders: mkdir -p ~/.local/share/ulauncher
-  setup-vscode-repos: '''
-    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-    echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-  '''
-}
+prerun: '''
+  mkdir -p ~/.local/share/ulauncher
+'''
 
 copr: [
   pgdev/ghostty
@@ -13,50 +9,29 @@ copr: [
 
 dnf: [
   zip
+  mako
   code
-  swayidle
+  aria2
+  wtype
+  waybar
   ghostty
-  ulauncher
-  "gtk-layer-shell" // required for ulauncher
-  mate-polkit
-  brightnessctl
-  NetworkManager-tui
   nautilus
-  ## niri dependencies
-  # we are building niri from source to get blurred windows
-  gcc
-  clang
-  cargo
-  dbus-devel
-  pango-devel
-  libgbm-devel
-  libseat-devel
-  wayland-devel
-  libudev-devel
-  pipewire-devel
-  libinput-devel
-  systemd-devel
-  wayland-devel
-  libxkbcommon-devel
-  cairo-gobject-devel
-  libdisplay-info-devel
+  swayidle
+  ulauncher
+  mate-polkit
+  wl-clipboard
+  brightnessctl
+  "gtk-layer-shell" // required for ulauncher
+  NetworkManager-tui
 ]
 
 nix: [
   eza
   dex
-  mako
-  wtype
-  zellij
-  nixfmt
   emote
-  aria2
-  waybar
+  zellij
   bluetui
-  swayidle
-  distrobox
   librewolf
-  wl-clipboard
 ]
 
 bun: []
@@ -67,6 +42,13 @@ flatpak: [
 
 local: {
   niri: '''
+    sudo dnf install -y \
+      gcc clang cargo dbus-devel \
+      systemd-devel wayland-devel \
+      pipewire-devel libinput-devel \
+      pango-devel mesa-libgbm-devel \
+      libseat-devel libdisplay-info-devel \
+      libxkbcommon-devel cairo-gobject-devel
     cargo build --release
     sudo cp -f target/release/niri /usr/bin/
     sudo cp -f resources/niri-session /usr/bin/
@@ -75,6 +57,8 @@ local: {
     sudo cp -f resources/niri.service /etc/systemd/user/
     sudo cp -f resources/niri-shutdown.target /etc/systemd/user/
   '''
+  vivaldi-snapshot: "./install"
+  vs-code: "./install"
 }
 
 symlinks: [
@@ -90,7 +74,6 @@ symlinks: [
   ["ulauncher/extensions" "../.local/share/ulauncher/extensions"]
   ["ulauncher/bookmarks" "ulauncher-bookmarks"]
   ["ulauncher/snippets" "ulauncher-text-snippets"]
-  ["git/config", "../.gitconfig"]
   ["../assets/icons" "../.icons"]
   ["../assets/themes" "../.themes"]
   ["../assets/themes/$GTK_THEME/gtk-4.0" "gtk-4.0"]

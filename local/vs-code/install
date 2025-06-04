@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Import Microsoft GPG key if not already imported
+if ! sudo rpm -q gpg-pubkey --qf '%{name}-%{version}-%{release}\n' | grep -qi microsoft; then
+  echo "Importing Microsoft GPG key..."
+  sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+else
+  echo "Microsoft GPG key already imported."
+fi
+
+# Define expected repo content
+read -r -d '' EXPECTED_REPO <<'EOF'
+[code]
+name=Visual Studio Code
+baseurl=https://packages.microsoft.com/yumrepos/vscode
+enabled=1
+autorefresh=1
+type=rpm-md
+gpgcheck=1
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+EOF
+
+REPO_FILE="/etc/yum.repos.d/vscode.repo"
+
+# Check if repo file exists and matches expected content
+if [ -f "$REPO_FILE" ]; then
+  if diff <(echo "$EXPECTED_REPO") "$REPO_FILE" >/dev/null; then
+    echo "VS Code repo file already configured correctly."
+  else
+    echo "Updating VS Code repo file..."
+    echo "$EXPECTED_REPO" | sudo tee "$REPO_FILE" > /dev/null
+  fi
+else
+  echo "Creating VS Code repo file..."
+  echo "$EXPECTED_REPO" | sudo tee "$REPO_FILE" > /dev/null
+fi
+
+# Install VS Code if not already installed
+if ! rpm -q code >/dev/null 2>&1; then
+  echo "Installing Visual Studio Code..."
+  sudo dnf install -y code
+else
+  echo "Visual Studio Code is already installed."
+fi

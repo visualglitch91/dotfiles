@@ -28,7 +28,8 @@ export PATH="$HOME/.bun/bin:$PATH"
 if ! command -v nix &>/dev/null; then
   echo "Installing nix package manager"
   sudo setenforce 0
-  sh -c "curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate"
+  curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix |
+    sh -s -- install --no-confirm
   source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
   sudo setenforce 1
 fi
@@ -41,13 +42,14 @@ install_bun_packages $REQUIRED_BUN_PKGS
 CONFIG=$(hjson -j "$ROOT/config.hjson")
 conf() { jq -r ".$1" <<<"$CONFIG"; }
 
-PRERUN_CMD=$(conf prerun)
+PRERUN_CMDS=$(conf prerun)
 
-echo $(conf prerun) | jq -c 'to_entries[]' | while read -r entry; do
-  key=$(echo "$entry" | jq -r '.key')
-  val=$(echo "$entry" | jq -r '.value')
-  echo "Running $key"
-  eval "$val"
+# Collapse continuation lines before processing
+eval_lines=$(echo "$PRERUN_CMDS" | sed -e ':a' -e '/\\$/N; s/\\\n//; ta')
+
+echo "$eval_lines" | while IFS= read -r line || [ -n "$line" ]; do
+  [ -z "$line" ] && continue
+  eval "$line"
 done
 
 enable_copr_repos $(conf copr[])

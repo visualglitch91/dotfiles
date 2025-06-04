@@ -48,15 +48,13 @@ enable_copr_repos() {
 }
 
 install_bun_packages() {
-  local installed=()
-  if installed_output=$(bun pm -g ls 2>/dev/null); then
-    mapfile -t installed < <(awk -F@ '/@/ {print $1}' <<<"$installed_output" | sed 's/^[^ ]* //')
-  fi
+  local pkg installed_dir
+  installed_dir="$HOME/.bun/install/global/node_modules"
 
   for pkg in "$@"; do
-    if ! printf '%s\n' "${installed[@]}" | grep -qx "$pkg"; then
+    if [ ! -d "$installed_dir/$pkg" ]; then
       echo "Installing bun package: $pkg"
-      bun install -g --no-save "$pkg" >/dev/null 2>&1
+      bun add -g "$pkg" >/dev/null 2>&1
     fi
   done
 }
