@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 ROOT=$(dirname "$(realpath -P "$0")")
+BIN="$ROOT/bin"
 
 REQUIRED_DNF_PKGS="jq curl zsh helix git dnf-plugins-core flatpak"
 REQUIRED_NIX_PKGS="bun nodejs_22"
@@ -10,7 +11,7 @@ REQUIRED_BUN_PKGS="hjson pm2"
 sudo echo "Starting installation..."
 
 # Load the install-utils script
-source "$ROOT/bin/install-utils"
+source "$BIN/install-utils"
 
 # Init git submodules
 echo "Initializing git submodules"
@@ -122,13 +123,13 @@ DEFAULT_BROWSER=$(echo $CONFIG | jq -r '.xdg.default_browser')
 xdg-settings set default-web-browser $DEFAULT_BROWSER
 
 # Fix DNS issues
-sudo bin/fix-dns-issues >/dev/null 2>&1
+sudo $BIN/fix-dns-issues >/dev/null 2>&1
 
 # Default dnf comand confirmations to yes
-sudo bin/dnf-defaultyes
+sudo $BIN/dnf-defaultyes
 
 # Enable sudo password feedback
-sudo bin/sudo-pwfeedback
+sudo $BIN/sudo-pwfeedback
 
 # Install oh-my-zsh, this must be done last since it modifies the shell
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
