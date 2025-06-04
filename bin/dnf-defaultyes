@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+
+conf_path = "/etc/dnf/dnf.conf"
+key = "defaultyes"
+value = "True"
+target_line = f"{key}={value}"
+
+with open(conf_path, "r") as f:
+    lines = f.readlines()
+
+in_main = False
+found = False
+output = []
+
+for line in lines:
+    stripped = line.strip()
+
+    if stripped.startswith("[") and stripped.endswith("]"):
+        if in_main and not found:
+            output.append(f"{target_line}\n")
+        in_main = stripped == "[main]"
+        output.append(line)
+        continue
+
+    if in_main and stripped.startswith(f"{key}="):
+        if not found:
+            output.append(f"{target_line}\n")
+            found = True
+        continue
+
+    output.append(line)
+
+if in_main and not found:
+    output.append(f"{target_line}\n")
+
+with open(conf_path, "w") as f:
+    f.writelines(output)

@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+
+sudoers_path = "/etc/sudoers"
+key = "Defaults"
+value = "pwfeedback"
+target_line = f"{key}    {value}"
+
+with open(sudoers_path, "r") as f:
+    lines = f.readlines()
+
+found = False
+output = []
+
+for line in lines:
+    stripped = line.strip()
+    if stripped == target_line:
+        found = True
+    output.append(line)
+
+if not found:
+    output.append(target_line + "\n")
+
+with open(sudoers_path, "w") as f:
+    f.writelines(output)
