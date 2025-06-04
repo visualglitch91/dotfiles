@@ -48,11 +48,12 @@ enable_copr_repos() {
 }
 
 install_bun_packages() {
-  local pkg installed_dir
-  installed_dir="$HOME/.bun/install/global/node_modules"
+  local pkg
+  local installed
+  installed=$(bun pm ls -g | sed 's/\x1B\[[0-9;]*[mG]//g')
 
   for pkg in "$@"; do
-    if [ ! -d "$installed_dir/$pkg" ]; then
+    if ! echo "$installed" | grep -qP "── $pkg@"; then
       echo "Installing bun package: $pkg"
       bun add -g "$pkg" >/dev/null 2>&1
     fi
