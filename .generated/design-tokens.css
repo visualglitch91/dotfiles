@@ -8,6 +8,7 @@
   --visualglitch91-colors-accent: #e06c75;
   --visualglitch91-apps-niri-cursorSize: 24;
   --visualglitch91-apps-niri-layoutGaps: 16;
+  --visualglitch91-apps-niri-layoutMarginX: 18;
   --visualglitch91-apps-niri-layoutFocusRingWidth: 1;
   --visualglitch91-apps-niri-layoutFocusRingColorStart: #e06c75;
   --visualglitch91-apps-niri-layoutFocusRingColorEnd: #BD93F9;
@@ -15,12 +16,17 @@
   --visualglitch91-apps-niri-layoutBorderColorStart: #69ff9488;
   --visualglitch91-apps-niri-layoutBorderColorEnd: #BD93F988;
   --visualglitch91-apps-niri-windowCornerRadius: 12;
+  --visualglitch91-apps-niriswitcher-fontFamily: Fira Mono;
+  --visualglitch91-apps-niriswitcher-fontSize: 14;
+  --visualglitch91-apps-niriswitcher-borderRadius: 8;
+  --visualglitch91-apps-niriswitcher-borderWidth: 2;
   --visualglitch91-apps-ulauncher-fontFamily: Fira Mono;
-  --visualglitch91-apps-ulauncher-borderRadius: 0;
+  --visualglitch91-apps-ulauncher-borderRadius: 8;
   --visualglitch91-apps-ulauncher-borderWidth: 2;
   --visualglitch91-apps-vivaldi-background: #101116;
   --visualglitch91-apps-vivaldi-accent: #e06c75;
   --visualglitch91-apps-vivaldi-highlight: #639898;
+  --visualglitch91-apps-vivaldi-surfaceRadius: 14;
   --visualglitch91-apps-mako-fontSize: 13;
   --visualglitch91-apps-mako-borderSize: 2;
   --visualglitch91-apps-mako-borderRadius: 8;

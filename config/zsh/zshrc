@@ -25,6 +25,10 @@ alias dnfup="sudo dnf update -y"
 alias dnfadd="sudo dnf -y install"
 alias dnfdel="sudo dnf -y remove"
 
+# Nix
+alias nixadd="nix profile install"
+alias nixdel="nix profile remove"
+
 # Flatpak shortcuts
 alias flatadd='flatpak install -y flathub'
 alias flatdel='flatpak remove -y'
@@ -110,9 +114,9 @@ fi
 [ -s "/home/erica/.bun/_bun" ] && source "/home/erica/.bun/_bun"
 
 if [[ -n $SSH_TTY ]] || [[ $(tty) == /dev/tty* ]]; then
-  if [[ -z $ZELLIJ ]]; then
-    exec zellij attach --create
-  fi
+    if [[ -z $ZELLIJ ]]; then
+        exec zellij attach --create
+    fi
 fi
 
 export TERM=xterm

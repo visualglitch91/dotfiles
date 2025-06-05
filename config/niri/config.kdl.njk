@@ -45,6 +45,11 @@ layout {
         proportion 1.0
     }
 
+    struts {
+        left {{ apps.niri.layout_margin_x }}
+        right {{ apps.niri.layout_margin_x }}
+    }
+
     focus-ring {
         width {{ apps.niri.layout_focus_ring_width }}
         active-gradient from="{{ apps.niri.layout_focus_ring_color_start }}" to="{{ apps.niri.layout_focus_ring_color_end }}" angle=45
@@ -59,8 +64,8 @@ layout {
     blur {
         on
         passes 3
-        radius 1
-        noise 0.3
+        radius 1.65
+        noise 0.35
     }
 }
 
@@ -77,7 +82,6 @@ gestures {
 }
 
 output "eDP-1" {
-    {% if external_display_connected %}off{% endif %}
     scale 1
 }
 
@@ -104,7 +108,9 @@ binds {
 
     // Power and Session
     Mod+Shift+E { quit; }
-
+    
+    Alt+Tab repeat=false { spawn "~/.visualglitch91/scripts/niriswitcher-show"; }
+    Alt+Shift+Tab repeat=false { spawn "~/.visualglitch91/scripts/niriswitcher-show"; }
     Mod+E { spawn "nautilus"; }
     Mod+D { spawn "ulauncher-toggle"; }
     Mod+period { spawn "emote"; }
@@ -112,7 +118,6 @@ binds {
     Mod+B { spawn "~/.visualglitch91/scripts/open-default-browser"; }
     Mod+Alt+Backspace { screenshot; }
     Mod+Shift+Backspace { screenshot-screen; }
-    Alt+Tab { spawn "~/.visualglitch91/scripts/window-switcher"; }
     Mod+C { spawn "~/.visualglitch91/scripts/type" "ç"; }
     Mod+Shift+C { spawn "~/.visualglitch91/scripts/type" "Ç"; }
     Mod+L { switch-layout "next"; }
@@ -139,7 +144,7 @@ binds {
     Mod+Alt+M { move-window-to-workspace-down; }
     Mod+Ctrl+Alt+Page_Up { move-window-to-workspace-up; }
     Mod+Ctrl+Alt+Page_Down { move-window-to-workspace-down; }
-    Ctrl+Alt+Shift+P { toggle-overview; }
+    F12 { toggle-overview; }
     Mod+Q { consume-or-expel-window-left; }
     Mod+Shift+Q { consume-or-expel-window-right; }
     Mod+F { maximize-column; }
@@ -168,6 +173,11 @@ hotkey-overlay {
     skip-at-startup
 }
 
+window-rule {    
+    match is-focused=true
+    opacity 0.94
+}
+
 window-rule {
     match is-active=false
     opacity 0.2
@@ -189,21 +199,18 @@ window-rule {
 }
 
 window-rule {
-    geometry-corner-radius {{ apps.niri.window_corner_radius }}
     clip-to-geometry true
     draw-border-with-background false
+    geometry-corner-radius {{ apps.niri.window_corner_radius }}
 }
 
 window-rule {
-    match app-id="kitty"
+    default-column-width { proportion 0.8; }
+}
+
+window-rule {
     match app-id="com.mitchellh.ghostty"
     default-column-width { proportion 0.5; }
-    
-}
-window-rule {
-    match app-id="code"
-    match app-id="vivaldi-snapshot"
-    default-column-width { proportion 0.9; }
 }
 
 window-rule {
@@ -237,9 +244,4 @@ window-rule {
     opacity 1.0
     default-column-width { fixed 480; }
     default-window-height { fixed 270; }   
-}
-
-window-rule {    
-    match app-id="code" is-focused=true
-    opacity 0.96
 }

@@ -8,6 +8,7 @@ copr:
 
 dnf:
   - zip
+  - pipx
   - mako
   - code
   - aria2
@@ -54,12 +55,14 @@ local:
     sudo cp -f resources/niri-shutdown.target /etc/systemd/user/
   vivaldi-snapshot: "./install"
   vs-code: "./install"
+  niriswitcher: "./install"
 
 symlinks:
   - ["zsh/zshrc", "../.zshrc"]
   - ["mako", "mako"]
   - ["sway", "sway"]
   - ["niri", "niri"]
+  - ["niriswitcher", "niriswitcher"]
   - ["ghostty", "ghostty"]
   - ["helix", "helix"]
   - ["waybar", "waybar"]
@@ -74,21 +77,24 @@ symlinks:
   - ["../assets/themes/$GTK_THEME/gtk-4.0", "gtk-4.0"]
 
 templates:
-  - mako/config.tmpl
-  - git/config.tmpl
-  - ghostty/config.tmpl
-  - niri/config.kdl.tmpl
-  - zellij/config.kdl.tmpl
-  - ulauncher/user-themes/wal/theme.css.tmpl
-  - ulauncher/user-themes/wal/manifest.json.tmpl
+  - mako/config.njk
+  - ghostty/config.njk
+  - niri/config.kdl.njk
+  - waybar/config.jsonc.njk
+  - niriswitcher/config.toml.njk
+  - zellij/config.kdl.njk
+  - ulauncher/user-themes/wal/theme.css.njk
+  - ulauncher/user-themes/wal/manifest.json.njk
 
 less:
   - waybar/style.less
   - vivaldi-css/style.less
+  - niriswitcher/style.less
 
 pm2:
   mako: "mako"
   waybar: "waybar"
+  niriswitcher: "~/.local/bin/niriswitcher"
   ulauncher: "ulauncher --daemon"
   niri-disaplay-manager: "{{bin}}/niri-display-manager"
   swaybg-wallpaper: "{{bin}}/swaybg.x64 -n wallpaper  -i {{assets}}/wallpaper.jpg"
@@ -121,6 +127,7 @@ application_theme:
   niri:
     cursor_size: 24
     layout_gaps: 16
+    layout_margin_x: 18
     layout_focus_ring_width: 1
     layout_focus_ring_color_start: "{{ colors.accent }}"
     layout_focus_ring_color_end: "#BD93F9"
@@ -128,14 +135,20 @@ application_theme:
     layout_border_color_start: "{{ colors.secondary }}88"
     layout_border_color_end: "#BD93F988"
     window_corner_radius: 12
+  niriswitcher:
+    font_family: "{{ fonts.mono }}"
+    font_size: 14
+    border_radius: 8
+    border_width: 2
   ulauncher:
     font_family: "{{ fonts.mono }}"
-    border_radius: 0
+    border_radius: 8
     border_width: 2
   vivaldi:
     background: "{{ colors.background | darken(0.6) }}"
     accent: "{{ colors.accent }}"
     highlight: "{{ colors.primary | desaturate(0.8) | darken(0.4) }}"
+    surface_radius: 14
   mako:
     font_size: 13
     border_size: 2

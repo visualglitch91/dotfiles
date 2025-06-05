@@ -14,6 +14,7 @@
     "niri": {
       "cursor_size": 24,
       "layout_gaps": 16,
+      "layout_margin_x": 18,
       "layout_focus_ring_width": 1,
       "layout_focus_ring_color_start": "#e06c75",
       "layout_focus_ring_color_end": "#BD93F9",
@@ -22,15 +23,22 @@
       "layout_border_color_end": "#BD93F988",
       "window_corner_radius": 12
     },
+    "niriswitcher": {
+      "font_family": "Fira Mono",
+      "font_size": 14,
+      "border_radius": 8,
+      "border_width": 2
+    },
     "ulauncher": {
       "font_family": "Fira Mono",
-      "border_radius": 0,
+      "border_radius": 8,
       "border_width": 2
     },
     "vivaldi": {
       "background": "#101116",
       "accent": "#e06c75",
-      "highlight": "#639898"
+      "highlight": "#639898",
+      "surface_radius": 14
     },
     "mako": {
       "font_size": 13,

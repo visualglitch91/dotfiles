@@ -9,6 +9,8 @@
 @baseWarning: #ffcc00;
 @baseError: #c64539;
 @baseInverse: #2c2e3a;
+@surfaceRadius: ~"@{apps_vivaldi_surfaceRadius}px";
+@uiRadius: (@apps_vivaldi_surfaceRadius * 0.8);
 
 html,
 #browser > * {
@@ -84,7 +86,7 @@ html,
 
   // Layout and custom style settings
 
-  --radius: 0px;
+  --radius: calc(min(@uiRadius, 6px));
   --radiusRoundedLess: calc(var(--radius) - 1px);
   --radiusHalf: calc(var(--radius) / 2);
   --radiusCap: calc(var(--radiusHalf) + 1px);
@@ -192,48 +194,6 @@ body:has(.extension-popup) .button-popup {
   display: none !important;
 }
 
-// footer#footer {
-//   position: absolute !important;
-//   top: var(--statusBarTop) !important;
-//   bottom: unset !important;
-//   right: 6px !important;
-//   left: unset !important;
-//   padding: 4px 12px;
-//   border-radius: 6px;
-//   overflow: hidden;
-//   border-top: none !important;
-//   background: var(--tabbarBackground) !important;
-//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-// }
-
-// .extension-popup.bottom {
-//   top: calc(var(--statusBarTop) + 40px) !important;
-//   margin-left: 2px !important;
-// }
-
-// .button-popup {
-//   bottom: unset !important;
-//   top: calc(var(--statusBarTop) + 40px) !important;
-// }
-
-// .button-popup:before,
-// .button-popup:after,
-// .extension-popup:before,
-// .extension-popup:after {
-//   display: none !important;
-// }
-
-// footer#footer .button-toolbar button {
-//   padding: 0 6px;
-//   border-radius: 6px;
-//   position: relative;
-//   overlay: hidden;
-// }
-
-// footer#footer .button-toolbar button:hover {
-//   background: rgba(255, 255, 255, 0.1);
-// }
-
 .find-in-page-wrapper {
   position: absolute;
   top: 0;
@@ -241,20 +201,92 @@ body:has(.extension-popup) .button-popup {
   z-index: 10;
   padding: 0 12px;
   border-bottom-left-radius: 5px;
-}
-
-#panels-container.overlay.minimized {
-  position: absolute;
+  backdrop-filter: blur(10px);
+  background: fade(@colors_background, 95%);
 }
 
 #panels-container {
-  background-color: fade(@baseBg, 65%);
-  backdrop-filter: blur(10px);
+  @background: fade(@colors_background, 78%);
+  --colorBg: @background;
+  --colorBgAlpha: @background;
+  --colorBgAlphaHeavy: @background;
+  --colorBgAlphaHeavier: @background;
+  --colorBgAlphaBlur: @background;
+
+  position: absolute !important;
+  height: 100vh;
 }
 
-.color-behind-tabs-off .SearchField:focus-within,
-.color-behind-tabs-off .MailSearchField-Inner:focus-within,
-.color-behind-tabs-off .UrlBar-AddressField:focus-within {
-  outline: 2px solid var(--colorAccentBg);
-  outline-offset: -2px;
+[aria-label="Address"].toolbar {
+  @height: 64px;
+  @background: fade(darken(@colors_background, 5%), 95%);
+  @itemRadius: (@apps_vivaldi_surfaceRadius * 0.8);
+  @itemRadiusPx: ~"@{itemRadius}px";
+
+  &:focus-within:after {
+    opacity: 1;
+  }
+
+  & .UrlBar-AddressField {
+    height: @height;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: @surfaceRadius !important;
+    background: @background;
+    outline: 2px solid var(--colorAccentBg);
+    outline-offset: -2px;
+
+    &:focus-within {
+      transform: translateY(300px) !important;
+    }
+
+    & input {
+      font-size: 18px;
+    }
+
+    & .OmniDropdown {
+      border: 2px solid var(--colorAccentBg);
+      border-radius: @surfaceRadius !important;
+      padding-top: @height !important;
+      padding-bottom: 12px !important;
+      background: @background;
+
+      & li {
+        margin-left: 8px;
+        margin-right: 8px;
+        border-radius: @itemRadius !important;
+      }
+    }
+  }
+}
+
+body,
+[aria-label="Address"].toolbar {
+  &:after {
+    opacity: 0;
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background: fade(@colors_background, 70%);
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none;
+  }
+}
+
+body:has(.extension-popup),
+[aria-label="Address"].toolbar:focus-within {
+  &:after {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.extension-popup {
+  border-radius: @surfaceRadius !important;
+  overflow: hidden !important;
 }

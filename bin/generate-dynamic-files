@@ -112,7 +112,7 @@ config.templates.forEach((it) => {
     const base = join(__dirname, "../config");
     const template = fs.readFileSync(join(base, it), "utf8");
     const result = tmpl(template, data);
-    fs.writeFileSync(join(base, it.replace(/\.tmpl$/, "")), result);
+    fs.writeFileSync(join(base, it.replace(/\.njk$/, "")), result);
   } catch (e) {
     console.error(`Error processing ${it}: ${e.message}`);
   }

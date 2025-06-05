@@ -1,0 +1,5 @@
+#!/bin/bash
+gdbus call --session \
+  --dest io.github.isaksamsten.Niriswitcher \
+  --object-path /io/github/isaksamsten/Niriswitcher \
+  --method io.github.isaksamsten.Niriswitcher.application
