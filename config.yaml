@@ -36,6 +36,7 @@ bun: []
 
 flatpak:
   - page.codeberg.libre_menu_editor.LibreMenuEditor
+  - io.gitlab.adhami3310.Footage
 
 local:
   niri: |
