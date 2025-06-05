@@ -22,6 +22,7 @@ dnf:
   - wl-clipboard
   - brightnessctl
   - "gtk-layer-shell" # required for ulauncher
+  - "gtk4-layer-shell" # required for niriswitcher
   - NetworkManager-tui
 
 nix:
