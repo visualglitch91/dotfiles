@@ -38,7 +38,7 @@
       "background": "#101116",
       "accent": "#e06c75",
       "highlight": "#639898",
-      "surface_radius": 14
+      "surface_radius": 8
     },
     "mako": {
       "font_size": 13,

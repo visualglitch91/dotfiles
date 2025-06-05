@@ -25,8 +25,8 @@ alias dnfup="sudo dnf update -y"
 alias dnfadd="sudo dnf -y install"
 alias dnfdel="sudo dnf -y remove"
 
-# Nix
-alias nixadd="nix profile install"
+# Nix shortcuts
+alias nixadd="nix profile add"
 alias nixdel="nix profile remove"
 
 # Flatpak shortcuts

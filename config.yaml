@@ -32,6 +32,7 @@ nix:
   - zellij
   - bluetui
   - librewolf
+  - wf-recorder
 
 bun: []
 
@@ -55,9 +56,9 @@ local:
     sudo cp -f resources/niri-portals.conf /usr/share/xdg-desktop-portal/
     sudo cp -f resources/niri.service /etc/systemd/user/
     sudo cp -f resources/niri-shutdown.target /etc/systemd/user/
-  vivaldi-snapshot: "./install"
   vs-code: "./install"
   niriswitcher: "./install"
+  vivaldi-snapshot: "./install"
 
 symlinks:
   - ["zsh/zshrc", "../.zshrc"]
