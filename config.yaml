@@ -3,6 +3,7 @@ prerun: |
   mkdir -p ~/.local/share/ulauncher
 
 copr:
+  - atim/starship
   - pgdev/ghostty
   - troycurtisjr/ulauncher
 
@@ -17,6 +18,7 @@ dnf:
   - ghostty
   - nautilus
   - swayidle
+  - starship
   - ulauncher
   - mate-polkit
   - wl-clipboard
@@ -29,16 +31,15 @@ nix:
   - eza
   - dex
   - emote
-  - zellij
   - bluetui
-  - librewolf
   - wf-recorder
 
 bun: []
 
 flatpak:
-  - page.codeberg.libre_menu_editor.LibreMenuEditor
   - io.gitlab.adhami3310.Footage
+  - io.gitlab.librewolf-community
+  - page.codeberg.libre_menu_editor.LibreMenuEditor
 
 local:
   niri: |
@@ -62,6 +63,7 @@ local:
 
 symlinks:
   - ["zsh/zshrc", "../.zshrc"]
+  - ["starship/starship.toml", "starship.toml"]
   - ["mako", "mako"]
   - ["sway", "sway"]
   - ["niri", "niri"]
@@ -70,7 +72,7 @@ symlinks:
   - ["helix", "helix"]
   - ["waybar", "waybar"]
   - ["ulauncher", "ulauncher"]
-  - ["zellij", "zellij"]
+  - ["tmux", "tmux"]
   - ["ulauncher/extensions", "../.local/share/ulauncher/extensions"]
   - ["ulauncher/bookmarks", "ulauncher-bookmarks"]
   - ["ulauncher/snippets", "ulauncher-text-snippets"]
@@ -82,10 +84,10 @@ symlinks:
 templates:
   - mako/config.njk
   - ghostty/config.njk
+  - tmux/tmux.conf.njk
   - niri/config.kdl.njk
   - waybar/config.jsonc.njk
   - niriswitcher/config.toml.njk
-  - zellij/config.kdl.njk
   - ulauncher/user-themes/wal/theme.css.njk
   - ulauncher/user-themes/wal/manifest.json.njk
 
@@ -160,8 +162,9 @@ application_theme:
   waybar:
     font_size: 13
     laptop_font_size: 14
-  ghostty:
+  kitty:
     font_size: 12
     background_opacity: 0.95
-  zellij:
-    theme: catppuccin-mocha
+  tmux:
+    tab_bar_bg: "#282a36"
+    active_tab_bg: "#BD93F9"

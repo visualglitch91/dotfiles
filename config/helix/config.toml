@@ -1,1 +1,5 @@
 theme = "visualglitch91"
+
+
+[editor]
+true-color = true

@@ -1,0 +1,32 @@
+run ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux
+
+set -g mouse on
+set -g status-position top
+
+set-option -sa terminal-overrides ",xterm*:Tc"
+set-option -g allow-rename off
+
+set-option -g status-right ""
+set-option -g status-left ""
+set-option -g status-bg "{{ apps.tmux.tab_bar_bg }}"
+
+set-window-option -g pane-border-status top
+set-window-option -g pane-border-format ''
+
+setw -g window-status-current-style 'fg=black bg={{ apps.tmux.active_tab_bg }}'
+setw -g window-status-current-format '  #W  '
+
+setw -g window-status-style 'fg=red bg={{ apps.tmux.tab_bar_bg }}'
+setw -g window-status-format '  #[fg=white]#W  '
+
+# Reload configuration file from within TMUX
+unbind r
+bind-key r source-file ~/.config/tmux/tmux.conf \; display-message "Reload source-file: done"
+
+unbind c
+unbind n
+unbind p
+bind-key n new-window
+bind-key Left previous-window
+bind-key Right next-window
+bind-key x kill-pane

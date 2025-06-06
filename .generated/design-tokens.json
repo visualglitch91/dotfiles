@@ -50,12 +50,13 @@
       "font_size": 13,
       "laptop_font_size": 14
     },
-    "ghostty": {
+    "kitty": {
       "font_size": 12,
       "background_opacity": 0.95
     },
-    "zellij": {
-      "theme": "catppuccin-mocha"
+    "tmux": {
+      "tab_bar_bg": "#282a36",
+      "active_tab_bg": "#BD93F9"
     }
   }
 }

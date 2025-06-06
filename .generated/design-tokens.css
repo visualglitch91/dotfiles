@@ -33,7 +33,8 @@
   --visualglitch91-apps-mako-borderColor: #69ff94;
   --visualglitch91-apps-waybar-fontSize: 13;
   --visualglitch91-apps-waybar-laptopFontSize: 14;
-  --visualglitch91-apps-ghostty-fontSize: 12;
-  --visualglitch91-apps-ghostty-backgroundOpacity: 0.95;
-  --visualglitch91-apps-zellij-theme: catppuccin-mocha;
+  --visualglitch91-apps-kitty-fontSize: 12;
+  --visualglitch91-apps-kitty-backgroundOpacity: 0.95;
+  --visualglitch91-apps-tmux-tabBarBg: #282a36;
+  --visualglitch91-apps-tmux-activeTabBg: #BD93F9;
 }
