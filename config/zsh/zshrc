@@ -20,6 +20,9 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="›%{$reset_color%}"
 
 source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 
+precmd() { precmd() { echo "" } }
+alias clear="precmd() { precmd() { echo } } && clear"
+
 alias open=xdg-open
 alias zsh-reload="source ~/.zshrc"
 alias vi="hx"
