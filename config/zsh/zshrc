@@ -44,8 +44,9 @@ alias flatadd='flatpak install -y flathub'
 alias flatdel='flatpak remove -y'
 
 alias compose="docker compose"
-alias l="eza -la"
-alias ls="eza -la"
+alias l="eza"
+alias ll="eza -l"
+alias lll="eza -la"
 
 alias sup='sudo -E'
 alias gl='git pull'

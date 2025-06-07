@@ -2,7 +2,7 @@ add_newline = false
 
 format = """
 $username\
-[@$hostname:](purple)\
+[@$hostname›](purple) \
 $directory\
 $git_branch\
 $git_commit\
@@ -19,7 +19,7 @@ style = "blue bold"
 style_root = "red"
 style_user = "purple"
 show_always = true
-format = "[$user]($style)"
+format = "[‹$user]($style)"
 
 [hostname]
 ssh_only = false
