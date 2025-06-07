@@ -72,7 +72,7 @@ dbash() { docker exec -it $1 /bin/bash; }
 
 # Git aliases
 alias gl='git pull'
-alias gp='git push -u origin $(git-curr-branch)'
+alias gp='git push -u origin $(gb)'
 alias gs='git status'
 alias gb='git rev-parse --abbrev-ref HEAD'
 alias gbl='git branch'

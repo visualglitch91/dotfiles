@@ -1,0 +1,28 @@
+name: Local Assistant
+version: 1.0.0
+schema: v1
+models:
+  - name: devstral:latest
+    provider: ollama
+    apiBase: https://chat.crisalida.cc/ollama
+    apiKey: sk-b98df0951d03438888d48aca263c5361
+    model: devstral:latest
+    roles:
+      - chat
+      - edit
+      - apply
+  - name: qwen2.5-coder:7b
+    provider: ollama
+    apiBase: https://chat.crisalida.cc/ollama
+    apiKey: sk-b98df0951d03438888d48aca263c5361
+    model: qwen2.5-coder:7b
+    roles:
+      - autocomplete
+context:
+  - provider: code
+  - provider: docs
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: folder
+  - provider: codebase

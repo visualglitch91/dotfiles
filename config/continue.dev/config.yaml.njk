@@ -1,0 +1,28 @@
+name: Local Assistant
+version: 1.0.0
+schema: v1
+models:
+  - name: devstral:latest
+    provider: ollama
+    apiBase: {{ secrets.openwebui_host }}/ollama
+    apiKey: {{ secrets.openwebui_key }}
+    model: devstral:latest
+    roles:
+      - chat
+      - edit
+      - apply
+  - name: qwen2.5-coder:7b
+    provider: ollama
+    apiBase: {{ secrets.openwebui_host }}/ollama
+    apiKey: {{ secrets.openwebui_key }}
+    model: qwen2.5-coder:7b
+    roles:
+      - autocomplete
+context:
+  - provider: code
+  - provider: docs
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: folder
+  - provider: codebase

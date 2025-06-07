@@ -64,6 +64,7 @@ local:
 
 symlinks:
   - ["zsh/zshrc", "../.zshrc"]
+  - ["continue.dev/config.yaml", "../.continue/config.yaml"]
   - ["starship/starship.toml", "starship.toml"]
   - ["mako", "mako"]
   - ["sway", "sway"]
@@ -88,6 +89,7 @@ templates:
   - tmux/tmux.conf.njk
   - niri/config.kdl.njk
   - waybar/config.jsonc.njk
+  - continue.dev/config.yaml.njk
   - niriswitcher/config.toml.njk
   - ulauncher/user-themes/wal/theme.css.njk
   - ulauncher/user-themes/wal/manifest.json.njk
