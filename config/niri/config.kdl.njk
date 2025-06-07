@@ -64,8 +64,8 @@ layout {
     blur {
         on
         passes 3
-        radius 1.65
-        noise 0.35
+        radius 2
+        noise 0.1
     }
 }
 
@@ -180,11 +180,11 @@ window-rule {
 
 window-rule {
     match is-active=false
-    opacity 0.2
+    opacity 0.05
     
     shadow {
         on
-        inactive-color "#1D1D1FF0"
+        inactive-color "#1D1D1FE0"
         spread 0
         softness 0
         offset x=0 y=0
@@ -194,8 +194,8 @@ window-rule {
 
 window-rule {
     match app-id="com.mitchellh.ghostty" is-focused=false
-    opacity 0.2
-    shadow { inactive-color "#1D1D1FDF"; }
+    opacity 0.1
+    shadow { inactive-color "#1D1D1FD0"; }
 }
 
 window-rule {
