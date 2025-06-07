@@ -1,2 +1,0 @@
-#!/bin/bash
-aria2c -x 16 -s 16 --dir="$HOME/Downloads" $1

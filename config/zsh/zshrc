@@ -23,37 +23,59 @@ source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 precmd() { precmd() { echo "" } }
 alias clear="precmd() { precmd() { echo } } && clear"
 
-alias open=xdg-open
-alias zsh-reload="source ~/.zshrc"
+# General aliases
+alias open="xdg-open"
+alias sup='sudo -E'
+alias zshr="source ~/.zshrc"
+alias dl="aria2c -x 16 -s 16 --dir='$HOME/Downloads'"
+alias c="clear"
+
+# Text editor aliases
 alias vi="hx"
 alias vim="hx"
 alias nano="hx"
-alias shx="sudo hx"
+alias shx="sup hx"
+alias cat="bat"
 
-# DNF shortcuts
+# DNF aliases
 alias dnfup="sudo dnf update -y"
 alias dnfadd="sudo dnf -y install"
 alias dnfdel="sudo dnf -y remove"
 
-# Nix shortcuts
-alias nixadd="nix profile add"
+# Nix aliases
+nixadd() { nix profile install nixpkgs#$1; }
 alias nixdel="nix profile remove"
 
-# Flatpak shortcuts
+# Flatpak aliases
 alias flatadd='flatpak install -y flathub'
 alias flatdel='flatpak remove -y'
 
-alias compose="docker compose"
-alias l="eza"
-alias ll="eza -l"
-alias lll="eza -la"
+# Bun aliases
+alias br='bun run'
+alias bi='bun install'
+alias badd='bun add'
+alias bdel='bun remove'
 
-alias sup='sudo -E'
+# Docker aliases
+alias dc="docker compose"
+alias dcl="dc logs -f --tail=15"
+alias dcu="dc up"
+alias dcud="dc up -d"
+alias dcd="dc down"
+alias dcr="dc restart"
+alias dcs="dc start"
+alias dcss="dc stop"
+alias compose="dc"
+alias drm="docker container rm -f"
+dsh() { docker exec -it $1 /bin/sh; }
+dbash() { docker exec -it $1 /bin/bash; }
+
+# Git aliases
 alias gl='git pull'
-alias gp='git push'
-alias gpo='git push -u origin'
+alias gp='git push -u origin $(git-curr-branch)'
 alias gs='git status'
-alias gb='git branch'
+alias gb='git rev-parse --abbrev-ref HEAD'
+alias gbl='git branch'
 alias gco='git checkout'
 alias gcb='git checkout -b'
 alias gd='git diff'
@@ -61,10 +83,31 @@ alias ga='git add'
 alias gall='git add .'
 alias gc='git commit'
 alias gcm='git commit -m'
+alias gca="gall && gcm"
 alias gcan='git commit --amend --no-edit'
-alias git-confia="git add . && git commit --amend --no-edit && git push --force"
-alias git-curr-branch='git rev-parse --abbrev-ref HEAD'
-alias git-push='git push -u origin $(git-curr-branch)'
+alias gff="git add . && git commit --amend --no-edit && git push --force"
+
+# File operations aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias cp="rsync -r --progress --partial --human-readable"
+alias rmf="rm -rf"
+alias mkd="mk -p"
+mkcd() { mkdir -p $1 && cd $1; }
+alias l="eza"
+alias ls="eza"
+alias ll="eza -l"
+alias lll="eza -la"
+
+# Tmux aliases
+alias texit="tmux kill-session"
+alias tquit="texit"
+alias tx="texit"
+
+# Compression and etraction
+alias untar="tar -xvf"
+alias zipit="zip -r"
 
 export TERM=xterm
 export VISUAL=hx
