@@ -30,6 +30,7 @@
       "border_width": 2
     },
     "ulauncher": {
+      "accent": "#69ff94",
       "font_family": "Fira Mono",
       "border_radius": 8,
       "border_width": 2

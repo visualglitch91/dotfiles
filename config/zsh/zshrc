@@ -35,7 +35,7 @@ alias vi="hx"
 alias vim="hx"
 alias nano="hx"
 alias shx="sup hx"
-alias cat="bat"
+alias cat="bat --paging=never"
 
 # DNF aliases
 alias dnfup="sudo dnf update -y"
@@ -93,7 +93,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias cp="rsync -r --progress --partial --human-readable"
 alias rmf="rm -rf"
-alias mkd="mk -p"
+alias mkd="mkdir -p"
 mkcd() { mkdir -p $1 && cd $1; }
 alias l="eza"
 alias ls="eza"

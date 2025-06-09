@@ -1,8 +1,8 @@
 /**
  * Dracula colors
  */
-@define-color background {{ colors.background }};
-@define-color current_line_background {{ colors.background | lighten(0.4) }};
+@define-color background {{ colors.background | fade(0.4) | rgba }};
+@define-color current_line_background {{ colors.background | lighten(0.8) | fade(0.8) | rgba }};
 @define-color foreground #F8F8F2;
 @define-color foreground_lessimportant #585858;
 @define-color accent {{ colors.text }};
@@ -13,7 +13,7 @@
  */
 @define-color bg_color @background;
 @define-color window_bg @background;
-@define-color window_border_color {{ colors.accent }};
+@define-color window_border_color {{ apps.ulauncher.accent }};
 @define-color prefs_backgroud @foreground;
 
 /**

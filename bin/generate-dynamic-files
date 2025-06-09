@@ -20,8 +20,16 @@ const colorFilters = ["darken", "lighten", "fade", "desaturate", "saturate"];
 
 colorFilters.forEach((it) => {
   n.addFilter(it, (color, amount) => {
-    return Color(color)[it](amount).hex();
+    const next = Color(color)[it](amount);
+    return next.valpha === 1 ? next.hex() : next.hexa();
   });
+});
+
+n.addFilter("rgba", (raw) => {
+  const color = Color(raw).rgb();
+  const a = color.alpha().toFixed(2);
+  const { r, g, b } = color.object();
+  return `rgba(${r}, ${g}, ${b}, ${a})`;
 });
 
 const appThemesBase = _.omit(config.application_theme, "colors");

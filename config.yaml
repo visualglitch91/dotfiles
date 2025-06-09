@@ -149,6 +149,7 @@ application_theme:
     border_radius: 8
     border_width: 2
   ulauncher:
+    accent: "{{ colors.secondary }}"
     font_family: "{{ fonts.mono }}"
     border_radius: 8
     border_width: 2
