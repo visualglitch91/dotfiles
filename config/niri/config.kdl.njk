@@ -1,6 +1,8 @@
 workspace "1"
 workspace "2"
 
+{% set scripts_dir = "~/.visualglitch91/scripts" %}
+
 environment {
     COLOR_SCHEME "{{ system_theme.color_scheme }}"
     GTK_THEME "{{ system_theme.gtk_theme }}"
@@ -109,17 +111,17 @@ binds {
     // Power and Session
     Mod+Shift+E { quit; }
     
-    Alt+Tab repeat=false { spawn "~/.visualglitch91/scripts/niriswitcher-show"; }
-    Alt+Shift+Tab repeat=false { spawn "~/.visualglitch91/scripts/niriswitcher-show"; }
+    Alt+Tab repeat=false { spawn "{{scripts_dir}}/niriswitcher-show"; }
+    Alt+Shift+Tab repeat=false { spawn "{{scripts_dir}}/niriswitcher-show"; }
     Mod+E { spawn "nautilus"; }
     Mod+D { spawn "ulauncher-toggle"; }
     Mod+period { spawn "emote"; }
     Mod+T { spawn "ghostty"; }
-    Mod+B { spawn "~/.visualglitch91/scripts/open-default-browser"; }
+    Mod+B { spawn "{{scripts_dir}}/open-default-browser"; }
     Mod+Alt+Backspace { screenshot; }
     Mod+Shift+Backspace { screenshot-screen; }
-    Mod+C { spawn "~/.visualglitch91/scripts/type" "ç"; }
-    Mod+Shift+C { spawn "~/.visualglitch91/scripts/type" "Ç"; }
+    Mod+C { spawn "{{scripts_dir}}/type" "ç"; }
+    Mod+Shift+C { spawn "{{scripts_dir}}/type" "Ç"; }
     Mod+Space { switch-layout "next"; }
     XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
     XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
@@ -179,16 +181,31 @@ binds {
 
 prefer-no-csd
 
-spawn-at-startup "~/.visualglitch91/scripts/reload"
+spawn-at-startup "{{scripts_dir}}/reload"
 spawn-at-startup "~/.visualglitch91/startup"
 
 hotkey-overlay {
     skip-at-startup
 }
 
+{% set shadow = {
+    offset: 3,
+    softness: 6,
+    color: "#1D1D1FE0"
+} %}
+
 window-rule {    
     match is-focused=true
     opacity 0.94
+
+    shadow {
+        on
+        inactive-color "{{shadow.color}}"
+        spread {{shadow.offset}}
+        softness {{shadow.softness}}
+        offset x={{shadow.offset}} y={{shadow.offset}}
+        draw-behind-window false
+    } 
 }
 
 window-rule {
@@ -197,10 +214,10 @@ window-rule {
     
     shadow {
         on
-        inactive-color "#1D1D1FE0"
-        spread 0
-        softness 0
-        offset x=0 y=0
+        inactive-color "{{shadow.color}}"
+        spread {{shadow.offset}}
+        softness {{shadow.softness}}
+        offset x={{shadow.offset}} y={{shadow.offset}}
         draw-behind-window true
     } 
 }
@@ -208,7 +225,7 @@ window-rule {
 window-rule {
     match app-id="com.mitchellh.ghostty" is-focused=false is-active=false
     opacity 0.1
-    shadow { inactive-color "#1D1D1FD0"; }
+    shadow { inactive-color "{{shadow.color}}"; }
 }
 
 window-rule {

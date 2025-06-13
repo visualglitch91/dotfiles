@@ -87,6 +87,14 @@ alias gca="gall && gcm"
 alias gcan='git commit --amend --no-edit'
 alias gff="git add . && git commit --amend --no-edit && git push --force"
 
+git-fixai () {
+  git fetch
+  git checkout $1
+  git revert $1 --no-commit
+  git add .
+  git commit -m "Fix AI code"
+}
+
 # File operations aliases
 alias ..='cd ..'
 alias ...='cd ../..'
