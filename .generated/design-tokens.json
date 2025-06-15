@@ -33,7 +33,8 @@
       "accent": "#69ff94",
       "font_family": "Fira Mono",
       "border_radius": 8,
-      "border_width": 2
+      "border_width": 2,
+      "opacity": 0.2
     },
     "vivaldi": {
       "background": "#101116",
