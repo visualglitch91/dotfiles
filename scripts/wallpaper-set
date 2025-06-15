@@ -28,5 +28,4 @@ fi
 # Generate blurred overview image
 convert "$ROOT" -blur 0x8 "$OVERVIEW"
 
-pm2 restart swaybg
-pm2 restart swww
+reload

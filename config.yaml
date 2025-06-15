@@ -141,7 +141,7 @@ application_theme:
     layout_focus_ring_color_end: "#BD93F9"
     layout_border_width: 2
     layout_border_color_start: "{{ colors.secondary }}88"
-    layout_border_color_end: "#BD93F988"
+    layout_border_color_end: "{{ colors.primary }}88"
     window_corner_radius: 12
   niriswitcher:
     font_family: "{{ fonts.mono }}"

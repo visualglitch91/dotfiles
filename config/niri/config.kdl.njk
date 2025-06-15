@@ -66,8 +66,8 @@ layout {
     blur {
         on
         passes 3
-        radius 2
-        noise 0.1
+        radius 1
+        noise 0.05
     }
 }
 
@@ -189,9 +189,9 @@ hotkey-overlay {
 }
 
 {% set shadow = {
-    offset: 3,
+    offset: 4,
     softness: 6,
-    color: "#1D1D1FE0"
+    color: "#1D1D1F"
 } %}
 
 window-rule {    
@@ -200,32 +200,32 @@ window-rule {
 
     shadow {
         on
-        inactive-color "{{shadow.color}}"
-        spread {{shadow.offset}}
+        inactive-color "{{shadow.color | fade(0.2)}}"
+        spread {{shadow.offset - 2}}
         softness {{shadow.softness}}
-        offset x={{shadow.offset}} y={{shadow.offset}}
+        offset x={{shadow.offset}} y={{shadow.offset + 1}}
         draw-behind-window false
     } 
 }
 
 window-rule {
     match is-active=false
-    opacity 0.05
+    opacity 0.3
     
     shadow {
         on
-        inactive-color "{{shadow.color}}"
-        spread {{shadow.offset}}
+        inactive-color "{{shadow.color | fade(0.2)}}"
+        spread {{shadow.offset - 2}}
         softness {{shadow.softness}}
-        offset x={{shadow.offset}} y={{shadow.offset}}
+        offset x={{shadow.offset}} y={{shadow.offset + 1}}
         draw-behind-window true
     } 
 }
 
 window-rule {
     match app-id="com.mitchellh.ghostty" is-focused=false is-active=false
-    opacity 0.1
-    shadow { inactive-color "{{shadow.color}}"; }
+    opacity 0.3
+    shadow { inactive-color "{{shadow.color | fade(0.2)}}"; }
 }
 
 window-rule {
