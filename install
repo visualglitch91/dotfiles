@@ -124,10 +124,6 @@ done
 echo "Reloading environment"
 $ROOT/scripts/reload >/dev/null 2>&1
 
-# Set the default web browser
-DEFAULT_BROWSER=$(echo $CONFIG | jq -r '.xdg.default_browser')
-xdg-settings set default-web-browser $DEFAULT_BROWSER
-
 # Fix DNS issues
 sudo $BIN/fix-dns-issues >/dev/null 2>&1
 

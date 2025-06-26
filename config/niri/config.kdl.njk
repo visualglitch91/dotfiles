@@ -90,14 +90,18 @@ output "eDP-1" {
 }
 
 output "Virtual-1" {
-    scale 1.8
+    scale 1.7
 }
 
 output "Smithay Winit Unknown" {
     scale 1.5
 }
 
-animations {}
+animations {
+    {% if hostname == "macbook-arch" %}
+    slowdown 0.5
+    {% endif %}
+}
 
 binds {
     // Applications such as remote-desktop clients and software KVM switches may
@@ -118,7 +122,7 @@ binds {
     Mod+E { spawn "nautilus"; }
     Mod+D { spawn "ulauncher-toggle"; }
     Mod+period { spawn "emote"; }
-    Mod+T { spawn "ghostty"; }
+    Mod+T { spawn "{{scripts_dir}}/open-default-terminal"; }
     Mod+B { spawn "{{scripts_dir}}/open-default-browser"; }
     Mod+Alt+Backspace { screenshot; }
     Mod+Shift+Backspace { screenshot-screen; }
@@ -196,9 +200,11 @@ hotkey-overlay {
     color: "#1D1D1F"
 } %}
 
-window-rule {    
+window-rule {
     match is-focused=true
+    {% if hostname != "macbook-arch" %}
     opacity 0.94
+    {% endif %}
 
     shadow {
         on
@@ -225,6 +231,7 @@ window-rule {
 }
 
 window-rule {
+    match app-id="kitty" is-focused=false is-active=false
     match app-id="com.mitchellh.ghostty" is-focused=false is-active=false
     opacity 0.3
     shadow { inactive-color "{{shadow.color | fade(0.2)}}"; }
@@ -241,6 +248,7 @@ window-rule {
 }
 
 window-rule {
+    match app-id="kitty"
     match app-id="com.mitchellh.ghostty"
     default-column-width { proportion 0.5; }
 }
@@ -250,12 +258,12 @@ window-rule {
     default-column-width { proportion 0.4; }   
 }
 
-window-rule {    
+window-rule {
     match app-id=r#"^vivaldi-gomuks.[^_]+__-Default$"#
     default-column-width { proportion 0.40; }
 }
 
-window-rule {    
+window-rule {
     match app-id=r#"^vivaldi-app.slack.com__client_.*-Default$"#
     default-column-width { proportion 0.60; }
 }
@@ -270,7 +278,7 @@ window-rule {
     max-width 640
 }
 
-window-rule {    
+window-rule {
     match app-id="balenaEtcher"
     open-floating false
 }

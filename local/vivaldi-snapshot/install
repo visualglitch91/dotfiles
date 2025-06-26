@@ -43,3 +43,6 @@ fi
 # Clean up the temporary directory
 echo "Cleaning up temporary directory..."
 rm -rf "$TEMP_DIR"
+
+# Set the default web browser
+xdg-settings set default-web-browser vivaldi-snapshot.desktop

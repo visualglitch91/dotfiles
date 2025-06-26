@@ -71,6 +71,7 @@ symlinks:
   - ["niri", "niri"]
   - ["niriswitcher", "niriswitcher"]
   - ["ghostty", "ghostty"]
+  - ["kitty", "kitty"]
   - ["helix", "helix"]
   - ["waybar", "waybar"]
   - ["ulauncher", "ulauncher"]
@@ -88,6 +89,7 @@ templates:
   - ghostty/config.njk
   - tmux/tmux.conf.njk
   - niri/config.kdl.njk
+  - kitty/kitty.conf.njk
   - waybar/config.jsonc.njk
   - continue.dev/config.yaml.njk
   - niriswitcher/config.toml.njk
@@ -112,9 +114,6 @@ pm2:
       timeout 300 'niri msg action power-off-monitors'
       timeout 1800 'systemctl suspend'
   polkit: "/usr/libexec/polkit-mate-authentication-agent-1"
-
-xdg:
-  default_browser: vivaldi-snapshot.desktop
 
 system_theme:
   color_scheme: prefer-dark
