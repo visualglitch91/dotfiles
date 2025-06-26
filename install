@@ -35,7 +35,10 @@ if ! command -v nix &>/dev/null; then
   sudo setenforce 1
 fi
 
-install_dnf_packages $REQUIRED_DNF_PKGS
+if command -v dnf &>/dev/null; then
+  install_dnf_packages $REQUIRED_DNF_PKGS
+fi
+
 install_nix_packages $REQUIRED_NIX_PKGS
 install_bun_packages $REQUIRED_BUN_PKGS
 
@@ -53,8 +56,11 @@ echo "$eval_lines" | while IFS= read -r line || [ -n "$line" ]; do
   eval "$line"
 done
 
-enable_copr_repos $(conf copr[])
-install_dnf_packages $(conf dnf[])
+if command -v dnf &>/dev/null; then
+  enable_copr_repos $(conf copr[])
+  install_dnf_packages $(conf dnf[])
+fi
+
 install_bun_packages $(conf bun[])
 install_nix_packages $(conf nix[])
 install_flatpak_packages $(conf flatpak[])
@@ -126,7 +132,9 @@ xdg-settings set default-web-browser $DEFAULT_BROWSER
 sudo $BIN/fix-dns-issues >/dev/null 2>&1
 
 # Default dnf comand confirmations to yes
-sudo $BIN/dnf-defaultyes
+if command -v dnf &>/dev/null; then
+  sudo $BIN/dnf-defaultyes
+fi
 
 # Enable sudo password feedback
 sudo $BIN/sudo-pwfeedback

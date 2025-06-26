@@ -63,12 +63,14 @@ layout {
         inactive-gradient from="{{ apps.niri.layout_border_color_start }}" to="{{ apps.niri.layout_border_color_end }}" angle=45
     }
 
+    {% if hostname != "macbook-arch" %}
     blur {
         on
         passes 3
         radius 1
         noise 0.05
     }
+    {% endif %}
 }
 
 // Force swaybg to set its background to the overview
@@ -205,7 +207,7 @@ window-rule {
         softness {{shadow.softness}}
         offset x={{shadow.offset}} y={{shadow.offset + 1}}
         draw-behind-window false
-    } 
+    }
 }
 
 window-rule {

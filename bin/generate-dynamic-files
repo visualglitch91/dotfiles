@@ -7,6 +7,7 @@ import _ from "lodash";
 import nunjucks from "nunjucks";
 import less from "less";
 import Color from "color";
+import os from "os";
 
 const loadYAML = (path) => {
   return yaml.load(fs.readFileSync(join(__dirname, path), "utf8"));
@@ -57,6 +58,7 @@ const data = {
   ...theme,
   system_theme: config.system_theme,
   secrets,
+  hostname: os.hostname(),
 };
 
 function flatten(obj, prefix = "") {
