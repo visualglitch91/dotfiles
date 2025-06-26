@@ -35,7 +35,7 @@ alias vi="hx"
 alias vim="hx"
 alias nano="hx"
 alias shx="sup hx"
-alias cat="bat --paging=never"
+alias cat="bat --paging=never -p"
 
 # DNF aliases
 alias dnfup="sudo dnf update -y"
