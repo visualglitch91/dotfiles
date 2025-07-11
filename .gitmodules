@@ -14,6 +14,6 @@
 [submodule "config/ulauncher/extensions/ulauncher-text-snippets"]
 	path = config/ulauncher/extensions/ulauncher-text-snippets
 	url = git@github.com:visualglitch91/ulauncher-text-snippets.git
-[submodule "local/niri"]
-	path = local/niri
+[submodule "local/niri/src"]
+	path = local/niri/src
 	url = git@github.com:visualglitch91/niri.git

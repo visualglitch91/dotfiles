@@ -26,6 +26,7 @@ dnf:
   - brightnessctl
   - "gtk-layer-shell" # required for ulauncher
   - "gtk4-layer-shell" # required for niriswitcher
+  - xwayland-satellite
   - NetworkManager-tui
 
 nix:
@@ -43,21 +44,7 @@ flatpak:
   - page.codeberg.libre_menu_editor.LibreMenuEditor
 
 local:
-  niri: |
-    sudo dnf install -y \
-      gcc clang cargo dbus-devel \
-      systemd-devel wayland-devel \
-      pipewire-devel libinput-devel \
-      pango-devel mesa-libgbm-devel \
-      libseat-devel libdisplay-info-devel \
-      libxkbcommon-devel cairo-gobject-devel
-    cargo build --release
-    sudo cp -f target/release/niri /usr/bin/
-    sudo cp -f resources/niri-session /usr/bin/
-    sudo cp -f resources/niri.desktop /usr/share/wayland-sessions/
-    sudo cp -f resources/niri-portals.conf /usr/share/xdg-desktop-portal/
-    sudo cp -f resources/niri.service /etc/systemd/user/
-    sudo cp -f resources/niri-shutdown.target /etc/systemd/user/
+  niri: "./install"
   vs-code: "./install"
   niriswitcher: "./install"
   vivaldi-snapshot: "./install"
